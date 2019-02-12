@@ -9,92 +9,92 @@ button,hr,input{overflow:visible}progress,sub,sup{vertical-align:baseline}[type=
 
 /* START - ROOT Content */
 :root {
-	--rb-primary-font:			'Roboto', Helvetica, Arial, sans-serif;		/* Main Body Text Font */
-	--rb-secondary-font:		'Montserrat', Helvetica, Arial, sans-serif;	/* Header Text Font */
-	--rb-primary-font-size:		16px;										/* Font Size Used For REM Scaling */
-	
-	--rb-primary-color:			#ffffff;									/* Card Background Color */
-	--rb-onprimary-color:		#000000;									/* Card Text Color */
-	
-	--rb-secondary-color:		#f1f1f1;									/* Main Background Color */
-	--rb-onsecondary-color:		#000000;									/* Main Text Color */
-	
-	--rb-tertiary-color:		#cccccc;									/* Mainly Used For Button Borders and Gray Tag Backgrounds */
-	--rb-ontertiary-color:		#000000;
-	
-	--rb-quaternary-color:		#616161;									/* Not Used Yet... */
-	--rb-onquaternary-color:	#ffffff;
+    --rb-primary-font: 'Roboto', Helvetica, Arial, sans-serif;    /* Main Body Text Font */
+    --rb-secondary-font: 'Montserrat', Helvetica, Arial, sans-serif;    /* Header Text Font */
+    --rb-primary-font-size: 16px;    /* Font Size Used For REM Scaling */
+
+    --rb-primary-color: #ffffff;    /* Card Background Color */
+    --rb-onprimary-color: #000000;    /* Card Text Color */
+
+    --rb-secondary-color: #f1f1f1;    /* Main Background Color */
+    --rb-onsecondary-color: #000000;    /* Main Text Color */
+
+    --rb-tertiary-color: #cccccc;    /* Mainly Used For Button Borders and Gray Tag Backgrounds */
+    --rb-ontertiary-color: #000000;
+
+    --rb-quaternary-color: #616161;    /* Not Used Yet... */
+    --rb-onquaternary-color: #ffffff;
 }
 
 body, html {
-	font-size:					var(--rb-primary-font-size);
-	font-family:				var(--rb-primary-font);
-	color:						var(--rb-onsecondary-color);
-	background-color:			var(--rb-secondary-color);
+    font-size: var(--rb-primary-font-size);
+    font-family: var(--rb-primary-font);
+    color: var(--rb-onsecondary-color);
+    background-color: var(--rb-secondary-color);
 }
 
-h1, h2, h3, h4, h5, h6 {													/* Default Margins And Font Weights For Header Tags */
-	font-weight:				400;
-	margin:						1rem;
+h1, h2, h3, h4, h5, h6 {    /* Default Margins And Font Weights For Header Tags */
+    font-weight: 400;
+    margin: 1rem;
 }
 
-p {																			/* Default Margin For Paragraph Tag */
-	margin:						1rem;
+p {    /* Default Margin For Paragraph Tag */
+    margin: 1rem;
 }
 
-hr {																		/* Default, No Shadow/Depth HR Border */
-	display:					block;
-	height:						0.0625rem;
-	border:						0rem;
-	border-top:					0.0625rem solid var(--rb-tertiary-color);	
-	padding:					0rem;
-	margin-top:					0.5rem;
-	margin-bottom:				-0.0625rem;
+hr {    /* Default, No Shadow/Depth HR Border */
+    display: block;
+    height: 0.0625rem;
+    border: 0rem;
+    border-top: 0.0625rem solid var(--rb-tertiary-color);
+    padding: 0rem;
+    margin-top: 0.5rem;
+    margin-bottom: -0.0625rem;
 }
 /* END   - ROOT Content */
 
 
 
 /* START - Main Flex Grid */
-.rb-main-flex-grid-initializer {											/* Main Flex Grid "Initializer */
-	display:					flex;
-	flex-flow:					row wrap;
-	justify-content:			center;	
+.rb-main-flex-grid-initializer {    /* Main Flex Grid "Initializer */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
-.rb-main-flex-grid-container {												/* Main Flex Grid Container: Used To Limit Page Size */
-	display:					inherit;
-	flex-flow:					inherit;
-	max-width:					90rem;										/* Max Page Width */
-	padding:					1.25rem;									/* Padding For Smaller Than Max-Width Pages */
+.rb-main-flex-grid-container {    /* Main Flex Grid Container: Used To Limit Page Size */
+    display: inherit;
+    flex-flow: 	inherit;
+    max-width: 90rem;    /* Max Page Width */
+    padding: 1.25rem;    /* Padding For Smaller Than Max-Width Pages */
 }
 
-.rb-main-flex-grid-header {													/* Main Page Header */
-	width:						100%;
-	
-	text-align: 				center;
-	padding-top:				2.5rem;
-	padding-bottom:				5rem;
+.rb-main-flex-grid-header {    /* Main Page Header */
+    width: 100%;
+
+    text-align: center;
+    padding-top: 2.5rem;
+    padding-bottom: 5rem;
 }
 
-@media (min-width: 1000px) {												/* Responsive Left And Right Grid When Screen Is Greater Than 999px */
-	.rb-main-flex-grid-left-column {										/* Main Page Left Column */
-		width:					66.66666%;
-	}
-	
-	.rb-main-flex-grid-right-column {										/* Main Page Right Column */
-		width:					33.33333%;
-	}
+@media (min-width: 1000px) {    /* Responsive Left And Right Grid When Screen Is Greater Than 999px */
+    .rb-main-flex-grid-left-column {    /* Main Page Left Column */
+        width: 66.66666%;
+    }
+
+    .rb-main-flex-grid-right-column {    /* Main Page Right Column */
+        width: 33.33333%;
+    }
 }
 
-@media (max-width: 999px) {													/* Responsive Left And Right Grid When Screen Is Less Than 1000px */
-	.rb-main-flex-grid-left-column {										/* Main Page Left Column */
-		width:					100%;
-	}
-	
-	.rb-main-flex-grid-right-column {										/* Main Page Right Column */
-		width:					100;
-	}
+@media (max-width: 999px) {    /* Responsive Left And Right Grid When Screen Is Less Than 1000px */
+    .rb-main-flex-grid-left-column {    /* Main Page Left Column */
+        width: 100%;
+    }
+
+    .rb-main-flex-grid-right-column {    /* Main Page Right Column */
+        width: 100;
+    }
 }
 /* END   - Main Flex Grid */
 
@@ -102,50 +102,50 @@ hr {																		/* Default, No Shadow/Depth HR Border */
 
 /* START - Card Component */
 .rb-card {
-	margin:						2rem;
-	overflow:					hidden;
-	border-radius:				0.25rem;
-	color:						var(--rb-onprimary-color);
-	background-color:			var(--rb-primary-color);
-	box-shadow:					0rem 0.25rem 0.625rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.25rem 1.25rem 0rem  rgba(0, 0, 0, 0.19);
+    margin: 2rem;
+    overflow: hidden;
+    border-radius: 0.25rem;
+    color: var(--rb-onprimary-color);
+    background-color: var(--rb-primary-color);
+    box-shadow: 0rem 0.25rem 0.625rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.25rem 1.25rem 0rem  rgba(0, 0, 0, 0.19);
 }
 
-.rb-card > img {															/* Image Stylelization For Image Cards */
-	vertical-align:				middle;
-	border-style:				none;
-	width:						100%;
-	height:						12rem;
-	object-fit:					cover;
+.rb-card > img {    /* Image Stylelization For Image Cards */
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
 }
 
 .rb-card-textonly {
-	margin-top:					3.5rem !important;							/* Overwrite The Default Margin Top For Text Cards (No Images) */
+    margin-top: 3.5rem !important;    /* Overwrite The Default Margin Top For Text Cards (No Images) */
 }
 
-.rb-card-flex-grid-container {												/* Card Flex Grid */
-	display:					flex;
-	flex-flow:					row wrap;
-	justify-content:			center;	
+.rb-card-flex-grid-container {    /* Card Flex Grid */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
-@media (min-width: 625px) {													/* Responsive Left And Right Grid When Screen Is Greater Than 624px */
-	.rb-card-flex-grid-left-column {										/* Card Left Column */
-		width:					55%;
-	}
-	
-	.rb-card-flex-grid-right-column {										/* Card Right Column */
-		width:					45%;
-	}
+@media (min-width: 625px) {    /* Responsive Left And Right Grid When Screen Is Greater Than 624px */
+    .rb-card-flex-grid-left-column {    /* Card Left Column */
+        width: 55%;
+    }
+
+    .rb-card-flex-grid-right-column {    /* Card Right Column */
+        width: 45%;
+    }
 }
 
-@media (max-width: 624px) {													/* Responsive Left And Right Grid When Screen Is Less Than 625px */
-	.rb-card-flex-grid-left-column {										/* Card Left Column */
-		width:					100%;
-	}
-	
-	.rb-card-flex-grid-right-column {										/* Card Right Column */
-		display:				none;										/* Make Right Column Invisible */
-	}
+@media (max-width: 624px) {    /* Responsive Left And Right Grid When Screen Is Less Than 625px */
+    .rb-card-flex-grid-left-column {    /* Card Left Column */
+        width: 100%;
+    }
+
+    .rb-card-flex-grid-right-column {    /* Card Right Column */
+        display: none;    /* Make Right Column Invisible */
+    }
 }
 /* END   - Card Component */
 
@@ -153,19 +153,19 @@ hr {																		/* Default, No Shadow/Depth HR Border */
 
 /* */
 .rb-nav-flex-grid {
-	display:					flex;
-	flex-flow:					row wrap;
-	justify-content:			center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
 .rb-nav-flex-grid-left-column {
-	width:						45%;
-	text-align:					left;
+    width: 45%;
+    text-align: left;
 }
 
 .rb-nav-flex-grid-right-column {
-	width:						45%;
-	text-align:					right;
+    width: 45%;
+    text-align: right;
 }
 
 /* */
@@ -174,26 +174,26 @@ hr {																		/* Default, No Shadow/Depth HR Border */
 
 /* START - List Component */
 .rb-list {
-	padding:					0rem;
-	margin:						0rem;
-	
-	display:					flex;
-	flex-flow:					row wrap;
-	justify-content:			left;
+    padding: 0rem;
+    margin: 0rem;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: left;
 }
 
 .rb-list-item {
-	border:						none;
-	width:						100%;
-	text-align:					left !important;
-	margin:						0rem !important;
-	padding:					1rem !important;
+    border: none;
+    width: 100%;
+    text-align: left !important;
+    margin: 0rem !important;
+    padding: 1rem !important;
 }
 
 .rb-list-item > img {
-	width:						3.125rem;
-	margin-right:				1rem !important;
-	float:						left;										/* I HATE Using Float In This Instance, But I Wasn't Able TO Get Flex Box To Do What I Wanted */
+    width: 3.125rem;
+    margin-right: 1rem !important;
+    float: left;    /* I HATE Using Float In This Instance, But I Wasn't Able TO Get Flex Box To Do What I Wanted */
 }
 
 /* END   - List Component */
@@ -202,112 +202,112 @@ hr {																		/* Default, No Shadow/Depth HR Border */
 
 /* START - Border Button */
 .rb-button {
-	border:						none;
-	margin:						1rem;
-	vertical-align:				middle;
-	text-decoration:			none;
-	text-align:					center;
-	cursor:						pointer;
-	white-space:				nowrap;
-	color:						var(--rb-onprimary-color);
-	background-color:			inherit;
-	transition:					all 0.2s ease-in;
-	overflow:					hidden;
-	position:					relative;
-	display:					inline-block;
+    border: none;
+    margin: 1rem;
+    vertical-align: middle;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--rb-onprimary-color);
+    background-color: inherit;
+    transition: all 0.2s ease-in;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
 }
 
 .rb-button-border {
-	border:						0.125rem solid var(--rb-tertiary-color) !important;
-	border-radius:				0.25rem !important;
+    border: 0.125rem solid var(--rb-tertiary-color) !important;
+    border-radius: 0.25rem !important;
 }
 
 .rb-button:hover {
-	background-color:			var(--rb-tertiary-color);
+    background-color: var(--rb-tertiary-color);
 }
 
 .rb-button:after {
-	content:					'';
-	position:					absolute;
-	top:						50%;
-	left:						50%;
-	width:						3.5%;
-	height:						20%;
-	background:					rgba(255, 255, 255, 0.5);
-	opacity:					0;
-	border-radius:				100%;
-	transform:					scale(1, 1) translate(-50%);
-	transform-origin:			50% 50%;
+    content: '';
+    position: 	absolute;
+    top: 50%;
+    left: 50%;
+    width: 3.5%;
+    height: 20%;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
 }
 
 @keyframes button-ripple {
-	0% {
-		transform:				scale(0, 0);
-		opacity:				1;
-	}
-	
-	20% {
-		transform:				scale(25, 25);
-		opacity:				1;
-	}
-	
-	100% {
-		opacity:				0;
-		transform:				scale(40, 40);
-	}
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(25, 25);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
 }
 
 .rb-button:focus:not(:active)::after {
-	animation:					button-ripple 1s ease-out;
+    animation: button-ripple 1s ease-out;
 }
 /* END   - Border Button */
 
 
 
 /* START - Stylelization Effects */
-.rb-text-black-tag {														/* Create A Black Tag Around Some White Text I.E. A "Tag" */
-	color:						var(--rb-primary-color);
-	background-color:			var(--rb-onprimary-color);
-	display:					inline-block;
-	padding:					0.25rem 0.5rem 0.25rem 0.5rem;
-	text-align:					center;
-	margin-bottom:				1rem !important;
-	margin-right:				0.25rem !important;
+.rb-text-black-tag {    /* Create A Black Tag Around Some White Text I.E. A "Tag" */
+    color: var(--rb-primary-color);
+    background-color: var(--rb-onprimary-color);
+    display: inline-block;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    text-align: center;
+    margin-bottom: 1rem !important;
+    margin-right: 0.25rem !important;
 }
 
-.rb-text-grey-tag {															/* Create A Gray Tag Around Some Black Text I.E. A "Tag" */
-	color:						var(--rb-ontertiary-color);
-	background-color:			var(--rb-tertiary-color);
-	display:					inline-block;
-	padding:					0.125rem 0.25rem 0.125rem 0.25rem;
-	text-align:					center;
-	margin-bottom:				1rem !important;
-	margin-right:				0.25rem !important;
-	font-size:					0.8rem !important;
+.rb-text-grey-tag {    /* Create A Gray Tag Around Some Black Text I.E. A "Tag" */
+    color: var(--rb-ontertiary-color);
+    background-color: var(--rb-tertiary-color);
+    display: inline-block;
+    padding: 0.125rem 0.25rem 0.125rem 0.25rem;
+    text-align: center;
+    margin-bottom: 1rem !important;
+    margin-right: 0.25rem !important;
+    font-size: 0.8rem !important;
 }
 
 .rb-link-tags-container > a {
-	text-decoration:			none;
+    text-decoration: none;
 }
 
-.rb-text-opacity {															/* Adds Opacity To The Selected Text */
-	opacity:					0.60;
+.rb-text-opacity {    /* Adds Opacity To The Selected Text */
+    opacity: 0.60;
 }
 
-.rb-text-align-right {														/* Aligns Text To The Right */
-	text-align:					right !important;
+.rb-text-align-right {    /* Aligns Text To The Right */
+    text-align: right !important;
 }
 
-.rb-text-align-left {														/* Aligns Text To The Left */
-	text-align:					left !important;
+.rb-text-align-left {    /* Aligns Text To The Left */
+    text-align: left !important;
 }
 
 .rb-text-font-large {
-	font-size:					1.125rem !important;
-	line-height:				1.5rem;
+    font-size: 1.125rem !important;
+    line-height: 1.5rem;
 }
 
 .rb-padding-1rem-2rem {
-	padding:					1rem 2rem !important;
+    padding: 1rem 2rem !important;
 }
 /* END   - Stylelization Effects */
