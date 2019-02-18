@@ -176,24 +176,28 @@ hr {    /* Default, No Shadow/Depth HR Border */
 .rb-list {
     padding: 0rem;
     margin: 0rem;
-
-    display: flex;
-    flex-flow: row wrap;
     justify-content: left;
 }
 
 .rb-list-item {
-    border: none;
-    width: 100%;
-    text-align: left !important;
+    display: grid !important;
+	grid-template-columns: 3.125rem auto;
+	grid-template-rows: auto;
+	text-align: left !important;
     margin: 0rem !important;
     padding: 1rem !important;
 }
 
 .rb-list-item > img {
-    width: 3.125rem;
-    margin-right: 1rem !important;
-    float: left;    /* I HATE Using Float In This Instance, But I Wasn't Able TO Get Flex Box To Do What I Wanted */
+	width: 3.125rem;
+	grid-row: 1;
+	grid-column: 1;
+}
+
+.rb-list-item-txt {
+	padding-left: 1rem;
+	grid-column: 2;
+	grid-row: 1;
 }
 
 /* END   - List Component */
@@ -211,7 +215,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
     white-space: nowrap;
     color: var(--rb-onprimary-color);
     background-color: inherit;
-    transition: all 0.2s ease-in;
+    transition: background-color 0.2s ease-in;
     overflow: hidden;
     position: relative;
     display: inline-block;
