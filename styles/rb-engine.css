@@ -66,7 +66,6 @@ hr {    /* Default, No Shadow/Depth HR Border */
     display: inherit;
     flex-flow: 	inherit;
     max-width: 90rem;    /* Max Page Width */
-    padding: 1.25rem;    /* Padding For Smaller Than Max-Width Pages */
 }
 
 .rb-main-flex-grid-header {    /* Main Page Header */
@@ -74,7 +73,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
     text-align: center;
     padding-top: 2.5rem;
-    padding-bottom: 5rem;
+    padding-bottom: 0.5rem;
 }
 
 @media (min-width: 1000px) {    /* Responsive Left And Right Grid When Screen Is Greater Than 999px */
@@ -108,6 +107,15 @@ hr {    /* Default, No Shadow/Depth HR Border */
     color: var(--rb-onprimary-color);
     background-color: var(--rb-primary-color);
     box-shadow: 0rem 0.25rem 0.625rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.25rem 1.25rem 0rem  rgba(0, 0, 0, 0.19);
+}
+
+@media (max-width: 999px) {    /* Responsive Margins For Cards */
+    .rb-card {    /* Main Page Left Column */
+        margin-top: 2rem;
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+        margin-bottom: 2rem;
+    }
 }
 
 .rb-card > img {    /* Image Stylelization For Image Cards */
@@ -151,7 +159,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 
 
-/* */
+/* START - Next And Previous Buttons*/
 .rb-nav-flex-grid {
     display: flex;
     flex-flow: row wrap;
@@ -167,8 +175,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
     width: 45%;
     text-align: right;
 }
-
-/* */
+/* END   - Next And Previous Buttons*/
 
 
 
@@ -181,23 +188,23 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 .rb-list-item {
     display: grid !important;
-	grid-template-columns: 3.125rem auto;
-	grid-template-rows: auto;
-	text-align: left !important;
+    grid-template-columns: 3.125rem auto;
+    grid-template-rows: auto;
+    text-align: left !important;
     margin: 0rem !important;
     padding: 1rem !important;
 }
 
 .rb-list-item > img {
-	width: 3.125rem;
-	grid-row: 1;
-	grid-column: 1;
+    width: 3.125rem;
+    grid-row: 1;
+    grid-column: 1;
 }
 
 .rb-list-item-txt {
-	padding-left: 1rem;
-	grid-column: 2;
-	grid-row: 1;
+    padding-left: 1rem;
+    grid-column: 2;
+    grid-row: 1;
 }
 
 /* END   - List Component */
