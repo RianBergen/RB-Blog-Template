@@ -215,7 +215,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
     white-space: nowrap;
     color: var(--rb-onprimary-color);
     background-color: inherit;
-    transition: all 0.2s ease-in;
+    transition: background-color 0.2s ease-in;
     overflow: hidden;
     position: relative;
     display: inline-block;
