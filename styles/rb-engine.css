@@ -7,8 +7,7 @@ button,hr,input{overflow:visible}progress,sub,sup{vertical-align:baseline}[type=
 
 /* START - ROOT Content */
 :root {
-    --rb-primary-font: 'Roboto', Helvetica, Arial, sans-serif;    /* Main Body Text Font */
-    --rb-secondary-font: 'Montserrat', Helvetica, Arial, sans-serif;    /* Header Text Font */
+    --rb-primary-font: Helvetica, Arial, sans-serif;    /* Main Body Text Font */
     --rb-primary-font-size: 16px;    /* Font Size Used For REM Scaling */
 
     --rb-primary-color: #ffffff;    /* Card Background Color */
@@ -20,7 +19,7 @@ button,hr,input{overflow:visible}progress,sub,sup{vertical-align:baseline}[type=
     --rb-tertiary-color: #cccccc;    /* Mainly Used For Button Borders and Gray Tag Backgrounds */
     --rb-ontertiary-color: #000000;
 
-    --rb-quaternary-color: #616161;    /* Not Used Yet... */
+    --rb-quaternary-color: #2b2b2b;    /* Not Used Yet... */
     --rb-onquaternary-color: #ffffff;
 }
 
@@ -90,7 +89,42 @@ hr {    /* Default, No Shadow/Depth HR Border */
     }
 
     .rb-main-flex-grid-right-column {    /* Main Page Right Column */
-        width: 100;
+        width: 100%;
+    }
+}
+
+.rb-page-footer {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 90rem 1fr;
+    margin-top: 2rem;
+    width:100%;
+    background-color: var(--rb-quaternary-color);
+    color: var(--rb-onquaternary-color);
+}
+
+.rb-page-footer-container {
+    grid-column: 2;
+    text-align: left !important;
+    margin-left: 2rem;
+}
+
+.rb-page-footer-container > h1,h6,a {
+    margin-left: 0rem;
+    text-decoration: none;
+    color: var(--rb-onquaternary-color);
+}
+
+
+
+@media (max-width: 999px) {
+    .rb-page-footer {
+        grid-template-columns: 1fr;
+    }
+
+    .rb-page-footer-container {
+        grid-column: 1;
+        margin-left: 0.75rem;
     }
 }
 /* END   - Main Flex Grid */
@@ -104,7 +138,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
     border-radius: 0.25rem;
     color: var(--rb-onprimary-color);
     background-color: var(--rb-primary-color);
-    box-shadow: 0rem 0.25rem 0.625rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.25rem 1.25rem 0rem  rgba(0, 0, 0, 0.19);
+    box-shadow: 0rem 0.125rem 0.3125rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.125rem 0.75rem 0rem  rgba(0, 0, 0, 0.19);
 }
 
 @media (max-width: 999px) {    /* Responsive Margins For Cards */
@@ -131,26 +165,26 @@ hr {    /* Default, No Shadow/Depth HR Border */
 .rb-card-flex-grid-container {    /* Card Flex Grid */
     display: grid !important;
     justify-content: left;
-	grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .rb-card-flex-grid-left-column {    /* Card Left Column */
-	grid-column: 1;
+    grid-column: 1;
 }
 .rb-card-flex-grid-right-column {    /* Card Right Column */
-	grid-column: 2;
+    grid-column: 2;
 }
 
 .rb-card-flex-grid-right-column > p {    /* Remove Bottom Margin For Text -> Card Right Column */
-	margin-bottom:0px !important;
-	padding-right:0px !important;
+    margin-bottom:0px !important;
+    padding-right:0px !important;
 }
 
 @media (max-width: 625px) {    /* Responsive Left And Right Grid When Screen Is Greater Than 624px */
 
-	.rb-card-flex-grid-right-column {    /* Remove Card Right Column */
-		display:none;
-	}
+    .rb-card-flex-grid-right-column {    /* Remove Card Right Column */
+        display:none;
+    }
 
 }
 
@@ -161,18 +195,6 @@ hr {    /* Default, No Shadow/Depth HR Border */
 /* START - Next And Previous Buttons*/
 .rb-nav-flex-grid {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-}
-
-.rb-nav-flex-grid-left-column {
-    width: 45%;
-    text-align: left;
-}
-
-.rb-nav-flex-grid-right-column {
-    width: 45%;
-    text-align: right;
 }
 /* END   - Next And Previous Buttons*/
 
@@ -319,5 +341,19 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 .rb-padding-1rem-2rem {
     padding: 1rem 2rem !important;
+}
+
+.rb-margin-2rem-left {
+    margin: 0rem;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 999px) {
+    .rb-margin-2rem-left {
+        margin: 0rem;
+        margin-left: 0.75rem;
+        margin-bottom: 2rem;
+    }
 }
 /* END   - Stylelization Effects */
