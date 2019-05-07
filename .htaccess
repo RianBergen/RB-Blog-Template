@@ -4,6 +4,20 @@ RewriteCond %{HTTP_HOST} !^www\.rianbergen\.com$ [NC]
 RewriteRule ^(.*)$ https://www.rianbergen.com/$1 [R=301,L]
 #END HTTPS REDIRECT
 
+#BEGIN SEO REDIRECT
+RewriteBase /
+
+RewriteRule ^category/(.*)$ index.php?page=category&id=$1 [L]
+RewriteRule ^tag/(.*)$ index.php?page=tag&id=$1 [L]
+RewriteRule ^archive/(.*)-(.*)$ index.php?page=archive&month=$1&year=$2 [L]
+RewriteRule ^action/(.*)$ index.php?page=action&id=$1 [L]
+RewriteRule ^info/(.*)$ index.php?page=info&id=$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d [NC]
+RewriteCond %{REQUEST_FILENAME} !-f [NC]
+RewriteRule ^post/(.*)$ index.php?page=post&id=$1 [QSA,L]
+#END SEO REDIRECT
+
 #BEGIN EXPIRES
 <IfModule mod_expires.c>
     ExpiresActive On
