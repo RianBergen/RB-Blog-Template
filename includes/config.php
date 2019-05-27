@@ -3,12 +3,8 @@
 ob_start();
 session_start();
 
-// Database Credentials // Credentials Removed For Security Purposes
-define('DBHOST', 'hostname');
-define('DBPORT', 'hostport');
-define('DBNAME', 'databasename');
-define('DBUSER', 'databaseuser');
-define('DBPASS', 'databasepassword');
+// Include Credentials
+require_once('credentials/credentials.php');
 
 // Create Database Connection
 $connection = new PDO('mysql:host='.DBHOST.';port='.DBPORT.';dbname='.DBNAME, DBUSER, DBPASS);

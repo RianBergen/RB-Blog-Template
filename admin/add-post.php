@@ -25,7 +25,8 @@ if(!$user->isLoggedIn()) {
 	
 	<link rel="stylesheet" href="../_res/styles/rb-engine.css">
 	
-	<script src="tinymce/tinymce.min.js"></script>
+    <!-- TinyMCE Initialization Script -->
+	<?php echo '<script src="'.TINYMCE.'"></script>';?>
 	<script>
 		tinymce.init({
 			selector: "textarea",

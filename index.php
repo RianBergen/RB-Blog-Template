@@ -85,11 +85,11 @@ if (isset($_GET['year'])) {
 
 </div>
 
+<!-- Disqus Comment Count -->
 <?php
-// Disqus Comment Count
-if ($page != 'post') {
-    echo '<script id="dsq-count-scr" src="//rianbergen.disqus.com/count.js" async></script>';
-}
+    if ($page != 'post') {
+        echo '<script id="dsq-count-scr" src="//'.DISQUS.'.disqus.com/count.js" async></script>';
+    }
 ?>
 </body>
 </html>

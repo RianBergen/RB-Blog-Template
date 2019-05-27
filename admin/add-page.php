@@ -25,14 +25,15 @@ if(!$user->isLoggedIn()) {
 	
 	<link rel="stylesheet" href="../_res/styles/rb-engine.css">
 	
-	<script src="tinymce/tinymce.min.js"></script>
+    <!-- TinyMCE Initialization Script -->
+    <?php echo '<script src="'.TINYMCE.'"></script>';?>
 	<script>
 		tinymce.init({
 			selector: "textarea",
 			plugins: [
 				"advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media tabl paste"
+				"insertdatetime media table paste"
 			],
 			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
             height : "500px"
