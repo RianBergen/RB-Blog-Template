@@ -17,12 +17,12 @@ if($user->isLoggedIn()) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - User Login</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - User Login</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
-	
+    
 	<link rel="stylesheet" href="../_res/styles/rb-engine.css">
 </head>
 <body>

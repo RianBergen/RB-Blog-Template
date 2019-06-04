@@ -5,6 +5,9 @@
  * @author David Carr - dave@daveismyname.com - http://www.daveismyname.com
  * @version 1.0
  * @date October 20, 2012
+ * 
+ * This was edited by Rian-Pascal Bergen on June 4, 2019 to fit with the website theme of https://www.rianbergen.com/
+ * All credit is due to David Carr for the base class as only minor adjustments were made
  */
 class Paginator{
         /**

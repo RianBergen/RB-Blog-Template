@@ -27,6 +27,7 @@ if (isset($_GET['year'])) {
     $year = NULL;
 }
 ?>
+
 <!-- HTML CODE -->
 <!DOCTYPE html>
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
@@ -36,13 +37,13 @@ if (isset($_GET['year'])) {
 	
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-    <title>Rian Bergen</title>
-    <meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
-    <link rel="icon" sizes="16x16" href=<?php echo '"'.DIR.'_res/images/16x16-Logo.png"';?>>
-    <link rel="icon" sizes="32x32" href=<?php echo '"'.DIR.'_res/images/32x32-Logo.png"';?>>
-    <link rel="icon" sizes="192x192" href=<?php echo '"'.DIR.'_res/images/192x192-Logo.png"';?>>
+    <title><?php echo ''.HTMLTITLE.'';?></title>
+    <meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
+    <link rel="icon" sizes="16x16" href=<?php echo '"'.URL.'_res/images/16x16-Logo.png"';?>>
+    <link rel="icon" sizes="32x32" href=<?php echo '"'.URL.'_res/images/32x32-Logo.png"';?>>
+    <link rel="icon" sizes="192x192" href=<?php echo '"'.URL.'_res/images/192x192-Logo.png"';?>>
     
-    <link rel="stylesheet" type="text/css" onload="this.media='all'" href=<?php echo '"'.DIR.'_res/styles/rb-engine.css"';?>>
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href=<?php echo '"'.URL.'_res/styles/rb-engine.css"';?>>
 </head>
 <body>
 <div class="rb-main-flex-grid-initializer">
@@ -54,19 +55,24 @@ if (isset($_GET['year'])) {
 		
 		// Check Variables And Include The Left Column
 		if ($page == NULL) {
-			// Inlclude Posts
+			// View All Posts
 			include 'pagecomp-posts.php';
 		} else if ($page == 'post') {
+            // View Selected Post
 			include 'pagecomp-viewpost.php';
 		} else if ($page == 'category') {
+            // View All Posts In Selected Category
 			include 'pagecomp-categories.php';
 		} else if ($page == 'archive') {
+            // View All Posts In Selected Archive
 			include 'pagecomp-archives.php';
 		} else if ($page == 'tag') {
+            // View All Posts In Selected Tag
             include 'pagecomp-tags.php';
         } else if ($page == 'action') {
-            // TO DO: MUST FINISH
+            // TO DO: MUST FINISH: Contact Pages, etc.
         } else if ($page == 'info') {
+            // View Selected Information Page
             include 'pagecomp-info.php';
         }
 
@@ -87,9 +93,9 @@ if (isset($_GET['year'])) {
 
 <!-- Disqus Comment Count -->
 <?php
-    if ($page != 'post') {
-        echo '<script id="dsq-count-scr" src="//'.DISQUS.'.disqus.com/count.js" async></script>';
-    }
+if ($page != 'post') {
+    echo '<script id="dsq-count-scr" src="//'.DISQUS.'.disqus.com/count.js" async></script>';
+}
 ?>
 </body>
 </html>

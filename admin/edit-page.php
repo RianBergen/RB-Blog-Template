@@ -17,8 +17,8 @@ if(!$user->isLoggedIn()) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - Edit Page</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - Edit Page</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
@@ -78,7 +78,16 @@ if(!$user->isLoggedIn()) {
 					$pageSlug = createCategorySlug($pageTitle);
 					
 					// Insert Data Into Database
-					$stmt = $connection->prepare('UPDATE blog_pages SET pageTitle = :pageTitle, pageSlug = :pageSlug, pageContent = :pageContent WHERE pageID = :pageID') ;
+					$stmt = $connection->prepare('
+                        UPDATE
+                            blog_pages
+                        SET
+                            pageTitle = :pageTitle,
+                            pageSlug = :pageSlug,
+                            pageContent = :pageContent
+                        WHERE
+                            pageID = :pageID
+                    ');
 					$stmt->execute(array(
 						':pageID' => $pageID,
 						':pageTitle' => $pageTitle,
@@ -103,8 +112,19 @@ if(!$user->isLoggedIn()) {
 		}
 		
 		try {
-			$stmt = $connection->prepare('SELECT pageID, pageTitle, pageContent FROM blog_pages WHERE pageID = :pageID') ;
-			$stmt->execute(array(':pageID' => $_GET['id']));
+			$stmt = $connection->prepare('
+                SELECT
+                    pageID,
+                    pageTitle,
+                    pageContent
+                FROM
+                    blog_pages
+                WHERE
+                    pageID = :pageID
+            ');
+			$stmt->execute(array(
+                ':pageID' => $_GET['id'])
+            );
 			$row = $stmt->fetch(); 
 		} catch(PDOException $e) {
 		    echo $e->getMessage();

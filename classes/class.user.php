@@ -26,8 +26,22 @@ class User {
 	// Retrieve The User Information
 	private function getUserDBInfo($username_or_email) {
 		try {
-			$statement = $this->connection->prepare('SELECT memberID, memberUsername, memberPassword, memberEmail, memberDateJoin FROM blog_members WHERE (memberEmail = :username_or_email) OR (memberUsername = :username_or_email)');
-			$statement->execute(array('username_or_email' => $username_or_email));
+			$statement = $this->connection->prepare('
+                SELECT
+                    memberID,
+                    memberUsername,
+                    memberPassword,
+                    memberEmail,
+                    memberDateJoin
+                FROM
+                    blog_members
+                WHERE
+                    (memberEmail = :username_or_email)
+                    OR (memberUsername = :username_or_email)'
+            );
+			$statement->execute(array(
+                'username_or_email' => $username_or_email
+            ));
 			
 			return $statement->fetch();
 		} catch(PDOException $e) {

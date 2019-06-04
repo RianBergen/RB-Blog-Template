@@ -1,9 +1,11 @@
+<?php?>
+
 <!-- START - Right Column: Navigation Column -->
 <div class="rb-main-flex-grid-right-column">
 	<!-- START - About Card -->
 	<div class="rb-card">
 		<!-- About Image -->
-		<img class="rb-card-img" src=<?php echo '"'.DIR.'_res/images/about/About-1920x1080.png"';?> alt="N/A">
+		<img class="rb-card-img" src=<?php echo '"'.URL.'_res/images/about/About-1920x1080.png"';?> alt="N/A">
 
 		<div>
 			<h3><b>Rian-Pascal Bergen</b></h3>
@@ -27,8 +29,8 @@
                 $increment = 1;
                 
 				while($row = $statement->fetch()){
-					echo '<a href="'.DIR.'post/'.$row['postSlug'].'" class="rb-button rb-list-item">';
-						echo '<img src="'.DIR.'/_res/images/side/'.$increment.'.png" onerror="this.src=&#39;'.DIR.'_res/images/192x192-Logo.png&#39;" alt="N/A">';
+					echo '<a href="'.URL.'post/'.$row['postSlug'].'" class="rb-button rb-list-item">';
+						echo '<img src="'.URL.'/_res/images/side/'.$increment.'.png" onerror="this.src=&#39;'.URL.'_res/images/192x192-Logo.png&#39;" alt="N/A">';
 						echo '<div class="rb-list-item-txt">';
 							echo '<span class="rb-text-font-large">'.$row['postTitle'].'</span><br>';
 							echo '<span>'.date('F d, Y', strtotime($row['postDate'])).'</span>';
@@ -52,12 +54,12 @@
 
 		<div>
 			<p class="rb-link-tags-container">
-				<a href=<?php echo '"'.DIR.'"'?> class="rb-text-black-tag">Back Home</a>
+				<a href=<?php echo '"'.URL.'"'?> class="rb-text-black-tag">Back Home</a>
 				
 				<?php
 					$statement = $connection->query('SELECT categoryTitle, categorySlug FROM blog_categories ORDER BY categoryID DESC');
 					while($row = $statement->fetch()){
-						echo '<a href="'.DIR.'category/'.$row['categorySlug'].'" class="rb-text-grey-tag">'.$row['categoryTitle'].'</a>';
+						echo '<a href="'.URL.'category/'.$row['categorySlug'].'" class="rb-text-grey-tag">'.$row['categoryTitle'].'</a>';
 					}
 				?>
 			</p>
@@ -75,7 +77,7 @@
 
 		<div>
 			<p class="rb-link-tags-container">
-				<a href=<?php echo '"'.DIR.'"'?> class="rb-text-black-tag">Back Home</a>
+				<a href=<?php echo '"'.URL.'"'?> class="rb-text-black-tag">Back Home</a>
 				
 				<?php
                     $tagsArray = [];
@@ -91,7 +93,7 @@
                     
                     $finalTags = array_unique($tagsArray);
                     foreach ($finalTags as $tag) {
-                        echo '<a href="'.DIR.'tag/'.$tag.'" class="rb-text-grey-tag">'.ucwords($tag).'</a>';
+                        echo '<a href="'.URL.'tag/'.$tag.'" class="rb-text-grey-tag">'.ucwords($tag).'</a>';
                     }
 				?>
 			</p>
@@ -109,14 +111,14 @@
 
 		<div>
 			<p class="rb-link-tags-container">
-				<a href=<?php echo '"'.DIR.'"'?> class="rb-text-black-tag">Back Home</a>
+				<a href=<?php echo '"'.URL.'"'?> class="rb-text-black-tag">Back Home</a>
 				
 				<?php
 					$statement = $connection->query('SELECT Month(postDate) as Month, Year(postDate) as Year FROM blog_posts GROUP BY Month(postDate), Year(postDate) ORDER BY postDate DESC');
 					while($row = $statement->fetch()){
 						$monthName = date("F Y", mktime(0, 0, 0, $row['Month'], 10));
 						$slug = 'archive/'.$row['Month'].'-'.$row['Year'];
-						echo '<a href="'.DIR.''.$slug.'" class="rb-text-grey-tag">'.$monthName.'</a>';
+						echo '<a href="'.URL.''.$slug.'" class="rb-text-grey-tag">'.$monthName.'</a>';
 					}
 				?>
 			</p>

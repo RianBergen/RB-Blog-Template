@@ -1,11 +1,24 @@
 <?php
 // Get Post Data
 if ($id != NULL) {
-	$statement = $connection->prepare('SELECT pageID, pageTitle, pageContent, pageSlug FROM blog_pages WHERE pageSlug = :pageSlug');
-	$statement->execute(array(':pageSlug' => $id));
+	$statement = $connection->prepare('
+        SELECT
+            pageID,
+            pageTitle,
+            pageContent,
+            pageSlug
+        FROM
+            blog_pages
+        WHERE
+            pageSlug = :pageSlug'
+    );
+	$statement->execute(array(
+        ':pageSlug' => $id
+    ));
 	$row = $statement->fetch();
 }
 ?>
+
 <!-- START - Left Column: Blog Post Column -->
 <div class="rb-main-flex-grid-left-column"  style="width: 100%;">
 	<!-- Back To Posts Button -->

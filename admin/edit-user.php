@@ -17,8 +17,8 @@ if(!$user->isLoggedIn()) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - Edit User</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - Edit User</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
@@ -75,7 +75,16 @@ if(!$user->isLoggedIn()) {
 						$hashedpassword = $user->createHash($password);
 
 						// Update Database
-						$statement = $connection->prepare('UPDATE blog_members SET memberUsername = :username, memberPassword = :password, memberEmail = :email WHERE memberID = :memberID') ;
+						$statement = $connection->prepare('
+                            UPDATE
+                                blog_members
+                            SET
+                                memberUsername = :username,
+                                memberPassword = :password,
+                                memberEmail = :email
+                            WHERE
+                                memberID = :memberID
+                        ');
 						$statement->execute(array(
 							':username' => $username,
 							':password' => $hashedpassword,
@@ -84,7 +93,15 @@ if(!$user->isLoggedIn()) {
 						));
 					} else {
 						// Update Database
-						$statement = $connection->prepare('UPDATE blog_members SET memberUsername = :username, memberEmail = :email WHERE memberID = :memberID') ;
+						$statement = $connection->prepare('
+                            UPDATE
+                                blog_members
+                            SET
+                                memberUsername = :username,
+                                memberEmail = :email
+                            WHERE
+                                memberID = :memberID
+                        ');
 						$statement->execute(array(
 							':username' => $username,
 							':email' => $email,
@@ -110,8 +127,19 @@ if(!$user->isLoggedIn()) {
 
 		// Retrieve Data
 		try {
-			$statement = $connection->prepare('SELECT memberID, memberUsername, memberEmail FROM blog_members WHERE memberID = :memberID') ;
-			$statement->execute(array(':memberID' => $_GET['id']));
+			$statement = $connection->prepare('
+                SELECT
+                    memberID,
+                    memberUsername,
+                    memberEmail
+                FROM
+                    blog_members
+                WHERE
+                    memberID = :memberID
+            ') ;
+			$statement->execute(array(
+                ':memberID' => $_GET['id']
+            ));
 			$row = $statement->fetch(); 
 		} catch(PDOException $e) {
 			echo $e->getMessage();

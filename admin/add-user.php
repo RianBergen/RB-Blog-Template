@@ -8,6 +8,7 @@ if(!$user->isLoggedIn()) {
 	header('Location: login.php');
 }
 ?>
+
 <!-- HTML CODE -->
 <!doctype html>
 <html lang="en">
@@ -17,8 +18,8 @@ if(!$user->isLoggedIn()) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - Add User</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - Add User</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
@@ -72,7 +73,12 @@ if(!$user->isLoggedIn()) {
 				
 				try {
 					// Insert Data Into Database
-					$statement = $connection->prepare('INSERT INTO blog_members (memberUsername, memberPassword, memberEmail, memberDateJoin) VALUES (:username, :password, :email, :datejoined)') ;
+					$statement = $connection->prepare('
+                        INSERT INTO
+                            blog_members (memberUsername, memberPassword, memberEmail, memberDateJoin)
+                        VALUES
+                            (:username, :password, :email, :datejoined)
+                    ');
 					$statement->execute(array(
 						':username' => $username,
 						':password' => $hashedpassword,

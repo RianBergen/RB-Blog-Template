@@ -11,7 +11,12 @@ if(!$user->isLoggedIn()) {
 // Delete User From Confirmation In Javascript Below
 if(isset($_GET['deluser'])) {
 	if($_GET['deluser'] != '1') {
-		$statement = $connection->prepare('DELETE FROM blog_members WHERE memberID = :memberID');
+		$statement = $connection->prepare('
+            DELETE FROM
+                blog_members
+            WHERE
+                memberID = :memberID'
+        );
 		$statement->execute(array(':memberID' => $_GET['deluser']));
 		
 		header('Location: users.php?action=deleted');
@@ -28,8 +33,8 @@ if(isset($_GET['deluser'])) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - User Admin Index</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - User Admin Index</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
@@ -70,7 +75,16 @@ if(isset($_GET['deluser'])) {
 		<?php
 			try {
 				// Get SQL Data
-				$statement = $connection->query('SELECT memberID, memberUsername, memberEmail FROM blog_members ORDER BY memberUsername');
+				$statement = $connection->query('
+                    SELECT
+                        memberID,
+                        memberUsername,
+                        memberEmail
+                    FROM
+                        blog_members
+                    ORDER BY
+                        memberUsername'
+                );
 				while($row = $statement->fetch()){
 					echo '<tr>';
 						echo '<td>'.$row['memberUsername'].'</td>';

@@ -37,9 +37,6 @@ function __autoload($class) {
 	}
 }
 
-// Define Directory Path
-define('DIR', 'https://www.rianbergen.com/');
-
 // Define How Many Posts Are Allowed Per Page
 define('POSTSPERPAGE', '7');
 

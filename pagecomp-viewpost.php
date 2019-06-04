@@ -1,14 +1,39 @@
 <?php
 // Get Post Data
 if ($id != NULL) {
-	$statement = $connection->prepare('SELECT postID, postTitle, postContent, postDate, postSlug, postImage, postTags FROM blog_posts WHERE postSlug = :postSlug');
-	$statement->execute(array(':postSlug' => $id));
+	$statement = $connection->prepare('
+        SELECT
+            postID,
+            postTitle,
+            postContent,
+            postDate,
+            postSlug,
+            postImage,
+            postTags
+        FROM 
+            blog_posts
+        WHERE
+            postSlug = :postSlug'
+    );
+	$statement->execute(array(
+        ':postSlug' => $id
+    ));
 	$row = $statement->fetch();
     
-    $statement = $connection->prepare('UPDATE blog_posts SET postViewCount = postViewCount + 1 WHERE postSlug = :postSlug');
-	$statement->execute(array(':postSlug' => $id));
+    $statement = $connection->prepare('
+        UPDATE
+            blog_posts
+        SET
+            postViewCount = postViewCount + 1
+        WHERE
+            postSlug = :postSlug'
+    );
+	$statement->execute(array(
+        ':postSlug' => $id
+    ));
 }
 ?>
+
 <!-- START - Left Column: Blog Post Column -->
 <div class="rb-main-flex-grid-left-column">
 	<!-- Back To Posts Button -->
@@ -35,14 +60,26 @@ if ($id != NULL) {
 		} else {
 			echo '<div class="rb-card">';
 				if ($row['postImage'] != "") {
-					echo '<img class="rb-card-img" src="'.DIR.$row['postImage'].'" onerror="this.src=&#39;'.DIR.'_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
+					echo '<img class="rb-card-img" src="'.URL.$row['postImage'].'" onerror="this.src=&#39;'.URL.'_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
 				}
 				echo '<div>';
 					echo '<h3><b>'.$row['postTitle'].'</b></h3>';
 					echo '<h5>Posted On: <span class="rb-text-opacity">'.date('F d, Y', strtotime($row['postDate'])).'</span></h5>';
 					echo '<h5>Posted In: <span class="rb-text-opacity">';
-						$statement2 = $connection->prepare('SELECT categoryTitle, categorySlug	FROM blog_categories, blog_post_categories WHERE blog_categories.categoryID = blog_post_categories.pcCategoryID AND blog_post_categories.pcPostID = :postID');
-						$statement2->execute(array(':postID' => $row['postID']));
+						$statement2 = $connection->prepare('
+                            SELECT
+                                categoryTitle,
+                                categorySlug
+                            FROM
+                                blog_categories,
+                                blog_post_categories
+                            WHERE
+                                blog_categories.categoryID = blog_post_categories.pcCategoryID
+                                AND blog_post_categories.pcPostID = :postID'
+                        );
+						$statement2->execute(array(
+                            ':postID' => $row['postID']
+                        ));
 						$categoryRow = $statement2->fetchAll(PDO::FETCH_ASSOC);
 						$links = array();
 						foreach ($categoryRow as $category) {
@@ -56,7 +93,7 @@ if ($id != NULL) {
                             $links = array();
                             $parts = explode(',', $row['postTags']);
                             foreach ($parts as $tag) {
-                                $links[] = "<a class='rb-card-categories-tag' href='".DIR."tag/".$tag."'>".$tag."</a>";
+                                $links[] = "<a class='rb-card-categories-tag' href='".URL."tag/".$tag."'>".$tag."</a>";
                             }
                             
                             echo implode(", ", $links);
@@ -88,7 +125,7 @@ if ($id != NULL) {
     
     var disqus_config = function () {
         // Replace PAGE_URL with your page's canonical URL variable
-        <?php echo 'this.page.url = "'.URL.'/post/'.$id.'";';?>
+        <?php echo 'this.page.url = "'.URL.'post/'.$id.'";';?>
         
         // Replace PAGE_IDENTIFIER with your page's unique identifier variable
         <?php echo 'this.page.identifier = '.$row["postID"].';';?>

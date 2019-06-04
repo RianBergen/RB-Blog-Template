@@ -8,6 +8,7 @@ if(!$user->isLoggedIn()) {
 	header('Location: login.php');
 }
 ?>
+
 <!-- HTML CODE -->
 <!doctype html>
 <html lang="en">
@@ -17,8 +18,8 @@ if(!$user->isLoggedIn()) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - Add Post</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - Add Post</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
@@ -98,7 +99,12 @@ if(!$user->isLoggedIn()) {
 					$postSlug = createPostSlug($postTitle);
 					
 					// Insert Data Into Database
-					$stmt = $connection->prepare('INSERT INTO blog_posts (postTitle, postSlug, postDescription, postContent, postDate, postTags) VALUES (:postTitle, :postSlug, :postDescription, :postContent, :postDate, :postTags)') ;
+					$stmt = $connection->prepare('
+                        INSERT INTO
+                            blog_posts (postTitle, postSlug, postDescription, postContent, postDate, postTags)
+                        VALUES
+                            (:postTitle, :postSlug, :postDescription, :postContent, :postDate, :postTags)
+                    ');
 					$stmt->execute(array(
 						':postTitle' => $postTitle,
 						':postSlug' => $postSlug,
@@ -113,7 +119,12 @@ if(!$user->isLoggedIn()) {
 					// Attach Categories
 					if(is_array($categoryID)) {
 						foreach($_POST['categoryID'] as $categoryID) {
-							$stmt = $connection->prepare("INSERT INTO blog_post_categories (pcPostID, pcCategoryID) VALUES(:postID, :categoryID)");
+							$stmt = $connection->prepare('
+                                INSERT INTO
+                                    blog_post_categories (pcPostID, pcCategoryID)
+                                VALUE
+                                    (:postID, :categoryID)
+                            ');
 							$stmt->execute(array(
 								':postID' => $postID,
 								':categoryID' => $categoryID
@@ -132,11 +143,18 @@ if(!$user->isLoggedIn()) {
                         move_uploaded_file($_FILES["postImage"]["tmp_name"], $path);
                         
                         // Connect Image
-                        $stmt2 = $connection->prepare('UPDATE blog_posts SET postImage = :image WHERE postID = :postID') ;
+                        $stmt2 = $connection->prepare('
+                            UPDATE
+                                blog_posts
+                            SET
+                                postImage = :image
+                            WHERE
+                                postID = :postID
+                        ');
                         $stmt2->execute(array(
                             ':postID' => $postID,
                             ':image' => $target
-                            ));
+                        ));
                     }
                     
 					// Redirect To Admin Page
@@ -175,7 +193,15 @@ if(!$user->isLoggedIn()) {
 			<legend>Categories</legend>
 			
 			<?php	
-				$stmt2 = $connection->query('SELECT categoryID, categoryTitle FROM blog_categories ORDER BY categoryTitle');
+				$stmt2 = $connection->query('
+                    SELECT
+                        categoryID,
+                        categoryTitle
+                    FROM
+                        blog_categories
+                    ORDER BY
+                        categoryTitle
+                ');
 				while($row2 = $stmt2->fetch()) {
 					if(isset($_POST['categoryID'])) {
 						if(in_array($row2['categoryID'], $_POST['categoryID'])) {

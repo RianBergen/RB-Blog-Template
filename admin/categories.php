@@ -10,13 +10,21 @@ if(!$user->isLoggedIn()) {
 
 // Delete Category From Confirmation In Javascript Below
 if(isset($_GET['delcat'])) { 
-	$statement = $connection->prepare('DELETE FROM blog_categories WHERE categoryID = :categoryID') ;
-	$statement->execute(array(':categoryID' => $_GET['delcat']));
+	$statement = $connection->prepare('
+        DELETE FROM
+            blog_categories
+        WHERE
+            categoryID = :categoryID
+    ');
+	$statement->execute(array(
+        ':categoryID' => $_GET['delcat'])
+    );
 	
 	header('Location: categories.php?action=deleted');
 	exit;
 }
 ?>
+
 <!-- HTML CODE -->
 <!doctype html>
 <html lang="en">
@@ -26,8 +34,8 @@ if(isset($_GET['delcat'])) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - Category Admin Index</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - Category Admin Index</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
@@ -67,7 +75,16 @@ if(isset($_GET['delcat'])) {
 		<?php
 			try {
 				// Get SQL Data
-				$stmt = $connection->query('SELECT categoryID, categoryTitle, categorySlug FROM blog_categories ORDER BY categoryTitle DESC');
+				$stmt = $connection->query('
+                    SELECT
+                        categoryID,
+                        categoryTitle,
+                        categorySlug
+                    FROM
+                        blog_categories
+                    ORDER BY
+                        categoryTitle DESC
+                ');
 				while($row = $stmt->fetch()) {
 					echo '<tr>';
 						echo '<td>'.$row['categoryTitle'].'</td>';

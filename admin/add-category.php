@@ -8,6 +8,7 @@ if(!$user->isLoggedIn()) {
 	header('Location: login.php');
 }
 ?>
+
 <!-- HTML CODE -->
 <!doctype html>
 <html lang="en">
@@ -17,8 +18,8 @@ if(!$user->isLoggedIn()) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - Add Category</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - Add Category</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
@@ -55,11 +56,16 @@ if(!$user->isLoggedIn()) {
 					$categorySlug = createCategorySlug($categoryTitle);
 					
 					// Insert Data Into Database
-					$stmt = $connection->prepare('INSERT INTO blog_categories (categoryTitle, categorySlug) VALUES (:categoryTitle, :categorySlug)') ;
+					$stmt = $connection->prepare('
+                        INSERT INTO
+                            blog_categories (categoryTitle, categorySlug)
+                        VALUES
+                            (:categoryTitle, :categorySlug)
+                    ');
 					$stmt->execute(array(
-						':categoryTitle' => $categoryTitle,
-						':categorySlug' => $categorySlug
-					));
+                        ':categoryTitle' => $categoryTitle,
+                        ':categorySlug' => $categorySlug)
+                    );
 					
 					// Redirect To Admin Page
 					header('Location: categories.php?action=added');

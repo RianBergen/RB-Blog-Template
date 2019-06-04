@@ -7,14 +7,14 @@ RewriteRule ^(.*)$ https://www.rianbergen.com/$1 [R=301,L]
 #BEGIN SEO REDIRECT
 RewriteBase /
 
+RewriteCond %{REQUEST_FILENAME} !-d [NC]
+RewriteCond %{REQUEST_FILENAME} !-f [NC]
+
 RewriteRule ^category/(.*)$ index.php?page=category&id=$1 [L]
 RewriteRule ^tag/(.*)$ index.php?page=tag&id=$1 [L]
 RewriteRule ^archive/(.*)-(.*)$ index.php?page=archive&month=$1&year=$2 [L]
 RewriteRule ^action/(.*)$ index.php?page=action&id=$1 [L]
 RewriteRule ^info/(.*)$ index.php?page=info&id=$1 [L]
-
-RewriteCond %{REQUEST_FILENAME} !-d [NC]
-RewriteCond %{REQUEST_FILENAME} !-f [NC]
 RewriteRule ^post/(.*)$ index.php?page=post&id=$1 [QSA,L]
 #END SEO REDIRECT
 
@@ -35,15 +35,20 @@ RewriteRule ^post/(.*)$ index.php?page=post&id=$1 [QSA,L]
 
 #BEGIN DEFLATE
 <IfModule mod_deflate.c>
-AddOutputFilterByType DEFLATE text/plain
-AddOutputFilterByType DEFLATE text/html
-AddOutputFilterByType DEFLATE text/xml
-AddOutputFilterByType DEFLATE text/css
-AddOutputFilterByType DEFLATE application/xml
-AddOutputFilterByType DEFLATE application/xhtml+xml
-AddOutputFilterByType DEFLATE application/rss+xml
-AddOutputFilterByType DEFLATE application/javascript
-AddOutputFilterByType DEFLATE application/x-javascript
-AddOutputFilter DEFLATE .shtml
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilter DEFLATE .shtml
 </IfModule>
 #END DEFLATE
+
+#BEGIN ERROR REDIRECTS
+ErrorDocument 404 https://rianbergen.com/404.html
+ErrorDocument 500 https://rianbergen.com/500.html
+#END ERROR REDIRECTS

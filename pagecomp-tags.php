@@ -1,10 +1,11 @@
 <?php ?>
+
 <!-- START - Left Column: Blog Post Column -->
 <div class="rb-main-flex-grid-left-column">
     <!-- Home Button -->
 	<div class="rb-nav-flex-grid">
 		<div>
-			<a href="https://www.rianbergen.com/" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important;"><b>Home</b></a>
+			<a href=<?php echo '"'.URL.'"';?> class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important;"><b>Home</b></a>
 		</div>
 		<div>
 		</div>
@@ -14,13 +15,40 @@
 		try {
 			// Setup Paginator
 			$pages = new Paginator(POSTSPERPAGE,'p');
-			$stmt = $connection->prepare('SELECT postID FROM blog_posts WHERE postTags like :postTags ORDER BY postID DESC');
-            $stmt->execute(array(':postTags' => '%'.$id.'%'));
+			$stmt = $connection->prepare('
+                SELECT
+                    postID
+                FROM
+                    blog_posts
+                WHERE
+                    postTags like :postTags
+                ORDER BY
+                    postID DESC'
+            );
+            $stmt->execute(array(
+                ':postTags' => '%'.$id.'%'
+            ));
 			
 			// Pass Number Of Dates To Database Querry
 			$pages->set_total($stmt->rowCount());
-			$statement = $connection->prepare('SELECT postID, postTitle, postSlug, postDescription, postDate, postViewCount, postTags FROM blog_posts WHERE postTags like :postTags ORDER BY postID DESC '.$pages->get_limit());
-            $statement->execute(array(':postTags' => '%'.$id.'%'));
+			$statement = $connection->prepare('
+                SELECT
+                    postID,
+                    postTitle,
+                    postSlug,
+                    postDescription,
+                    postDate,
+                    postTags
+                FROM
+                    blog_posts
+                WHERE
+                    postTags like :postTags
+                ORDER BY
+                    postID DESC '.$pages->get_limit()
+            );
+            $statement->execute(array(
+                ':postTags' => '%'.$id.'%'
+            ));
             
             
 			while($row = $statement->fetch()) {
@@ -33,8 +61,20 @@
 						echo '<h3><b>'.$row['postTitle'].'</b></h3>';
 						echo '<h5>Posted On: <span class="rb-text-opacity">'.date('F d, Y', strtotime($row['postDate'])).'</span></h5>';
 						echo '<h5>Posted In: <span class="rb-text-opacity">';
-							$statement2 = $connection->prepare('SELECT categoryTitle, categorySlug	FROM blog_categories, blog_post_categories WHERE blog_categories.categoryID = blog_post_categories.pcCategoryID AND blog_post_categories.pcPostID = :postID');
-							$statement2->execute(array(':postID' => $row['postID']));
+							$statement2 = $connection->prepare('
+                                SELECT
+                                    categoryTitle,
+                                    categorySlug
+                                FROM
+                                    blog_categories,
+                                    blog_post_categories
+                                WHERE
+                                    blog_categories.categoryID = blog_post_categories.pcCategoryID
+                                    AND blog_post_categories.pcPostID = :postID'
+                            );
+							$statement2->execute(array(
+                                ':postID' => $row['postID']
+                            ));
 							$categoryRow = $statement2->fetchAll(PDO::FETCH_ASSOC);
 							$links = array();
 							foreach ($categoryRow as $category) {

@@ -10,7 +10,12 @@ if(!$user->isLoggedIn()) {
 
 // Delete Post From Confirmation In Javascript Below
 if(isset($_GET['delpage'])) {
-	$statement = $connection->prepare('DELETE FROM blog_pages WHERE pageID = :pageID') ;
+	$statement = $connection->prepare('
+        DELETE FROM
+            blog_pages
+        WHERE
+            pageID = :pageID'
+    );
 	$statement->execute(array(':pageID' => $_GET['delpage']));
 	
 	header('Location: pages.php?action=deleted');
@@ -26,8 +31,8 @@ if(isset($_GET['delpage'])) {
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Rian Bergen - Pages Admin Index</title>
-	<meta name="description" content="The official home for everything related to Rian-Pascal Bergen!">
+	<title><?php echo ''.HTMLTITLE.'';?> - Pages Admin Index</title>
+	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
 	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
@@ -67,7 +72,15 @@ if(isset($_GET['delpage'])) {
 		<?php
 			try {
 				// Get SQL Data
-				$statement = $connection->query('SELECT pageID, pageTitle FROM blog_pages ORDER BY pageID DESC');
+				$statement = $connection->query('
+                    SELECT
+                        pageID,
+                        pageTitle
+                    FROM
+                        blog_pages
+                    ORDER BY
+                        pageID DESC'
+                );
 				while($row = $statement->fetch()) {
 					echo '<tr>';
 						echo '<td>'.$row['pageTitle'].'</td>';
