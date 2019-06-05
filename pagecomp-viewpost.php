@@ -60,7 +60,7 @@ if ($id != NULL) {
 		} else {
 			echo '<div class="rb-card">';
 				if ($row['postImage'] != "") {
-					echo '<img class="rb-card-img" src="'.URL.$row['postImage'].'" onerror="this.src=&#39;'.URL.'_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
+					echo '<img class="rb-card-img" src="/'.$row['postImage'].'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
 				}
 				echo '<div>';
 					echo '<h3><b>'.$row['postTitle'].'</b></h3>';
@@ -83,7 +83,7 @@ if ($id != NULL) {
 						$categoryRow = $statement2->fetchAll(PDO::FETCH_ASSOC);
 						$links = array();
 						foreach ($categoryRow as $category) {
-							$links[] = "<a class='rb-card-categories-tag' href='c-".$category['categorySlug']."'>".$category['categoryTitle']."</a>";
+							$links[] = "<a class='rb-card-categories-tag' href='/category/".$category['categorySlug']."'>".$category['categoryTitle']."</a>";
 						}
 						
 						echo implode(", ", $links);
@@ -93,7 +93,7 @@ if ($id != NULL) {
                             $links = array();
                             $parts = explode(',', $row['postTags']);
                             foreach ($parts as $tag) {
-                                $links[] = "<a class='rb-card-categories-tag' href='".URL."tag/".$tag."'>".$tag."</a>";
+                                $links[] = "<a class='rb-card-categories-tag' href='/tag/".$tag."'>".$tag."</a>";
                             }
                             
                             echo implode(", ", $links);
@@ -125,7 +125,7 @@ if ($id != NULL) {
     
     var disqus_config = function () {
         // Replace PAGE_URL with your page's canonical URL variable
-        <?php echo 'this.page.url = "'.URL.'post/'.$id.'";';?>
+        <?php echo 'this.page.url = "/post/'.$id.'";';?>
         
         // Replace PAGE_IDENTIFIER with your page's unique identifier variable
         <?php echo 'this.page.identifier = '.$row["postID"].';';?>

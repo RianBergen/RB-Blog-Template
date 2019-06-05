@@ -415,9 +415,9 @@ hr {    /* Default, No Shadow/Depth HR Border */
     padding: 0.75rem;
     margin: 0.75rem;
     max-width: 100%;
-    border: 0.0625rem solid #990000;
-    color: #990000;
-    background-color: #FDF0EB;
+    border: 0.0625rem solid var(--rb-color-error-text);
+    color: var(--rb-color-error-text);
+    background-color: var(--rb-color-error);
     -moz-border-radius: 0.5rem;
     -webkit-border-radius: 0.5rem;
 }
