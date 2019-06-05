@@ -1,0 +1,26 @@
+/*
+    RB-Engine LIGHT theme
+*/
+
+/* START - ROOT Content */
+:root {
+    --rb-font-primary: Helvetica, Arial, sans-serif;    /* Website Font Used Everywhere */
+    --rb-font-primary-size: 16px;    /* Font Size Used For REM Scaling: 1 REM = 16px */
+    
+    --rb-color-background: #f1f1f1;    /* Website Background Color */
+    --rb-color-background-text: #000000;    /* Website Text Color On Background Color */
+    
+    --rb-color-card: #ffffff;    /* Background Color For Cards */
+    --rb-color-card-text: #000000;    /* Text Color For Cards */
+    
+    --rb-color-elements: #cccccc;    /* Background Color For Buttons, Tags, Etc. */
+    --rb-color-elements-text: #000000;    /* Text Color For Buttons, Tags, Etc. */
+    
+    --rb-color-footer: #2b2b2b;    /* Background Color For Footer */
+    --rb-color-footer-text: #ffffff;    /* Text Color For Footer */
+    
+    --rb-color-error: #FDF0EB;    /* Background Color For Error Messages */
+    --rb-color-error-text: #990000;    /* Text And Border Color For Error Messages */
+    
+    --rb-color-disabled: #DDDDDD;    /* Color Used For Disabled Links */
+}

@@ -17,6 +17,9 @@
             <a class="rb-page-footer-container-element" href="/info/privacy-policy">Privacy Policy</a><br />
             <a class="rb-page-footer-container-element" href="/info/help">Help</a><br />
         </div>
+		<div class="rb-margin-1rem-top">
+            <p id="theme-change-button" class="rb-page-footer-container-element rb-page-footer-pointer" onclick="SwitchTheme()">Enable Dark Mode</p>
+        </div>
     </div>
 </footer>
 <!-- END   - Footer Content -->
