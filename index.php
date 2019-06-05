@@ -39,11 +39,11 @@ if (isset($_GET['year'])) {
 	
     <title><?php echo ''.HTMLTITLE.'';?></title>
     <meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-    <link rel="icon" sizes="16x16" href=<?php echo '"'.URL.'_res/images/16x16-Logo.png"';?>>
-    <link rel="icon" sizes="32x32" href=<?php echo '"'.URL.'_res/images/32x32-Logo.png"';?>>
-    <link rel="icon" sizes="192x192" href=<?php echo '"'.URL.'_res/images/192x192-Logo.png"';?>>
+    <link rel="icon" sizes="16x16" href=<?php echo '"/_res/images/16x16-Logo.png"';?>>
+    <link rel="icon" sizes="32x32" href=<?php echo '"/_res/images/32x32-Logo.png"';?>>
+    <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
     
-	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css" />
+    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css" />
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css">
 </head>
 <body>

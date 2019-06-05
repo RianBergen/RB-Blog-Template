@@ -6,16 +6,16 @@
         <div>
             <h1 class="rb-page-footer-container-element"><?php echo ''.TITLE.'';?></h1>
             <h6 class="rb-page-footer-container-element"><?php echo ''.COPYRIGHT.'';?></h6>
-            <a class="rb-page-footer-container-element" href="<?php echo ''.URL.'';?>">Home</a><br />
-            <a class="rb-page-footer-container-element" href="<?php echo ''.URL.'';?>action/about">About</a><br />
-            <a class="rb-page-footer-container-element" href="<?php echo ''.URL.'';?>action/contact">Contact</a><br />
-            <a class="rb-page-footer-container-element" href="<?php echo ''.URL.'';?>action/subscribe">Subscribe</a><br />
+            <a class="rb-page-footer-container-element" href="/">Home</a><br />
+            <a class="rb-page-footer-container-element" href="/action/about">About</a><br />
+            <a class="rb-page-footer-container-element" href="/action/contact">Contact</a><br />
+            <a class="rb-page-footer-container-element" href="/action/subscribe">Subscribe</a><br />
         </div>
         <div class="rb-margin-1rem-top">
-            <a class="rb-page-footer-container-element" href="<?php echo ''.URL.'';?>info/terms-and-conditions">Terms and Conditions</a><br />
-            <a class="rb-page-footer-container-element" href="<?php echo ''.URL.'';?>info/software-eula">Software EULA</a><br />
-            <a class="rb-page-footer-container-element" href="<?php echo ''.URL.'';?>info/privacy-policy">Privacy Policy</a><br />
-            <a class="rb-page-footer-container-element" href="<?php echo ''.URL.'';?>info/help">Help</a><br />
+            <a class="rb-page-footer-container-element" href="/info/terms-and-conditions">Terms and Conditions</a><br />
+            <a class="rb-page-footer-container-element" href="/info/software-eula">Software EULA</a><br />
+            <a class="rb-page-footer-container-element" href="/info/privacy-policy">Privacy Policy</a><br />
+            <a class="rb-page-footer-container-element" href="/info/help">Help</a><br />
         </div>
 		<div class="rb-margin-1rem-top">
             <p id="theme-change-button" class="rb-page-footer-container-element rb-page-footer-pointer" onclick="SwitchTheme()">Enable Dark Mode</p>

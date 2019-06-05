@@ -19,11 +19,11 @@ if(!$user->isLoggedIn()) {
 	
 	<title><?php echo ''.HTMLTITLE.'';?> - Edit Post</title>
 	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
-	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
-	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
+	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png">
+	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
+	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
 	
-	<link rel="stylesheet" href="../_res/styles/rb-engine.css">
+	<link rel="stylesheet" href="/_res/styles/rb-engine.css">
 	
     <!-- TinyMCE Initialization Script -->
 	<?php echo '<script src="'.TINYMCE.'"></script>';?>
@@ -150,7 +150,7 @@ if(!$user->isLoggedIn()) {
 					}
                     
                     // Add Image If Uploaded
-                    if(isset($_FILES['postImage']) && $_FILES['postImage'] != NULL){
+                    if(file_exists($_FILES['postImage']['tmp_name']) && is_uploaded_file($_FILES['postImage']['tmp_name'])){
                         // Select The New File Location For The Images
                         $target = "_res/images/posts/".$postID."/".$_FILES['postImage']['name'];
                         $path = '../'.$target;

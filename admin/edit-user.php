@@ -19,11 +19,11 @@ if(!$user->isLoggedIn()) {
 	
 	<title><?php echo ''.HTMLTITLE.'';?> - Edit User</title>
 	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-	<link rel="icon" sizes="16x16" href="../_res/images/16x16-Logo.png">
-	<link rel="icon" sizes="32x32" href="../_res/images/32x32-Logo.png">
-	<link rel="icon" sizes="192x192" href="../_res/images/192x192-Logo.png">
+	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png">
+	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
+	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
 	
-	<link rel="stylesheet" href="../_res/styles/rb-engine.css">
+	<link rel="stylesheet" href="/_res/styles/rb-engine.css">
 </head>
 <body>
 <div id="rb-admin-container">
