@@ -140,7 +140,7 @@ if(!$user->isLoggedIn()) {
                         $path = '../'.$target;
                         
                         // Move Image
-                        mkdir("../_res/images/posts/".$postID."/", 0755);
+                        mkdir("../_res/images/posts/".$postID."/", 0705);
                         move_uploaded_file($_FILES["postImage"]["tmp_name"], $path);
                         
                         // Connect Image
