@@ -23,4 +23,10 @@
     --rb-color-error-text: #C90000; /* Text And Border Color For Error Messages */
 
     --rb-color-disabled: #DDDDDD; /* Color Used For Disabled Links */
+    
+    --rb-color-admin-red: #EF1F2F; /* Color Used For Links In Admin Menu */
+    
+    --rb-color-table-header: #E5E5E5; /* Background Color For Table Header */
+    --rb-color-table-header-text: #000000; /* Text Color For Table Header */
+    --rb-color-table-header-border: #BBBBBB; /* Border Color For Table Header */
 }

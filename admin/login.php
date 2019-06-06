@@ -23,11 +23,12 @@ if($user->isLoggedIn()) {
 	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
     
-	<link rel="stylesheet" href="/_res/styles/rb-engine.css">
+	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css">
 </head>
 <body>
-<div id="rb-login-container">
-	<div class="rb-card" id="rb-login-content">
+<div class="rb-login-container">
+	<div class="rb-login-form rb-card">
 		
 	<?php
 		// Process Login From If Submitted
@@ -53,11 +54,14 @@ if($user->isLoggedIn()) {
 		<!-- Login Form -->
 		<form action="" method="post">
 			<p><h1>Login</h1></p>
-			<p><label>Username/Email:</label></br><input type="text" name="username" value=""/></p>
-			<p><label>Password:</label></br><input type="password" name="password" value=""/></p>
-			<p><label></label><input class="rb-button rb-button-border" type="submit" name="submit" value="Login"/></p>
+			<p><label>Username/Email:</label></br><input class="rb-login-input" type="text" name="username" value=""/></p>
+			<p><label>Password:</label></br><input class="rb-login-input" type="password" name="password" value=""/></p>
+			<input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" type="submit" name="submit" value="Login"/>
 		</form>
 	</div>
 </div>
+
+<!-- Light/Dark Mode Manager -->
+<script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>

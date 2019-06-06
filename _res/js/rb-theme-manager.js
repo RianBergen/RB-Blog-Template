@@ -1,17 +1,23 @@
-
 //Init. If is dark then initially change it to dark
 var IsDark = !getDarkThemeFromCookie();
 SwitchTheme();
 
 function SwitchTheme() {
-
 	//Change the style based on if the theme is currently dark
 	if (IsDark) {
         document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.light.css");
-        document.getElementById("theme-change-button").innerHTML = "Enable Dark Mode";
+        
+        // Check If Element Exists
+        if (document.getElementById("theme-change-button") != null) {
+            document.getElementById("theme-change-button").innerHTML = "Enable Dark Mode";
+        }
 	} else {
         document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.dark.css");
-        document.getElementById("theme-change-button").innerHTML = "Disable Dark Mode";
+        
+        // Check If Element Exists
+        if (document.getElementById("theme-change-button") != null) {
+            document.getElementById("theme-change-button").innerHTML = "Disable Dark Mode";
+        }
 	}
 
 	//Invert the theme boolean

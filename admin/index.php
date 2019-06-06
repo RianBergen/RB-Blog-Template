@@ -39,8 +39,9 @@ if(isset($_GET['delpost'])) {
 	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png">
 	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
-	
-	<link rel="stylesheet" href="/_res/styles/rb-engine.css">
+    
+	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css">
 	
 	<script language="JavaScript" type="text/javascript">
 		// Confirm Delete Post
@@ -52,9 +53,9 @@ if(isset($_GET['delpost'])) {
 	</script>
 </head>
 <body>
-<div id="rb-admin-container">
-	<div class="rb-card" id="rb-admin-content">
-	
+<div class="rb-admin-container">
+	<div class="rb-card rb-admin-content">
+        <h1>Blog</h1>
 	<?php
 		// Display Menu
 		include('menu.php');
@@ -66,46 +67,51 @@ if(isset($_GET['delpost'])) {
 	?>
 	
 	<!-- Table Containg Database Content -->
-	<table>
-		<tr>
-			<th>Title</th>
-			<th>Date</th>
-			<th>Action</th>
-		</tr>
-		
-		<?php
-			try {
-				// Get SQL Data
-				$statement = $connection->query('
-                    SELECT
+    <div class="rb-admin-content-table-container">
+        <table class="rb-admin-content-table">
+            <tr>
+                <th class="rb-admin-content-table-header">Title</th>
+                <th class="rb-admin-content-table-header rb-admin-content-table-data-hidden">Date</th>
+                <th class="rb-admin-content-table-header">Action</th>
+            </tr>
+            
+            <?php
+                try {
+                    // Get SQL Data
+                    $statement = $connection->query('
+                        SELECT
                         postID,
-                        postTitle,
-                        postDate
-                    FROM
-                        blog_posts
-                    ORDER BY
-                        postID DESC
-                ');
-				while($row = $statement->fetch()) {
-					echo '<tr>';
-						echo '<td>'.$row['postTitle'].'</td>';
-						echo '<td>'.date('M d, Y', strtotime($row['postDate'])).'</td>';
-						echo '<td>';
-							?>
-							<a href="edit-post.php?id=<?php echo $row['postID'];?>">Edit</a> | 
-							<a href="javascript:delpost('<?php echo $row['postID'];?>','<?php echo $row['postTitle'];?>')">Delete</a>
-							<?php
-						echo '</td>';
-					echo '</tr>';
-				}
-			} catch(PDOException $e) {
-				echo $e->getMessage();
-			}
-		?>
-	</table>
+                            postTitle,
+                            postDate
+                        FROM
+                            blog_posts
+                        ORDER BY
+                            postID DESC
+                    ');
+                    while($row = $statement->fetch()) {
+                        echo '<tr class="rb-admin-content-table-row">';
+                            echo '<td class="rb-admin-content-table-data">'.$row['postTitle'].'</td>';
+                            echo '<td class="rb-admin-content-table-data rb-admin-content-table-data-hidden">'.date('M d, Y', strtotime($row['postDate'])).'</td>';
+                            echo '<td class="rb-admin-content-table-data">';
+                                ?>
+                                <a href="edit-post.php?id=<?php echo $row['postID'];?>">Edit</a> | 
+                                <a href="javascript:delpost('<?php echo $row['postID'];?>','<?php echo $row['postTitle'];?>')">Delete</a>
+                                <?php
+                            echo '</td>';
+                        echo '</tr>';
+                    }
+                } catch(PDOException $e) {
+                    echo $e->getMessage();
+                }
+            ?>
+        </table>
+    </div>
 	
 	<p><a href='add-post.php'>Add Post</a></p>
 	</div>
 </div>
+
+<!-- Light/Dark Mode Manager -->
+<script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>

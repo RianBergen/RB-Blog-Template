@@ -43,7 +43,7 @@ if (isset($_GET['year'])) {
     <link rel="icon" sizes="32x32" href=<?php echo '"/_res/images/32x32-Logo.png"';?>>
     <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
     
-    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css" />
+    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css">
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css">
 </head>
 <body>
@@ -98,6 +98,8 @@ if ($page != 'post') {
     echo '<script id="dsq-count-scr" src="//'.DISQUS.'.disqus.com/count.js" async></script>';
 }
 ?>
+
+<!-- Light/Dark Mode Manager -->
 <script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>

@@ -40,7 +40,8 @@ if(isset($_GET['delcat'])) {
 	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
 	
-	<link rel="stylesheet" href="/_res/styles/rb-engine.css">
+	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css">
 	
 	<script language="JavaScript" type="text/javascript">
 		// Confirm Delete Category
@@ -52,9 +53,9 @@ if(isset($_GET['delcat'])) {
 	</script>
 </head>
 <body>
-<div id="rb-admin-container">
-	<div class="rb-card" id="rb-admin-content">
-	
+<div class="rb-admin-container">
+	<div class="rb-card rb-admin-content">
+        <h1>Categories</h1>
 	<?php
 		// Display Menu
 		include('menu.php');
@@ -66,44 +67,49 @@ if(isset($_GET['delcat'])) {
 	?>
 	
 	<!-- Table Containg Database Content -->
-	<table>
-		<tr>
-			<th>Title</th>
-			<th>Action</th>
-		</tr>
-		
-		<?php
-			try {
-				// Get SQL Data
-				$stmt = $connection->query('
-                    SELECT
-                        categoryID,
-                        categoryTitle,
-                        categorySlug
-                    FROM
-                        blog_categories
-                    ORDER BY
-                        categoryTitle DESC
-                ');
-				while($row = $stmt->fetch()) {
-					echo '<tr>';
-						echo '<td>'.$row['categoryTitle'].'</td>';
-						echo '<td>';
-							?>
-							<a href="edit-category.php?id=<?php echo $row['categoryID'];?>">Edit</a> | 
-							<a href="javascript:delcat('<?php echo $row['categoryID'];?>','<?php echo $row['categorySlug'];?>')">Delete</a>
-							<?php
-						echo '</td>';
-					echo '</tr>';
-				}
-			} catch (PDOException $e) {
-				echo $e->getMessage();
-			}
-		?>
-	</table>
+    <div class="rb-admin-content-table-container">
+        <table class="rb-admin-content-table">
+            <tr>
+                <th class="rb-admin-content-table-header">Title</th>
+                <th class="rb-admin-content-table-header">Action</th>
+            </tr>
+            
+            <?php
+                try {
+                    // Get SQL Data
+                    $stmt = $connection->query('
+                        SELECT
+                            categoryID,
+                            categoryTitle,
+                            categorySlug
+                        FROM
+                            blog_categories
+                        ORDER BY
+                            categoryTitle DESC
+                    ');
+                    while($row = $stmt->fetch()) {
+                        echo '<tr class="rb-admin-content-table-row">';
+                            echo '<td class="rb-admin-content-table-data">'.$row['categoryTitle'].'</td>';
+                            echo '<td class="rb-admin-content-table-data">';
+                                ?>
+                                <a href="edit-category.php?id=<?php echo $row['categoryID'];?>">Edit</a> | 
+                                <a href="javascript:delcat('<?php echo $row['categoryID'];?>','<?php echo $row['categorySlug'];?>')">Delete</a>
+                                <?php
+                            echo '</td>';
+                        echo '</tr>';
+                    }
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+            ?>
+        </table>
+    </div>
 	
 	<p><a href='add-category.php'>Add Category</a></p>
 	</div>
 </div>
+
+<!-- Light/Dark Mode Manager -->
+<script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>

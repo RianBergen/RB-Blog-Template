@@ -424,85 +424,112 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 
 
-/* START - Form Specific */
-#rb-login-container {
+/* START - Admin Login Form */
+.rb-login-container {
 	max-width: 19.25rem;
 	margin: auto;
 }
 
-#rb-login-content {
+.rb-login-form {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto !important;
 }
 
-#rb-login-content input {
-	margin: 0.125rem;
-	border: 0.0625rem solid #999999;
-	border-bottom-color: #cccccc;
-	border-right-color: #cccccc;
+.rb-login-input {
+	margin-top: 0.125rem;
+	border: 0.0625rem solid var(--rb-color-elements);
+    background-color: var(--rb-color-card);
+    color: var(--rb-color-card-text);
 	padding: 0.3125rem;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1rem;
 }
 
-#rb-admin-container {
+.rb-login-button {
+	margin-top: 0rem;
+}
+
+/* END   - Admin Login Form */
+
+
+
+/* START - Admin Form */
+.rb-admin-container {
 	max-width: 90rem;
 	margin: auto;
 }
 
-#rb-admin-content {
+.rb-admin-content {
 	margin: 2rem;
 }
 
-#rb-admin-content ul {
-	margin: 1rem;
+@media (max-width: 999px) {
+   .rb-admin-content {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    } 
 }
 
-#rb-admin-content table {
-	width: 100%;
-	text-align: left;
-	border: 0.0625rem solid #DDDDDD;
-	font-size: 0.75rem;
+.rb-admin-menu {
+    display: flex;
+	padding-left: 0rem;
+    margin: 1rem 0rem 1rem 1rem;
 }
 
-#rb-admin-content table th {
-	background-color: #E5E5E5;
-	border: 0.0625rem solid #BBBBBB;
-	padding: 0.1875rem 0.375rem;
-	font-weight: normal;
-	color: #000000;
+@media (max-width: 499px) {
+   .rb-admin-menu {
+        display: block;
+    } 
 }
 
-#rb-admin-content table tr td {
-	border: 0.0625rem solid #DDDDDD;
-	padding: 0.3125rem 0.375rem;
+.rb-admin-menu-item {
+    list-style: none;
+	margin-right: 1rem;
 }
 
-#rb-admin-content table tr.alt td {
-	background-color: #E2E2E2;
-}
-
-#rb-admin-content table tr:hover {
-	background-color: #F0F0F0;
-	color: #000000;
-}
-
-#rb-admin-content a {
-	color: #EF1F2F;
+.rb-admin-content a {
+	color: var(--rb-color-admin-red);
 	text-decoration: none;
 }
 
-#rb-admin-content p, li {
-	color: #555555;
-	font-size: 1rem;
-	line-height: 1.5rem;
+.rb-admin-content-table-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
-#rb-admin-menu {
-	padding-left: 0rem;
-	display: flex;
+.rb-admin-content-table {
+    width: 100%;
+    text-align: left;
+    font-size: 0.75rem;
+    border: 0.0625rem solid var(--rb-color-background-text);
 }
 
-#rb-admin-menu li {
-	list-style: none;
-	margin-right: 1.25rem;
+.rb-admin-content-table-header {
+    border: 0.0625rem solid var(--rb-color-table-header-border);
+    background-color: var(--rb-color-table-header);
+    color: var(--rb-color-table-header-text);
+    padding: 0.1875rem 0.375rem;
+    font-weight: normal;
+    display: table-cell;
 }
-/* END   - Form Specific */
+
+.rb-admin-content-table-row:hover {
+    background-color: var(--rb-color-table-header);
+    color: var(--rb-color-table-header-text);
+}
+
+.rb-admin-content-table-data {
+    border: 0.0625rem solid var(--rb-color-table-header-border);
+    padding: 0.1875rem 0.375rem;
+    display: table-cell;
+}
+@media (max-width: 599px) {
+    .rb-admin-content-table-data-hidden {
+        display: none;
+    }
+}
+/* END   - Admin Form */

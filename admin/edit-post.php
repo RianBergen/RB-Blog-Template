@@ -23,7 +23,8 @@ if(!$user->isLoggedIn()) {
 	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
 	
-	<link rel="stylesheet" href="/_res/styles/rb-engine.css">
+	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css">
 	
     <!-- TinyMCE Initialization Script -->
 	<?php echo '<script src="'.TINYMCE.'"></script>';?>
@@ -41,14 +42,9 @@ if(!$user->isLoggedIn()) {
 	</script>
 </head>
 <body>
-<div id="rb-admin-container">
-	<div class="rb-card" id="rb-admin-content">
-	
-	<?php
-		// Display Menu
-		include('menu.php');
-	?>
-	
+<div class="rb-admin-container">
+	<div class="rb-card rb-admin-content">
+    
 	<!-- Admin Page Link -->
 	<p><a href="./">Go Back</a></p>
 	<h2>Edit Post</h2>
@@ -279,5 +275,8 @@ if(!$user->isLoggedIn()) {
 	</form>
 	</div>
 </div>
+
+<!-- Light/Dark Mode Manager -->
+<script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>
