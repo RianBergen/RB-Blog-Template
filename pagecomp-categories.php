@@ -5,7 +5,7 @@
     <!-- Home Button -->
 	<div class="rb-nav-flex-grid">
 		<div>
-			<a href="/" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important;"><b>Home</b></a>
+			<a href="/" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Home</b></a>
 		</div>
 		<div>
 		</div>

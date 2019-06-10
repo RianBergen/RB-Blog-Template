@@ -13,8 +13,8 @@ if ($id != NULL) {
         FROM 
             blog_posts
         WHERE
-            postSlug = :postSlug'
-    );
+            postSlug = :postSlug
+    ');
 	$statement->execute(array(
         ':postSlug' => $id
     ));
@@ -26,8 +26,8 @@ if ($id != NULL) {
         SET
             postViewCount = postViewCount + 1
         WHERE
-            postSlug = :postSlug'
-    );
+            postSlug = :postSlug
+    ');
 	$statement->execute(array(
         ':postSlug' => $id
     ));
@@ -39,7 +39,7 @@ if ($id != NULL) {
 	<!-- Back To Posts Button -->
 	<div class="rb-nav-flex-grid">
 		<div>
-			<a href="javascript:history.back()" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important;"><b>Go Back</b></a>
+			<a href="javascript:history.back()" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Go Back</b></a>
 		</div>
 		<div>
 		</div>

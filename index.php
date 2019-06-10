@@ -71,7 +71,11 @@ if (isset($_GET['year'])) {
             // View All Posts In Selected Tag
             include 'pagecomp-tags.php';
         } else if ($page == 'action') {
-            // TO DO: MUST FINISH: Contact Pages, etc.
+            if ($id == 'about') {
+                include 'pagecomp-viewabout.php';
+            } else {
+                include 'pagecomp-action.php';
+            }
         } else if ($page == 'info') {
             // View Selected Information Page
             include 'pagecomp-info.php';

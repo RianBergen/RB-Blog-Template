@@ -33,17 +33,23 @@ if($user->isLoggedIn()) {
 	<?php
 		// Process Login From If Submitted
 		if(isset($_POST['submit'])) {
-			$username = testInput($_POST['username']);
-			$password = testInput($_POST['password']);
-			
-			if($user->login($username, $password)){
-				// Login Worked
-				header('Location: index.php');
-				exit;
-			} else {
-				// Login Failed
-				$message = '<p class="rb-error">Wrong Username/Email or Password</p>';
-			}
+            // Honeypot
+            if (testInput($_POST['id1']) == "") {
+                $username = testInput($_POST['id2']);
+                $password = testInput($_POST['id3']);
+                
+                if($user->login($username, $password)){
+                    // Login Worked
+                    header('Location: index.php');
+                    exit;
+                } else {
+                    // Login Failed
+                    $message = '<p class="rb-error">Wrong Username/Email or Password</p>';
+                }
+            }  else {
+                // Login Failed
+                $message = '<p class="rb-error">Wrong Username/Email or Password</p>';
+            }
 		}
 		
 		if(isset($message)) {
@@ -52,12 +58,16 @@ if($user->isLoggedIn()) {
 	?>
 		
 		<!-- Login Form -->
-		<form action="" method="post">
-			<p><h1>Login</h1></p>
-			<p><label>Username/Email:</label></br><input class="rb-login-input" type="text" name="username" value=""/></p>
-			<p><label>Password:</label></br><input class="rb-login-input" type="password" name="password" value=""/></p>
-			<input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" type="submit" name="submit" value="Login"/>
-		</form>
+        <div style="padding: 1rem;">
+            <form action="" method="post">
+                <h1>Login</h1>
+                <label for="id1" class="rb-id1">Honeypot: Do Not Fill Out!</label>
+                <input class="rb-login-input rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
+                <label>Username/Email:</label></br><input class="rb-login-input" style="width: 100%;" type="text" name="id2" value=""/>
+                <label>Password:</label></br><input class="rb-login-input" style="width: 100%;" type="password" name="id3" value=""/>
+                <input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" style="margin: 0rem;"type="submit" name="submit" value="Login"/>
+            </form>
+        </div>
 	</div>
 </div>
 
