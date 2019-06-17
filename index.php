@@ -43,8 +43,10 @@ if (isset($_GET['year'])) {
     <link rel="icon" sizes="32x32" href=<?php echo '"/_res/images/32x32-Logo.png"';?>>
     <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
     
-    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css">
-    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css">
+    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css?v=<?php echo ''.CSSVERSION.'';?>">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
+    
+    <meta name="theme-color" content="#242424">
 </head>
 <body>
 <div class="rb-main-flex-grid-initializer">

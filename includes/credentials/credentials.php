@@ -22,6 +22,9 @@ define('DISQUS', 'key');
 // Example: define('URL', 'https://www.rianbergen.com/');
 define('URL', 'absolute');
 
+// CSS File Version - This is used to circumnavigate css file caching. Changing this value will force the user to re-download the css files.
+define('CSSVERSION', '0.0.0');
+
 // HTML Values
 // This Fills Out The HTML Title And Description Tags
 define('HTMLTITLE', 'title');
@@ -32,4 +35,8 @@ define('HTMLDESCRIPTION', 'description');
 define('TITLE', 'title');
 define('DESCRIPTION', 'description');
 define('COPYRIGHT', 'copyright');
+
+// Administrator Email Address: This email address will recieve all of the contact requests
+define('ADMINEMAIL', 'email-address@email.com');
+define('ADMINNAME', 'admin name');
 ?>

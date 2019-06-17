@@ -22,7 +22,7 @@
         ));
         $row = $stmt->fetch();
         
-        $string = explode(' </p>' , $row['pageContent']); //substr($row['pageContent'], 0, strpos($row['pageContent'], '</p>'));;
+        $string = explode(' </p>' , $row['pageContent']); //substr($row['pageContent'], 0, strpos($row['pageContent'], '</p>'));
         
 		echo '<div>';
 			echo $string[0];

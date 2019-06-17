@@ -60,7 +60,6 @@
 					echo '<div>';
 						echo '<h3><b>'.$row['postTitle'].'</b></h3>';
 						echo '<h5>Posted On: <span class="rb-text-opacity">'.date('F d, Y', strtotime($row['postDate'])).'</span></h5>';
-						echo '<h5>Posted In: <span class="rb-text-opacity">';
 							$statement2 = $connection->prepare('
                                 SELECT
                                     categoryTitle,
@@ -81,7 +80,10 @@
 								$links[] = "<a class='rb-card-categories-tag' href='/category/".$category['categorySlug']."'>".$category['categoryTitle']."</a>";
 							}
 							
-							echo implode(", ", $links);
+							if (empty($categoryRow) != true) {
+                                echo '<h5>Posted In: <span class="rb-text-opacity">';
+                                echo implode(", ", $links);
+                            }
 						echo '</span></h5>';
                         echo '<h5>Tagged As: <span class="rb-text-opacity">';
 							$links = array();

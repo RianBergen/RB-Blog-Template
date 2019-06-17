@@ -376,6 +376,17 @@ hr {    /* Default, No Shadow/Depth HR Border */
     -webkit-border-radius: 0.5rem;
 }
 
+.rb-success {
+    padding: 0.75rem;
+    margin: 0.75rem;
+    max-width: 100%;
+    border: 0.0625rem solid var(--rb-color-success-text);
+    color: var(--rb-color-success-text);
+    background-color: var(--rb-color-success);
+    -moz-border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+}
+
 .rb-indent {
     padding-left: 2.5rem;
 }
@@ -432,7 +443,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 .rb-login-form {
     width: 16rem;
-    height: fit-content;
+    display: table;    /* Alternative for height: fit-content; */
     position: absolute;
     top: 0;
     bottom: 0;

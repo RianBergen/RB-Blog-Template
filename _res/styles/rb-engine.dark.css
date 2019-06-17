@@ -21,7 +21,10 @@
 
     --rb-color-error: #303030; /* Background Color For Error Messages */
     --rb-color-error-text: #C90000; /* Text And Border Color For Error Messages */
-
+    
+    --rb-color-success: #F0FDEB; /* Background Color For Success Messages */
+    --rb-color-success-text: #009900; /* Text And Border Color For Success Messages */
+    
     --rb-color-disabled: #DDDDDD; /* Color Used For Disabled Links */
     
     --rb-color-admin-red: #EF1F2F; /* Color Used For Links In Admin Menu */
