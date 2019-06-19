@@ -138,7 +138,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
     border-radius: 0.25rem;
     color: var(--rb-color-card-text);
     background-color: var(--rb-color-card);
-    box-shadow: 0rem 0.125rem 0.3125rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.125rem 0.75rem 0rem  rgba(0, 0, 0, 0.19);
+    box-shadow: var(--rb-shadow-cards);
 }
 
 @media (max-width: 999px) {    /* Responsive Margins For Cards */

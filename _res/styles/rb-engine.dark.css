@@ -32,4 +32,6 @@
     --rb-color-table-header: #E5E5E5; /* Background Color For Table Header */
     --rb-color-table-header-text: #000000; /* Text Color For Table Header */
     --rb-color-table-header-border: #BBBBBB; /* Border Color For Table Header */
+    
+    --rb-shadow-cards: 0px 14px 49px -27px rgba(0,0,0,0.75); /* Box Shadow For Card Elements */ /* Old Box Shadow: 0rem 0.125rem 0.3125rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.125rem 0.75rem 0rem  rgba(0, 0, 0, 0.19) */
 }
