@@ -23,7 +23,7 @@ define('DISQUS', 'key');
 define('URL', 'absolute');
 
 // CSS File Version - This is used to circumnavigate css file caching. Changing this value will force the user to re-download the css files.
-define('CSSVERSION', '0.0.0');
+define('CSSVERSION', '1.0.0');
 
 // HTML Values
 // This Fills Out The HTML Title And Description Tags
