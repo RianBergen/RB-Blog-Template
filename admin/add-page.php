@@ -24,7 +24,10 @@ if(!$user->isLoggedIn()) {
 	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
 	
-	<link rel="stylesheet" href="/_res/styles/rb-engine.css">
+	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css?v=<?php echo ''.CSSVERSION.'';?>">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
+    
+    <meta name="theme-color" content="#242424">
 	
     <!-- TinyMCE Initialization Script -->
     <?php echo '<script src="'.TINYMCE.'"></script>';?>
@@ -42,14 +45,9 @@ if(!$user->isLoggedIn()) {
 	</script>
 </head>
 <body>
-<div id="rb-admin-container">
-	<div class="rb-card" id="rb-admin-content">
-	
-	<?php
-		// Display Menu
-		include('menu.php');
-	?>
-	
+<div class="rb-admin-container">
+	<div class="rb-card rb-admin-content">
+    
 	<!-- Admin Page Link -->
 	<p><a href="pages.php">Go Back</a></p>
 	<h2>Add Page</h2>
@@ -78,15 +76,16 @@ if(!$user->isLoggedIn()) {
 					// Insert Data Into Database
 					$stmt = $connection->prepare('
                         INSERT INTO
-                            blog_pages (pageTitle, pageSlug, pageContent)
+                            blog_pages (pageTitle, pageSlug, pageContent, pageExtra)
                         VALUES
-                            (:pageTitle, :pageSlug, :pageContent)
+                            (:pageTitle, :pageSlug, :pageContent, :pageExtra)
                     ');
 					$stmt->execute(array(
                         ':pageTitle' => $pageTitle,
                         ':pageSlug' => $pageSlug,
-                        ':pageContent' => $pageContent)
-                    );
+                        ':pageContent' => $pageContent,
+                        ':pageExtra' => $pageExtra
+                    ));
 					
 					$postID = $connection->lastInsertId();
 					
@@ -115,9 +114,15 @@ if(!$user->isLoggedIn()) {
 		<p><label>Content</label><br />
 		<textarea name='pageContent' cols='60' rows='10'><?php if(isset($error)){echo $_POST['pageContent'];}?></textarea></p>
         
+        <p><label>Extra Field</label><br />
+		<input type='text' name='pageExtra' value='<?php if(isset($error)){echo $_POST['pageExtra'];}?>'></p>
+        
 		<p><input type='submit' name='submit' value='Submit'></p>
 	</form>
 	</div>
 </div>
+
+<!-- Light/Dark Mode Manager -->
+<script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>

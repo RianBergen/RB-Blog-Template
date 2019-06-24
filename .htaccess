@@ -1,7 +1,7 @@
 #BEGIN HTTPS REDIRECT
 RewriteEngine On
-RewriteCond %{HTTP_HOST} !^www\.rianbergen\.com$ [NC]
-RewriteRule ^(.*)$ https://www.rianbergen.com/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !^www\.YOURDOMAIN\.com$ [NC]
+RewriteRule ^(.*)$ https://www.YOURDOMAIN.com/$1 [R=301,L]
 #END HTTPS REDIRECT
 
 #BEGIN SEO REDIRECT
@@ -17,6 +17,11 @@ RewriteRule ^action/(.*)$ index.php?page=action&id=$1 [L]
 RewriteRule ^info/(.*)$ index.php?page=info&id=$1 [L]
 RewriteRule ^post/(.*)$ index.php?page=post&id=$1 [QSA,L]
 #END SEO REDIRECT
+
+#BEGIN ERROR REDIRECTS
+ErrorDocument 404 https://www.YOURDOMAIN.com/404.html
+ErrorDocument 500 https://www.YOURDOMAIN.com/500.html
+#END ERROR REDIRECTS
 
 #BEGIN EXPIRES
 <IfModule mod_expires.c>
@@ -47,8 +52,3 @@ RewriteRule ^post/(.*)$ index.php?page=post&id=$1 [QSA,L]
     AddOutputFilter DEFLATE .shtml
 </IfModule>
 #END DEFLATE
-
-#BEGIN ERROR REDIRECTS
-ErrorDocument 404 https://rianbergen.com/404.html
-ErrorDocument 500 https://rianbergen.com/500.html
-#END ERROR REDIRECTS

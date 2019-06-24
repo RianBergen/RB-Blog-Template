@@ -4,23 +4,34 @@
 
 /* START - ROOT Content */
 :root {
-    --rb-font-primary: Helvetica, Arial, sans-serif;    /* Website Font Used Everywhere */
-    --rb-font-primary-size: 16px;    /* Font Size Used For REM Scaling: 1 REM = 16px */
+    --rb-font-primary: Helvetica, Arial, sans-serif; /* Website Font Used Everywhere */
+    --rb-font-primary-size: 16px; /* Font Size Used For REM Scaling: 1 REM = 16px */
     
-    --rb-color-background: #f1f1f1;    /* Website Background Color */
-    --rb-color-background-text: #000000;    /* Website Text Color On Background Color */
+    --rb-color-background: #f1f1f1; /* Website Background Color */
+    --rb-color-background-text: #000000; /* Website Text Color On Background Color */
     
-    --rb-color-card: #ffffff;    /* Background Color For Cards */
-    --rb-color-card-text: #000000;    /* Text Color For Cards */
+    --rb-color-card: #ffffff; /* Background Color For Cards */
+    --rb-color-card-text: #000000; /* Text Color For Cards */
     
-    --rb-color-elements: #cccccc;    /* Background Color For Buttons, Tags, Etc. */
-    --rb-color-elements-text: #000000;    /* Text Color For Buttons, Tags, Etc. */
+    --rb-color-elements: #cccccc; /* Background Color For Buttons, Tags, Etc. */
+    --rb-color-elements-text: #000000; /* Text Color For Buttons, Tags, Etc. */
     
-    --rb-color-footer: #2b2b2b;    /* Background Color For Footer */
-    --rb-color-footer-text: #ffffff;    /* Text Color For Footer */
+    --rb-color-footer: #2b2b2b; /* Background Color For Footer */
+    --rb-color-footer-text: #ffffff; /* Text Color For Footer */
     
-    --rb-color-error: #FDF0EB;    /* Background Color For Error Messages */
-    --rb-color-error-text: #990000;    /* Text And Border Color For Error Messages */
+    --rb-color-error: #FDF0EB; /* Background Color For Error Messages */
+    --rb-color-error-text: #990000; /* Text And Border Color For Error Messages */
     
-    --rb-color-disabled: #DDDDDD;    /* Color Used For Disabled Links */
+    --rb-color-success: #F0FDEB; /* Background Color For Success Messages */
+    --rb-color-success-text: #009900; /* Text And Border Color For Success Messages */
+    
+    --rb-color-disabled: #DDDDDD; /* Color Used For Disabled Links */
+    
+    --rb-color-admin-red: #EF1F2F; /* Color Used For Links In Admin Menu */
+    
+    --rb-color-table-header: #E5E5E5; /* Background Color For Table Header */
+    --rb-color-table-header-text: #000000; /* Text Color For Table Header */
+    --rb-color-table-header-border: #BBBBBB; /* Border Color For Table Header */
+    
+    --rb-shadow-cards: 0px 14px 49px -27px rgba(0,0,0,0.75); /* Box Shadow For Card Elements */ /* Old Box Shadow: 0rem 0.125rem 0.3125rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.125rem 0.75rem 0rem  rgba(0, 0, 0, 0.19) */
 }

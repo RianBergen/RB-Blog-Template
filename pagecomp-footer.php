@@ -9,7 +9,7 @@
             <a class="rb-page-footer-container-element" href="/">Home</a><br />
             <a class="rb-page-footer-container-element" href="/action/about">About</a><br />
             <a class="rb-page-footer-container-element" href="/action/contact">Contact</a><br />
-            <a class="rb-page-footer-container-element" href="/action/subscribe">Subscribe</a><br />
+            <a class="rb-page-footer-container-element" href="/action/subscribe">Subscribe/Unsubscribe</a><br />
         </div>
         <div class="rb-margin-1rem-top">
             <a class="rb-page-footer-container-element" href="/info/terms-and-conditions">Terms and Conditions</a><br />

@@ -43,8 +43,10 @@ if (isset($_GET['year'])) {
     <link rel="icon" sizes="32x32" href=<?php echo '"/_res/images/32x32-Logo.png"';?>>
     <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
     
-    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css" />
-    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css">
+    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css?v=<?php echo ''.CSSVERSION.'';?>">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
+    
+    <meta name="theme-color" content="#242424">
 </head>
 <body>
 <div class="rb-main-flex-grid-initializer">
@@ -71,7 +73,11 @@ if (isset($_GET['year'])) {
             // View All Posts In Selected Tag
             include 'pagecomp-tags.php';
         } else if ($page == 'action') {
-            // TO DO: MUST FINISH: Contact Pages, etc.
+            if ($id == 'about') {
+                include 'pagecomp-viewabout.php';
+            } else {
+                include 'pagecomp-action.php';
+            }
         } else if ($page == 'info') {
             // View Selected Information Page
             include 'pagecomp-info.php';
@@ -98,6 +104,8 @@ if ($page != 'post') {
     echo '<script id="dsq-count-scr" src="//'.DISQUS.'.disqus.com/count.js" async></script>';
 }
 ?>
+
+<!-- Light/Dark Mode Manager -->
 <script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>

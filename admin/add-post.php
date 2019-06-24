@@ -24,7 +24,10 @@ if(!$user->isLoggedIn()) {
 	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
 	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
 	
-	<link rel="stylesheet" href="/_res/styles/rb-engine.css">
+	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css?v=<?php echo ''.CSSVERSION.'';?>">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
+    
+    <meta name="theme-color" content="#242424">
 	
     <!-- TinyMCE Initialization Script -->
 	<?php echo '<script src="'.TINYMCE.'"></script>';?>
@@ -42,13 +45,8 @@ if(!$user->isLoggedIn()) {
 	</script>
 </head>
 <body>
-<div id="rb-admin-container">
-	<div class="rb-card" id="rb-admin-content">
-	
-	<?php
-		// Display Menu
-		include('menu.php');
-	?>
+<div class="rb-admin-container">
+	<div class="rb-card rb-admin-content">
 	
 	<!-- Admin Page Link -->
 	<p><a href="./">Go Back</a></p>
@@ -133,14 +131,13 @@ if(!$user->isLoggedIn()) {
 					}
                     
                     // Add Image If Uploaded
-					
                     if(file_exists($_FILES['postImage']['tmp_name']) && is_uploaded_file($_FILES['postImage']['tmp_name'])) {
                         // Select The New File Location For The Images
                         $target = "_res/images/posts/".$postID."/".$_FILES['postImage']['name'];
                         $path = '../'.$target;
                         
                         // Move Image
-                        mkdir("../_res/images/posts/".$postID."/", 0755);
+                        mkdir("../_res/images/posts/".$postID."/", 0705);
                         move_uploaded_file($_FILES["postImage"]["tmp_name"], $path);
                         
                         // Connect Image
@@ -158,9 +155,61 @@ if(!$user->isLoggedIn()) {
                         ));
                     }
                     
-					// Redirect To Admin Page
-					//header('Location: index.php?action=added');
-					exit;
+                    // Notification System
+                    if ($notify == true) {
+                        $stmt3 = $connection->query('
+                            SELECT
+                                subscriberID,
+                                subscriberEmail
+                            FROM
+                                blog_subscribers
+                            ORDER BY
+                                subscriberID
+                        ');
+                        
+                        while($row3 = $stmt3->fetch()) {
+                            // Retrieve Email Template
+                            $statementemail = $connection->prepare('
+                                SELECT
+                                    pageTitle,
+                                    pageContent,
+                                    pageExtra
+                                FROM
+                                    blog_pages
+                                WHERE
+                                    pageTitle = :pageTitle
+                            ');
+                            $statementemail->execute(array(
+                                ':pageTitle' => "New Post-Email Notification"
+                            ));
+                            $rowemail = $statementemail->fetch();
+                            
+                            // Format Template And Replace Tags With Information
+                            $msg = '
+                                <html>
+                                <head>
+                                    <title>Contact Request</title>
+                                </head>
+                                <body>
+                            '.$rowemail['pageContent'].'
+                                </body>
+                                </html>
+                            ';
+                            
+                            $msg = str_replace('[Title]', $postTitle, $msg);
+                            $content = substr($postContent, 0, strpos($postContent, '</p>'));
+                            $msg = str_replace('[Content]', $content, $msg);
+                            $msg = str_replace('[Link]', URL."post/".$postSlug, $msg);
+                            
+                            // Add Headers
+                            $headers = "MIME-Version: 1.0"."\r\n";
+                            $headers .= "Content-Type: text/html; charset=ISO-8859-1"."\r\n";
+                            $headers .= "From: ".ADMINNAME."<".ADMINEMAIL.">"."\r\n";
+                            
+                            // Send Message
+                            mail($row3['subscriberEmail'], $rowemail['pageExtra'], $msg, $headers);
+                        }
+                    }
 				} catch(PDOException $e) {
 					echo $e->getMessage();
 				}
@@ -220,9 +269,14 @@ if(!$user->isLoggedIn()) {
         <p><label>Banner Image (Recommended Size: 1920x1080)(Recommended File Type: JPEG, PNG, GIF)</label><br />
         <input type='file' name='postImage' multiple></p>
         
+        <p><input type="checkbox" name="notify"><label> Notify Subscribers</label></p>
+        
 		<p><input type='submit' name='submit' value='Submit'></p>
 	</form>
 	</div>
 </div>
+
+<!-- Light/Dark Mode Manager -->
+<script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>
