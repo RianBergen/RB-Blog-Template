@@ -112,7 +112,7 @@
                         if ($row['postTags'] != NULL) {
                             echo '<h5>Tagged As: <span class="rb-text-opacity">';
                                 $links = array();
-                                $parts = explode(',', $row['postTags']);
+                                $parts = explode(', ', $row['postTags']);
                                 foreach ($parts as $tag) {
                                     $links[] = "<a class='rb-card-categories-tag' href='/tag/".$tag."'>".$tag."</a>";
                                 }

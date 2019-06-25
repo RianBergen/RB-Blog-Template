@@ -128,7 +128,7 @@
                     ');
                     
                     while($row = $statement->fetch()){
-                        $parts = explode(',', $row['postTags']);
+                        $parts = explode(', ', $row['postTags']);
                         
                         foreach ($parts as $tag) {
                             $tagsArray[] = $tag;
