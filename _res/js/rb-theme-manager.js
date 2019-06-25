@@ -1,30 +1,35 @@
 //Init. If is dark then initially change it to dark
-var IsDark = !getDarkThemeFromCookie();
-SwitchTheme();
+var IsDark = getDarkThemeFromCookie();
+theme_SetCssTheme(IsDark);
 
 function SwitchTheme() {
 	//Change the style based on if the theme is currently dark
-	if (IsDark) {
-        document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.light.css");
-        
-        // Check If Element Exists
-        if (document.getElementById("theme-change-button") != null) {
-            document.getElementById("theme-change-button").innerHTML = "Enable Dark Mode";
-        }
-	} else {
-        document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.dark.css");
-        
-        // Check If Element Exists
-        if (document.getElementById("theme-change-button") != null) {
-            document.getElementById("theme-change-button").innerHTML = "Disable Dark Mode";
-        }
-	}
+    theme_SetCssTheme(!IsDark);
+    theme_SetButtonText(!IsDark);
 
-	//Invert the theme boolean
+	//Invert the theme
 	IsDark = !IsDark;
 
 	//Update the cookie
 	setDarkThemeInCookie(IsDark, 30);
+}
+
+//Sets the theme based on an input boolean
+function theme_SetCssTheme(dark) {
+    if (dark) {
+        document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.dark.css");
+    } else {
+        document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.light.css");
+    }
+}
+
+//Sets the theme button text based on an input boolean
+function theme_SetButtonText(dark) {
+    if (dark) {
+        document.getElementById("theme-change-button").innerHTML = "Disable Dark Mode";
+    } else {
+        document.getElementById("theme-change-button").innerHTML = "Enable Dark Mode";
+    }
 }
 
 function getDarkThemeFromCookie() {
