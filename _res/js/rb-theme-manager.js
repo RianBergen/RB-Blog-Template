@@ -1,6 +1,7 @@
 //Init. If is dark then initially change it to dark
 var IsDark = getDarkThemeFromCookie();
-theme_SetCssTheme(IsDark);
+//theme_SetCssTheme(IsDark);
+theme_SetButtonText(IsDark);
 
 function SwitchTheme() {
 	//Change the style based on if the theme is currently dark
