@@ -43,11 +43,10 @@ if (isset($_GET['year'])) {
     <link rel="icon" sizes="32x32" href=<?php echo '"/_res/images/32x32-Logo.png"';?>>
     <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
     
-    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.light.css?v=<?php echo ''.CSSVERSION.'';?>">
+    <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
 
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
-    <script src="/_res/js/rb-theme-manager.js"></script>
-
+    
     <meta name="theme-color" content="#242424">
 </head>
 <body>
@@ -108,8 +107,6 @@ if ($page != 'post') {
 ?>
 
 <!-- Light/Dark Mode Manager -->
-<script>
-	theme_SetButtonText(IsDark);
-</script>
+<script src="/_res/js/rb-theme-manager.js"></script>
 </body>
 </html>
