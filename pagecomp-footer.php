@@ -20,6 +20,9 @@
 		<div class="rb-margin-1rem-top">
             <p id="theme-change-button" class="rb-page-footer-container-element rb-page-footer-pointer" onclick="SwitchTheme()">Enable Dark Mode</p>
         </div>
+        <div>
+            This Website Is Open Source! Here Is Our Github Link: <a class="rb-page-footer-container-element" href="https://github.com/RianBergen/RB-Blog-Template">https://github.com/RianBergen/RB-Blog-Template</a>
+        </div>
     </div>
 </footer>
 <!-- END   - Footer Content -->
