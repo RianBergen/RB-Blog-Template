@@ -21,7 +21,7 @@
             <p id="theme-change-button" class="rb-page-footer-container-element rb-page-footer-pointer" onclick="SwitchTheme()">Enable Dark Mode</p>
         </div>
         <div>
-            <a class="rb-page-footer-container-element" href="https://github.com/RianBergen/RB-Blog-Template">Github Link</a>
+            <a class="rb-page-footer-container-element" href="https://github.com/RianBergen/RB-Blog-Template">GitHub Link</a>
         </div>
     </div>
 </footer>
