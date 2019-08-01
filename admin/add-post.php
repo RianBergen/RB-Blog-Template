@@ -95,13 +95,20 @@ if(!$user->isLoggedIn()) {
 				try {
 					// Create Post Slug
 					$postSlug = createPostSlug($postTitle);
-					
+                    
+					// Cleanup postComments Data
+                    if($comments){
+                        $comments = 1;
+                    } else {
+                        $comments = 0;
+                    }
+                    
 					// Insert Data Into Database
 					$stmt = $connection->prepare('
                         INSERT INTO
-                            blog_posts (postTitle, postSlug, postDescription, postContent, postDate, postTags)
+                            blog_posts (postTitle, postSlug, postDescription, postContent, postDate, postTags, postComments)
                         VALUES
-                            (:postTitle, :postSlug, :postDescription, :postContent, :postDate, :postTags)
+                            (:postTitle, :postSlug, :postDescription, :postContent, :postDate, :postTags, :postComments)
                     ');
 					$stmt->execute(array(
 						':postTitle' => $postTitle,
@@ -109,7 +116,8 @@ if(!$user->isLoggedIn()) {
 						':postDescription' => $postDescription,
 						':postContent' => $postContent,
 						':postDate' => date('Y-m-d H:i:s'),
-                        ':postTags' => $postTags
+                        ':postTags' => $postTags,
+                        ':postComments' => $comments
 					));
 					
 					$postID = $connection->lastInsertId();
@@ -269,7 +277,9 @@ if(!$user->isLoggedIn()) {
         <p><label>Banner Image (Recommended Size: 1920x1080)(Recommended File Type: JPEG, PNG, GIF)</label><br />
         <input type='file' name='postImage' multiple></p>
         
-        <p><input type="checkbox" name="notify"><label> Notify Subscribers</label></p>
+        <p><input type="checkbox" name="comments" <?php if(isset($error)){if($_POST['comments'] == true){echo 'checked';} else {echo '';}}else{echo 'checked';}?>><label> Enable/Disable Comments (Checked = Enabled)</label></p>
+        
+        <p><input type="checkbox" name="notify" <?php if(isset($error)){if($_POST['notify'] == true){echo 'checked';} else {echo '';}}else{echo '';}?>><label> Notify Subscribers (Checked = Yes)</label></p>
         
 		<p><input type='submit' name='submit' value='Submit'></p>
 	</form>

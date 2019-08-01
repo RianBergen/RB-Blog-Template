@@ -98,6 +98,13 @@ if(!$user->isLoggedIn()) {
 					// Create Post Slug
 					$postSlug = createPostSlug($postTitle);
 					
+                    // Cleanup postComments Data
+                    if($comments){
+                        $comments = 1;
+                    } else {
+                        $comments = 0;
+                    }
+                    
 					// Insert Data Into Database
 					$stmt = $connection->prepare('
                         UPDATE
@@ -107,7 +114,8 @@ if(!$user->isLoggedIn()) {
                             postSlug = :postSlug,
                             postDescription = :postDescription,
                             postContent = :postContent,
-                            postTags = :postTags
+                            postTags = :postTags,
+                            postComments = :postComments
                         WHERE
                             postID = :postID
                     ');
@@ -117,7 +125,8 @@ if(!$user->isLoggedIn()) {
 						':postSlug' => $postSlug,
 						':postDescription' => $postDescription,
 						':postContent' => $postContent,
-                        ':postTags' => $postTags
+                        ':postTags' => $postTags,
+                        ':postComments' => $comments
 					));
 					
 					// Delete All Post Category Connections For Current Post
@@ -196,7 +205,8 @@ if(!$user->isLoggedIn()) {
                     postDescription,
                     postContent,
                     postTags,
-                    postImage
+                    postImage,
+                    postComments
                 FROM
                     blog_posts
                 WHERE
@@ -271,6 +281,7 @@ if(!$user->isLoggedIn()) {
             <p><img class="rb-card-img" src="<?=URL.$row['postImage'];?>"></p>
         <?php } ?>
         
+        <p><input type="checkbox" name="comments" <?php if($row['postComments'] == true){echo 'checked';} else {echo '';}?>><label> Enable/Disable Comments (Checked = Enabled)</label></p>
         
 		<p><input type='submit' name='submit' value='Submit'></p>
 		
