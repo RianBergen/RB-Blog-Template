@@ -437,18 +437,16 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 /* START - Admin Login Form */
 .rb-login-container {
-	max-width: 19.25rem;
+	width: 100vw;
+	height: 100vh;
 	margin: auto;
 }
 
 .rb-login-form {
     width: 16rem;
-    display: table;    /* Alternative for height: fit-content; */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     margin: auto !important;
 }
 
