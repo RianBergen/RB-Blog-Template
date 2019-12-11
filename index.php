@@ -27,7 +27,7 @@ if (isset($_GET['year'])) {
     $year = NULL;
 }
 
-// Get Sidebar Information
+// Get Sidebar And Background Information
 try {
     // Get SQL Data
     $statement = $connection->query('
@@ -37,7 +37,7 @@ try {
         FROM
             blog_settings
         WHERE
-            settingsID >= 1 AND settingsID <= 5
+            settingsID >= 1 AND settingsID <= 7
         ORDER BY
             settingsID
     ');
@@ -56,6 +56,9 @@ if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
 } else {
     $showSidebar = 0;
 }
+
+$sidebarRight = $rows[5][1];
+$backgroundImage = $rows[6][1];
 ?>
 
 <!-- HTML CODE -->
@@ -74,7 +77,13 @@ if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
     <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
     
     <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
-
+    
+    <?php
+    if ($backgroundImage) {
+        echo '<style>body{background-color: transparent !important; background-image: url("/_res/images/background/Background.png") !important;}</style>';
+    }
+    ?>
+    
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
     
     <meta name="theme-color" content="#242424">
@@ -87,7 +96,15 @@ if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
 		// Include Page Header
 		include 'pagecomp-header.php';
         
-        // Decide Left Column Width
+        
+        // Include Sidebar Left
+        if ($sidebarRight == 0 && $showSidebar) {
+            if ($page != 'info') {
+                include 'pagecomp-sidebar.php';
+            }
+        }
+        
+        // Decide Main Column Width
         echo '<!-- START - Left Column: Blog Post Column -->';
         echo '<div class="'; if($showSidebar == 0 || $page == 'info') {echo 'rb-main-flex-grid-column';} else { echo 'rb-main-flex-grid-left-column';}; echo '">';
 		
@@ -117,10 +134,12 @@ if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
             // View Selected Information Page
             include 'pagecomp-info.php';
         }
-
+        
 		// Include Sidebar
-        if ($page != 'info') {
-            include 'pagecomp-sidebar.php';
+        if ($sidebarRight == 1 && $showSidebar) {
+            if ($page != 'info') {
+                include 'pagecomp-sidebar.php';
+            }
         }
 	?>
 		

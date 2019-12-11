@@ -192,8 +192,8 @@ if(!$user->isLoggedIn()) {
         <p><input type="hidden" name="settingsID[2]" value="0"><input type="checkbox" name="settingsID[2]" <?php if($rows[2][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Categories In Sidebar (Checked = Enabled)</label></p>
         <p><input type="hidden" name="settingsID[3]" value="0"><input type="checkbox" name="settingsID[3]" <?php if($rows[3][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Tags Sidebar In (Checked = Enabled)</label></p>
         <p><input type="hidden" name="settingsID[4]" value="0"><input type="checkbox" name="settingsID[4]" <?php if($rows[4][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Recent Sidebar In (Checked = Enabled)</label></p>
-        
-        
+        <p><input type="hidden" name="settingsID[5]" value="0"><input type="checkbox" name="settingsID[5]" <?php if($rows[5][2] == 1){echo 'checked';} else {echo '';}?>><label> Sidebar Left or Right? (Unchecked = Left, Checked = Right)</label></p>
+        <p><input type="hidden" name="settingsID[6]" value="0"><input type="checkbox" name="settingsID[6]" <?php if($rows[6][2] == 1){echo 'checked';} else {echo '';}?>><label> Use Background Image? (Checked = Yes)</label></p>
         
         <p><input type='submit' name='submit' value='Submit'></p>
 	</form>
