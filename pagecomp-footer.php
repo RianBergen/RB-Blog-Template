@@ -7,6 +7,7 @@
             <h1 class="rb-page-footer-container-element"><?php echo ''.TITLE.'';?></h1>
             <h6 class="rb-page-footer-container-element"><?php echo ''.COPYRIGHT.'';?></h6>
             <a class="rb-page-footer-container-element" href="/">Home</a><br />
+            <?php if ($showTimeline == 0) {echo '<a class="rb-page-footer-container-element" href="/feed/">Posts</a><br />';}?>
             <a class="rb-page-footer-container-element" href="/action/about">About</a><br />
             <a class="rb-page-footer-container-element" href="/action/contact">Contact</a><br />
             <a class="rb-page-footer-container-element" href="/action/subscribe">Subscribe/Unsubscribe</a><br />

@@ -37,7 +37,7 @@ try {
         FROM
             blog_settings
         WHERE
-            settingsID >= 1 AND settingsID <= 7
+            settingsID >= 1 AND settingsID <= 8
         ORDER BY
             settingsID
     ');
@@ -59,6 +59,7 @@ if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
 
 $sidebarRight = $rows[5][1];
 $backgroundImage = $rows[6][1];
+$showTimeline = $rows[7][1];
 ?>
 
 <!-- HTML CODE -->
@@ -110,9 +111,17 @@ $backgroundImage = $rows[6][1];
 		
 		// Check Variables And Include The Left Column
 		if ($page == NULL) {
-			// View All Posts
-			include 'pagecomp-posts.php';
-		} else if ($page == 'post') {
+            if ($showTimeline == 1) {
+                // View All Posts
+                include 'pagecomp-posts.php';
+            } else {
+                // View Home
+                include 'pagecomp-home.php';
+            }
+		} else if ($page == 'feed') {
+            // View All Posts
+            include 'pagecomp-posts.php';
+        } else if ($page == 'post') {
             // View Selected Post
 			include 'pagecomp-viewpost.php';
 		} else if ($page == 'category') {

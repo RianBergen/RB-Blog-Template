@@ -13,6 +13,7 @@ body, html {
     background-attachment: fixed;
     color: var(--rb-color-background-text);
     min-height: 100%;
+    height: 100%;
 }
 
 p, h1, h2, h3, h4, h5, h6 {    /* Default Margins And Font Weights For Paragraph And Header Tags */
