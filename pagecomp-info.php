@@ -19,8 +19,6 @@ if ($id != NULL) {
 }
 ?>
 
-<!-- START - Left Column: Blog Post Column -->
-<div class="rb-main-flex-grid-left-column"  style="width: 100%;">
 	<!-- Back To Posts Button -->
 	<div class="rb-nav-flex-grid">
 		<div>
@@ -34,7 +32,7 @@ if ($id != NULL) {
 	<?php
 		if($row['pageID'] == "") {
 			// Card
-			echo '<div class="rb-card" style="width: 100%;">';
+			echo '<div class="rb-card">';
 				echo '<div>';
 					echo '<h3><b>Page Was Not Found, Or Is Empty!</b></h3>';
 				echo '</div>';

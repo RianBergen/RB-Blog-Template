@@ -26,6 +26,36 @@ if (isset($_GET['year'])) {
 } else {
     $year = NULL;
 }
+
+// Get Sidebar Information
+try {
+    // Get SQL Data
+    $statement = $connection->query('
+        SELECT
+            settingsID,
+            settingsValue
+        FROM
+            blog_settings
+        WHERE
+            settingsID >= 1 AND settingsID <= 5
+        ORDER BY
+            settingsID
+    ');
+    
+    $rows = array();
+    
+    while($row = $statement->fetch()) {
+        array_push($rows, $row);
+    }
+} catch(PDOException $e) {
+    echo $e->getMessage();
+}
+
+if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
+    $showSidebar = 1;
+} else {
+    $showSidebar = 0;
+}
 ?>
 
 <!-- HTML CODE -->
@@ -56,6 +86,10 @@ if (isset($_GET['year'])) {
 	<?php
 		// Include Page Header
 		include 'pagecomp-header.php';
+        
+        // Decide Left Column Width
+        echo '<!-- START - Left Column: Blog Post Column -->';
+        echo '<div class="'; if($showSidebar == 0 || $page == 'info') {echo 'rb-main-flex-grid-column';} else { echo 'rb-main-flex-grid-left-column';}; echo '">';
 		
 		// Check Variables And Include The Left Column
 		if ($page == NULL) {

@@ -19,8 +19,6 @@ if ($id != NULL) {
 }
 ?>
 
-<!-- START - Left Column: Blog Post Column -->
-<div class="rb-main-flex-grid-left-column">
 	<!-- Back To Posts Button -->
 	<div class="rb-nav-flex-grid">
 		<div>
