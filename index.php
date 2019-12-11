@@ -26,6 +26,40 @@ if (isset($_GET['year'])) {
 } else {
     $year = NULL;
 }
+
+// Get Sidebar And Background Information
+try {
+    // Get SQL Data
+    $statement = $connection->query('
+        SELECT
+            settingsID,
+            settingsValue
+        FROM
+            blog_settings
+        WHERE
+            settingsID >= 1 AND settingsID <= 8
+        ORDER BY
+            settingsID
+    ');
+    
+    $rows = array();
+    
+    while($row = $statement->fetch()) {
+        array_push($rows, $row);
+    }
+} catch(PDOException $e) {
+    echo $e->getMessage();
+}
+
+if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
+    $showSidebar = 1;
+} else {
+    $showSidebar = 0;
+}
+
+$sidebarRight = $rows[5][1];
+$backgroundImage = $rows[6][1];
+$showTimeline = $rows[7][1];
 ?>
 
 <!-- HTML CODE -->
@@ -44,7 +78,13 @@ if (isset($_GET['year'])) {
     <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
     
     <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
-
+    
+    <?php
+    if ($backgroundImage) {
+        echo '<style>body{background-color: transparent !important; background-image: url("/_res/images/background/Background.png") !important;}</style>';
+    }
+    ?>
+    
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
     
     <meta name="theme-color" content="#242424">
@@ -56,12 +96,32 @@ if (isset($_GET['year'])) {
 	<?php
 		// Include Page Header
 		include 'pagecomp-header.php';
+        
+        
+        // Include Sidebar Left
+        if ($sidebarRight == 0 && $showSidebar) {
+            if ($page != 'info') {
+                include 'pagecomp-sidebar.php';
+            }
+        }
+        
+        // Decide Main Column Width
+        echo '<!-- START - Left Column: Blog Post Column -->';
+        echo '<div class="'; if($showSidebar == 0 || $page == 'info') {echo 'rb-main-flex-grid-column';} else { echo 'rb-main-flex-grid-left-column';}; echo '">';
 		
 		// Check Variables And Include The Left Column
 		if ($page == NULL) {
-			// View All Posts
-			include 'pagecomp-posts.php';
-		} else if ($page == 'post') {
+            if ($showTimeline == 1) {
+                // View All Posts
+                include 'pagecomp-posts.php';
+            } else {
+                // View Home
+                include 'pagecomp-home.php';
+            }
+		} else if ($page == 'feed') {
+            // View All Posts
+            include 'pagecomp-posts.php';
+        } else if ($page == 'post') {
             // View Selected Post
 			include 'pagecomp-viewpost.php';
 		} else if ($page == 'category') {
@@ -83,10 +143,12 @@ if (isset($_GET['year'])) {
             // View Selected Information Page
             include 'pagecomp-info.php';
         }
-
+        
 		// Include Sidebar
-        if ($page != 'info') {
-            include 'pagecomp-sidebar.php';
+        if ($sidebarRight == 1 && $showSidebar) {
+            if ($page != 'info') {
+                include 'pagecomp-sidebar.php';
+            }
         }
 	?>
 		

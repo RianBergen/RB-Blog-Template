@@ -60,10 +60,6 @@ if(!$user->isLoggedIn()) {
 			if($pageID == '' ){
 				$error[] = 'Invalid ID';
 			}
-		
-			if($pageTitle == '') {
-				$error[] = 'Please Enter A Title';
-			}
             
 			if($pageContent == '') {
 				$error[] = 'Please Enter The Content';
@@ -80,8 +76,6 @@ if(!$user->isLoggedIn()) {
                         UPDATE
                             blog_pages
                         SET
-                            pageTitle = :pageTitle,
-                            pageSlug = :pageSlug,
                             pageContent = :pageContent,
                             pageExtra = :pageExtra
                         WHERE
@@ -89,8 +83,6 @@ if(!$user->isLoggedIn()) {
                     ');
 					$stmt->execute(array(
 						':pageID' => $pageID,
-						':pageTitle' => $pageTitle,
-						':pageSlug' => $pageSlug,
 						':pageContent' => $pageContent,
                         ':pageExtra' => $pageExtra
 					));
@@ -135,9 +127,6 @@ if(!$user->isLoggedIn()) {
 	<!-- Edit Post Form -->
 	<form action='' method='post'>
 		<input type='hidden' name='pageID' value='<?php echo $row['pageID'];?>'>
-
-		<p><label>Title</label><br />
-		<input type='text' name='pageTitle' value='<?php echo $row['pageTitle'];?>'></p>
         
 		<p><label>Content</label><br />
 		<textarea name='pageContent' cols='60' rows='10'><?php echo $row['pageContent'];?></textarea></p>

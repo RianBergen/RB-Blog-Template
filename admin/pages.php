@@ -67,7 +67,7 @@ if(isset($_GET['delpage'])) {
 	
 	<!-- Table Containg Database Content -->
     <div class="rb-admin-content-table-container">
-        <table class="rb-admin-content-table">
+        <table class="rb-admin-content-table" style="margin-bottom: 1rem;">
             <tr>
                 <th class="rb-admin-content-table-header">Title</th>
                 <th class="rb-admin-content-table-header">Action</th>
@@ -90,8 +90,7 @@ if(isset($_GET['delpage'])) {
                             echo '<td class="rb-admin-content-table-data">'.$row['pageTitle'].'</td>';
                             echo '<td class="rb-admin-content-table-data">';
                                 ?>
-                                <a href="edit-page.php?id=<?php echo $row['pageID'];?>">Edit</a> | 
-                                <a href="javascript:delpage('<?php echo $row['pageID'];?>','<?php echo $row['pageTitle'];?>')">Delete</a>
+                                <a href="edit-page.php?id=<?php echo $row['pageID'];?>">Edit</a>
                                 <?php
                             echo '</td class="rb-admin-content-table-data">';
                         echo '</tr>';
@@ -102,7 +101,6 @@ if(isset($_GET['delpage'])) {
             ?>
         </table>
     </div>
-	<p><a href='add-page.php'>Add Page</a></p>
 	</div>
 </div>
 

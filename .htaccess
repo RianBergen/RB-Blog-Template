@@ -16,6 +16,7 @@ RewriteRule ^archive/(.*)-(.*)$ index.php?page=archive&month=$1&year=$2 [L]
 RewriteRule ^action/(.*)$ index.php?page=action&id=$1 [L]
 RewriteRule ^info/(.*)$ index.php?page=info&id=$1 [L]
 RewriteRule ^post/(.*)$ index.php?page=post&id=$1 [QSA,L]
+RewriteRule ^feed/ index.php?page=feed [L]
 #END SEO REDIRECT
 
 #BEGIN ERROR REDIRECTS

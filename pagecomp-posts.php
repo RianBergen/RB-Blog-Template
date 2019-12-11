@@ -1,8 +1,4 @@
-<?php ?>
-
-<!-- START - Left Column: Blog Post Column -->
-<div class="rb-main-flex-grid-left-column">
-	<?php
+    <?php
 		try {
 			// Setup Paginator
 			$pages = new Paginator(POSTSPERPAGE,'p');

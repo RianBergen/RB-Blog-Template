@@ -1,7 +1,5 @@
 <?php ?>
 
-<!-- START - Left Column: Blog Post Column -->
-<div class="rb-main-flex-grid-left-column">
     <!-- Home Button -->
 	<div class="rb-nav-flex-grid">
 		<div>

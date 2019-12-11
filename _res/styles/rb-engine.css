@@ -9,7 +9,11 @@ body, html {
     font-family: var(--rb-font-primary);
     font-size: var(--rb-font-primary-size);
     background-color: var(--rb-color-background);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--rb-color-background-text);
+    min-height: 100%;
+    height: 100%;
 }
 
 p, h1, h2, h3, h4, h5, h6 {    /* Default Margins And Font Weights For Paragraph And Header Tags */
@@ -35,12 +39,14 @@ hr {    /* Default, No Shadow/Depth HR Border */
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    min-height: 100%;
 }
 
 .rb-main-flex-grid-container {    /* Main Flex Grid Container: Used To Limit Page Size */
     display: inherit;
     flex-flow: 	inherit;
     max-width: 90rem;    /* Max Page Width */
+    width: 100%;
 }
 
 .rb-main-flex-grid-header {    /* Main Page Header */
@@ -52,6 +58,10 @@ hr {    /* Default, No Shadow/Depth HR Border */
 }
 
 @media (min-width: 1000px) {    /* Responsive Left And Right Grid When Screen Is Greater Than 999px */
+    .rb-main-flex-grid-column {     /* Used When No Sidebar Exists */
+        width: 100%;
+    }
+    
     .rb-main-flex-grid-left-column {    /* Main Page Left Column */
         width: 66.66666%;
     }
@@ -62,6 +72,10 @@ hr {    /* Default, No Shadow/Depth HR Border */
 }
 
 @media (max-width: 999px) {    /* Responsive Left And Right Grid When Screen Is Less Than 1000px */
+    .rb-main-flex-grid-column {     /* Used When No Sidebar Exists */
+        width: 100%;
+    }
+    
     .rb-main-flex-grid-left-column {    /* Main Page Left Column */
         width: 100%;
     }
@@ -78,6 +92,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
     width:100%;
     background-color: var(--rb-color-footer);
     color: var(--rb-color-footer-text);
+    bottom: 0;
 }
 
 .rb-page-footer-container {
@@ -133,6 +148,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 /* START - Card Component */
 .rb-card {
+    width: calc(100% - 4rem);
     margin: 2rem;
     overflow: hidden;
     border-radius: 0.25rem;
@@ -143,6 +159,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 @media (max-width: 999px) {    /* Responsive Margins For Cards */
     .rb-card {    /* Main Page Left Column */
+        width: calc(100% - 1.5rem);
         margin-top: 2rem;
         margin-left: 0.75rem;
         margin-right: 0.75rem;
