@@ -197,7 +197,7 @@ if($showAbout || $showRecent || $showCategories || $showTags || $showArchives) {
                     ');
                     
                     while($row = $statement->fetch()){
-                        $monthName = date("F Y", mktime(0, 0, 0, $row['Month'], 10));
+                        $monthName = date("F Y", mktime(0, 0, 0, $row['Month'], 0, $row['Year']));
                         $slug = 'archive/'.$row['Month'].'-'.$row['Year'];
                         echo '<a href="/'.$slug.'" class="rb-text-grey-tag">'.$monthName.'</a>';
                     }
