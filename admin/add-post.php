@@ -146,7 +146,9 @@ if(!$user->isLoggedIn()) {
                         
                         // Move Image
                         mkdir("../_res/images/posts/".$postID."/", 0705);
-                        move_uploaded_file($_FILES["postImage"]["tmp_name"], $path);
+                        if (move_uploaded_file($_FILES["postImage"]["tmp_name"], $path)) {
+                            // echo "Success";
+                        }
                         
                         // Connect Image
                         $stmt2 = $connection->prepare('
