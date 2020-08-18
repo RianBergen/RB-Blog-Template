@@ -28,7 +28,7 @@ if(!$user->isLoggedIn()) {
     
     <meta name="theme-color" content="#242424">
 </head>
-<body>
+<body class="rb-admin-body">
 <div class="rb-admin-container">
 	<div class="rb-card rb-admin-content">
     
@@ -164,6 +164,11 @@ if(!$user->isLoggedIn()) {
 	</form>
 	</div>
 </div>
+
+<?php
+	// Include Page Footer
+	include '../pagecomp-footer.php';
+?>
 
 <!-- Light/Dark Mode Manager -->
 <script src="/_res/js/rb-theme-manager.js"></script>

@@ -53,7 +53,7 @@ if(isset($_GET['deluser'])) {
 		}
 	</script>
 </head>
-<body>
+<body class="rb-admin-body">
 <div class="rb-admin-container">
 	<div class="rb-card rb-admin-content">
         <h1>Users</h1>
@@ -110,6 +110,11 @@ if(isset($_GET['deluser'])) {
 	<p><a href='add-user.php'>Add User</a></p>
 	</div>
 </div>
+
+<?php
+	// Include Page Footer
+	include '../pagecomp-footer.php';
+?>
 
 <!-- Light/Dark Mode Manager -->
 <script src="/_res/js/rb-theme-manager.js"></script>

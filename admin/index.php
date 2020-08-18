@@ -54,7 +54,7 @@ if(isset($_GET['delpost'])) {
 		}
 	</script>
 </head>
-<body>
+<body class="rb-admin-body">
 <div class="rb-admin-container">
 	<div class="rb-card rb-admin-content">
         <h1>Blog</h1>
@@ -112,6 +112,11 @@ if(isset($_GET['delpost'])) {
 	<p><a href='add-post.php'>Add Post</a></p>
 	</div>
 </div>
+
+<?php
+	// Include Page Footer
+	include '../pagecomp-footer.php';
+?>
 
 <!-- Light/Dark Mode Manager -->
 <script src="/_res/js/rb-theme-manager.js"></script>

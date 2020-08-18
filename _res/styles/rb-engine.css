@@ -456,7 +456,8 @@ hr {    /* Default, No Shadow/Depth HR Border */
 .rb-login-container {
 	width: 100vw;
 	height: 100vh;
-	margin: auto;
+    margin: auto;
+    flex: 1 0 auto;
 }
 
 .rb-login-form {
@@ -491,9 +492,16 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 
 /* START - Admin Form */
+.rb-admin-body {
+    display: flex;
+    flex-direction: column;
+}
+
 .rb-admin-container {
-	max-width: 90rem;
-	margin: auto;
+    max-width: 90rem;
+    width: 100%;
+    margin: auto;
+    flex: 1 0 auto;
 }
 
 .rb-admin-content {
