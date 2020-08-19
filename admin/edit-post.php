@@ -39,6 +39,24 @@ if(!$user->isLoggedIn()) {
 				"insertdatetime media table paste"
 			],
 			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            image_list: [
+                <?php
+                    $stmt2 = $connection->query('
+                        SELECT
+                            imageID,
+                            imageTitle,
+                            imagePath
+                        FROM
+                            blog_images
+                        ORDER BY
+                            imageTitle
+                    ');
+                    while($row2 = $stmt2->fetch()) {
+                        echo "{title: '".$row2['imageTitle']."', value: '../".$row2['imagePath']."'},";
+                    }
+                ?>
+                {title: 'Placeholder Image', value: '../_res/images/missing/Placeholder-Image-1920x1080.png'}
+            ],
             height : "500px"
 		});
 	</script>
@@ -65,32 +83,9 @@ if(!$user->isLoggedIn()) {
 				$error[] = 'Please Enter A Title';
 			}
 			
-			if($postDescription == '') {
-				$error[] = 'Please Enter A Description';
-			}
-			
 			if($postContent == '') {
 				$error[] = 'Please Enter The Content';
 			}
-            
-            // Image Validation For Post Banner
-            if(isset($_FILES['postImage'])) {
-                // Find The Image Type
-                switch ($_FILES["postImage"]["type"]) {
-                    case $_FILES["postImage"]["type"] == "image/gif":
-                        break;
-                    case $_FILES["postImage"]["type"] == "image/jpeg":
-                        break;
-                    case $_FILES["postImage"]["type"] == "image/pjpeg":
-                        break;
-                    case $_FILES["postImage"]["type"] == "image/png":
-                        break;
-                    case $_FILES["postImage"]["type"] == "image/x-png":
-                        break;
-                    default:
-                        $error[] = 'Improper Image Upload For Post: Not A JPG, PNG Or GIF';
-                }
-            }
             
             // Form Handling
 			if(!isset($error)) {
@@ -112,7 +107,6 @@ if(!$user->isLoggedIn()) {
                         SET
                             postTitle = :postTitle,
                             postSlug = :postSlug,
-                            postDescription = :postDescription,
                             postContent = :postContent,
                             postTags = :postTags,
                             postComments = :postComments
@@ -123,61 +117,25 @@ if(!$user->isLoggedIn()) {
 						':postID' => $postID,
 						':postTitle' => $postTitle,
 						':postSlug' => $postSlug,
-						':postDescription' => $postDescription,
 						':postContent' => $postContent,
                         ':postTags' => $postTags,
                         ':postComments' => $comments
 					));
 					
-					// Delete All Post Category Connections For Current Post
-					$stmt = $connection->prepare('
-                        DELETE FROM
-                            blog_post_categories
-                        WHERE
-                            pcPostID = :postID
-                    ');
-					$stmt->execute(array(
-                        ':postID' => $postID)
-                    );
-					
-					// Attach Categories
-					if(is_array($categoryID)) {
-						foreach($_POST['categoryID'] as $categoryID) {
-							$stmt = $connection->prepare('
-                                INSERT INTO
-                                    blog_post_categories (pcPostID, pcCategoryID)
-                                VALUES
-                                    (:postID, :categoryID)
-                            ');
-							$stmt->execute(array(
-								':postID' => $postID,
-								':categoryID' => $categoryID
-							));
-						}
-					}
-                    
-                    // Add Image If Uploaded
-                    if(file_exists($_FILES['postImage']['tmp_name']) && is_uploaded_file($_FILES['postImage']['tmp_name'])){
-                        // Select The New File Location For The Images
-                        $target = "_res/images/posts/".$postID."/".$_FILES['postImage']['name'];
-                        $path = '../'.$target;
-                        
-                        // Move Image
-                        mkdir("../_res/images/posts/".$postID."/", 0705);
-                        move_uploaded_file($_FILES["postImage"]["tmp_name"], $path);
-                        
+                    // Add Image If Selected
+                    if($postImage != '0') {
                         // Connect Image
                         $stmt2 = $connection->prepare('
                             UPDATE
                                 blog_posts
                             SET
-                                postImage = :image
+                                postImage = :postImage
                             WHERE
                                 postID = :postID
                         ');
                         $stmt2->execute(array(
                             ':postID' => $postID,
-                            ':image' => $target
+                            ':postImage' => $postImage
                         ));
                     }
 					
@@ -202,7 +160,6 @@ if(!$user->isLoggedIn()) {
                 SELECT
                     postID,
                     postTitle,
-                    postDescription,
                     postContent,
                     postTags,
                     postImage,
@@ -226,61 +183,41 @@ if(!$user->isLoggedIn()) {
 		<input type='hidden' name='postID' value='<?php echo $row['postID'];?>'>
 
 		<p><label>Title</label><br />
-		<input type='text' name='postTitle' value='<?php echo $row['postTitle'];?>'></p>
+		<input type='text' name='postTitle' value='<?php echo $row['postTitle'];?>'  style='width:400px;'></p>
 
-		<p><label>Description</label><br />
-		<textarea name='postDescription' cols='60' rows='10'><?php echo $row['postDescription'];?></textarea></p>
+        <p><label>Tags (Comma Seperated)</label><br />
+        <input type='text' name='postTags' value='<?php echo $row['postTags'];?>' style='width:400px;'></p>
+		
+        <!-- Images -->
+        <p><label>Banner Image</label><br />
+        <select name="postImage" style='width:400px;'>
+            <option value='0'>NONE</option>
+            <?php
+                $stmt2 = $connection->query('
+                    SELECT
+                        imageID,
+                        imageTitle
+                    FROM
+                        blog_images
+                    ORDER BY
+                        imageTitle
+                ');
+                while($row2 = $stmt2->fetch()) {
+                    if(isset($_POST['postImage']) || $row['postImage']) {
+                        if(($row2['imageID'] == $_POST['postImage']) || ($row2['imageID'] == $row['postImage'])) {
+                            $selected ="selected='selected'";
+                        } else {
+                            $selected = null;
+                        }
+                    }
+                    echo "<option value='".$row2['imageID']."' ".$selected.">".$row2['imageTitle']."</option>";
+                }
+            ?>
+        </select>
 
 		<p><label>Content</label><br />
 		<textarea name='postContent' cols='60' rows='10'><?php echo $row['postContent'];?></textarea></p>
-        
-        <p><label>Tags (comma seperated)</label><br />
-        <input type='text' name='postTags' value='<?php echo $row['postTags'];?>' style="width:400px;"></p>
 		
-		<!-- List Of All Categories -->
-		<fieldset>
-			<legend>Categories</legend>
-
-			<?php
-				$stmt2 = $connection->query('
-                    SELECT
-                        categoryID,
-                        categoryTitle
-                    FROM
-                        blog_categories
-                    ORDER BY
-                        categoryTitle
-                ');
-				while($row2 = $stmt2->fetch()) {
-					$stmt3 = $connection->prepare('
-                        SELECT
-                            pcCategoryID
-                        FROM
-                            blog_post_categories
-                        WHERE
-                            pcCategoryID = :categoryID
-                        AND
-                            pcPostID = :postID
-                    ');
-					$stmt3->execute(array(':categoryID' => $row2['categoryID'], ':postID' => $row['postID']));
-					$row3 = $stmt3->fetch(); 
-					if($row3['pcCategoryID'] == $row2['categoryID']) {
-						$checked = 'checked=checked';
-					} else {
-						$checked = null;
-					}
-					echo "<input type='checkbox' name='categoryID[]' value='".$row2['categoryID']."' $checked> ".$row2['categoryTitle']."<br />";
-				}
-			?>
-		</fieldset>
-        
-        <!-- Images -->
-        <p><label>Banner Image (Recommended Size: 1920x1080)(Recommended File Type: JPEG, PNG, GIF)</label><br />
-        <input type='file' name='postImage' multiple></p>
-        <?php if ($row['postImage'] != '') { ?>
-            <p><img class="rb-card-img" src="<?=URL.$row['postImage'];?>"></p>
-        <?php } ?>
-        
         <p><input type="checkbox" name="comments" <?php if($row['postComments'] == true){echo 'checked';} else {echo '';}?>><label> Enable/Disable Comments (Checked = Enabled)</label></p>
         
 		<p><input type='submit' name='submit' value='Submit'></p>

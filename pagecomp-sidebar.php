@@ -24,12 +24,11 @@ try {
 
 $showAbout = $rows[0][1];
 $showRecent = $rows[1][1];
-$showCategories = $rows[2][1];
-$showTags = $rows[3][1];
-$showArchives = $rows[4][1];
+$showTags = $rows[2][1];
+$showArchives = $rows[3][1];
 
 // Check If Sidebar Is Needed
-if($showAbout || $showRecent || $showCategories || $showTags || $showArchives) {
+if($showAbout || $showRecent || $showTags || $showArchives) {
     // Sidebar Header
     echo '<!-- START - Right Column: Navigation Column -->';
     echo '<div class="rb-main-flex-grid-right-column">';
@@ -100,35 +99,6 @@ if($showAbout || $showRecent || $showCategories || $showTags || $showArchives) {
             echo '</div>';
         echo '</div>';
         echo '<!-- END   - Recent Posts -->';
-        }
-        
-        if($showCategories) {
-        // Categories
-        echo '<!-- START - Categories -->';
-        echo '<div class="rb-card">';
-            echo '<div>';
-                echo '<h3><b>Categories</b></h3>';
-            echo '</div>';
-            echo '<hr/>';
-            echo '<div>';
-                echo '<p class="rb-link-tags-container">';
-                    echo '<a href="/" class="rb-text-black-tag">Back Home</a>';
-                    $statement = $connection->query('
-                        SELECT
-                            categoryTitle,
-                            categorySlug
-                        FROM
-                            blog_categories
-                        ORDER BY
-                            categoryID DESC
-                    ');
-                    while($row = $statement->fetch()){
-                        echo '<a href="/category/'.$row['categorySlug'].'" class="rb-text-grey-tag">'.$row['categoryTitle'].'</a>';
-                    }
-                echo '</p>';
-            echo '</div>';
-        echo '</div>';
-        echo '<!-- END   - Categories -->';
         }
         
         if($showTags) {

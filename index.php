@@ -51,15 +51,15 @@ try {
     echo $e->getMessage();
 }
 
-if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
+if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1]) {
     $showSidebar = 1;
 } else {
     $showSidebar = 0;
 }
 
-$sidebarRight = $rows[5][1];
-$backgroundImage = $rows[6][1];
-$showTimeline = $rows[7][1];
+$sidebarRight = $rows[4][1];
+$backgroundImage = $rows[5][1];
+$showTimeline = $rows[6][1];
 ?>
 
 <!-- HTML CODE -->
@@ -124,9 +124,6 @@ $showTimeline = $rows[7][1];
         } else if ($page == 'post') {
             // View Selected Post
 			include 'pagecomp-viewpost.php';
-		} else if ($page == 'category') {
-            // View All Posts In Selected Category
-			include 'pagecomp-categories.php';
 		} else if ($page == 'archive') {
             // View All Posts In Selected Archive
 			include 'pagecomp-archives.php';

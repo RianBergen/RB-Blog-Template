@@ -40,6 +40,24 @@ if(!$user->isLoggedIn()) {
 				"insertdatetime media table paste"
 			],
 			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            image_list: [
+                <?php
+                    $stmt2 = $connection->query('
+                        SELECT
+                            imageID,
+                            imageTitle,
+                            imagePath
+                        FROM
+                            blog_images
+                        ORDER BY
+                            imageTitle
+                    ');
+                    while($row2 = $stmt2->fetch()) {
+                        echo "{title: '".$row2['imageTitle']."', value: '../".$row2['imagePath']."'},";
+                    }
+                ?>
+                {title: 'Placeholder Image', value: '../_res/images/missing/Placeholder-Image-1920x1080.png'}
+            ],
             height : "500px"
 		});
 	</script>

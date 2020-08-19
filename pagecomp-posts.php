@@ -17,7 +17,6 @@
                 SELECT
                     postID,
                     postTitle,
-                    postDescription,
                     postTags,
                     postDate,
                     postSlug,
@@ -37,30 +36,6 @@
 					echo '<div>';
 						echo '<h3><b>'.$row['postTitle'].'</b></h3>';
 						echo '<h5>Posted On: <span class="rb-text-opacity">'.date('F d, Y', strtotime($row['postDate'])).'</span></h5>';
-							$statement2 = $connection->prepare('
-                                SELECT
-                                    categoryTitle,
-                                    categorySlug
-                                FROM
-                                    blog_categories,
-                                    blog_post_categories
-                                WHERE
-                                    blog_categories.categoryID = blog_post_categories.pcCategoryID
-                                    AND blog_post_categories.pcPostID = :postID'
-                            );
-							$statement2->execute(array(
-                                ':postID' => $row['postID']
-                            ));
-							$categoryRow = $statement2->fetchAll(PDO::FETCH_ASSOC);
-							$links = array();
-							foreach ($categoryRow as $category) {
-								$links[] = "<a class='rb-card-categories-tag' href='/category/".$category['categorySlug']."'>".$category['categoryTitle']."</a>";
-							}
-							
-							if (empty($categoryRow) != true) {
-                                echo '<h5>Posted In: <span class="rb-text-opacity">';
-                                echo implode(", ", $links);
-                            }
 						echo '</span></h5>';
                         if ($row['postTags'] != NULL) {
                             echo '<h5>Tagged As: <span class="rb-text-opacity">';
@@ -75,7 +50,7 @@
                         }
 					echo '</div>';
 					echo '<div>';
-						echo ''.$row['postDescription'].'';
+
 						echo '<div class="rb-card-flex-grid-container">';
 							echo '<div class="rb-card-flex-grid-left-column">';
 								echo '<a href="/post/'.$row['postSlug'].'" class="rb-button rb-button-border rb-padding-1rem-2rem"><b>READ MORE</b></a>';

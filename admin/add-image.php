@@ -59,7 +59,7 @@ if(!$user->isLoggedIn()) {
 			extract($_POST);
             
             // Image Validation
-            if(isset($_FILES['imageImage'])) {
+            if(isset($_FILES['imageImage']) && file_exists($_FILES['imageImage']['tmp_name']) && is_uploaded_file($_FILES['imageImage']['tmp_name'])) {
                 // Find The Image Type
                 switch ($_FILES["imageImage"]["type"]) {
                     case $_FILES["imageImage"]["type"] == "image/gif":
@@ -76,8 +76,10 @@ if(!$user->isLoggedIn()) {
                         break;
                     default:
                         $error[] = 'Improper Image Upload: Not A JPG, JPEG, PNG Or GIF';
-                }
-            }
+				}
+            } else {
+				$error[] = 'No Image was Uploaded';
+			}
 
 			// Very Basic Vallidation
 			if($imageTitle == '') {
@@ -135,7 +137,8 @@ if(!$user->isLoggedIn()) {
 	<!-- Add Post Form -->
 	<form action='' method='post' enctype="multipart/form-data">
         <!-- Images -->
-        <p><label>Banner Image (Recommended Size: 1920x1080)(Recommended File Type: JPG, JPEG, PNG, GIF)</label><br />
+        <p><label>Upload Image (Recommended Size: 1920x1080)(Recommended File Type: JPG, JPEG, PNG, GIF)</label><br />
+		<label>If Image is a Large File, please wait for it to finsih uploading before Submiting.</label><br />
         <input type='file' name='imageImage' multiple></p>
 
         <p><label>Title</label><br />

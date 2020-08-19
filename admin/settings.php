@@ -27,21 +27,6 @@ if(!$user->isLoggedIn()) {
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
     
     <meta name="theme-color" content="#242424">
-	
-    <!-- TinyMCE Initialization Script -->
-	<?php echo '<script src="'.TINYMCE.'"></script>';?>
-	<script>
-		tinymce.init({
-			selector: "textarea",
-			plugins: [
-				"advlist autolink lists link image charmap print preview anchor",
-				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media table paste"
-			],
-			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-            height : "500px"
-		});
-	</script>
 </head>
 <body class="rb-admin-body">
 <div class="rb-admin-container">
@@ -65,26 +50,6 @@ if(!$user->isLoggedIn()) {
 			// Collect Form Data
 			extract($_POST);
             
-            /*
-            // Image Validation For Post Banner
-            if(isset($_FILES['postImage'])) {
-                // Find The Image Type
-                switch ($_FILES["postImage"]["type"]) {
-                    case $_FILES["postImage"]["type"] == "image/gif":
-                        break;
-                    case $_FILES["postImage"]["type"] == "image/jpeg":
-                        break;
-                    case $_FILES["postImage"]["type"] == "image/pjpeg":
-                        break;
-                    case $_FILES["postImage"]["type"] == "image/png":
-                        break;
-                    case $_FILES["postImage"]["type"] == "image/x-png":
-                        break;
-                    default:
-                        $error[] = 'Improper Image Upload For Post: Not A JPG, PNG Or GIF';
-                }
-            }
-            */
             // Form Handling
 			if(!isset($error)) {
 				try {
@@ -118,32 +83,6 @@ if(!$user->isLoggedIn()) {
                         }
                     }
                     
-					/*
-                    // Add Image If Uploaded
-                    if(file_exists($_FILES['postImage']['tmp_name']) && is_uploaded_file($_FILES['postImage']['tmp_name'])){
-                        // Select The New File Location For The Images
-                        $target = "_res/images/posts/".$postID."/".$_FILES['postImage']['name'];
-                        $path = '../'.$target;
-                        
-                        // Move Image
-                        mkdir("../_res/images/posts/".$postID."/", 0705);
-                        move_uploaded_file($_FILES["postImage"]["tmp_name"], $path);
-                        
-                        // Connect Image
-                        $stmt2 = $connection->prepare('
-                            UPDATE
-                                blog_posts
-                            SET
-                                postImage = :image
-                            WHERE
-                                postID = :postID
-                        ');
-                        $stmt2->execute(array(
-                            ':postID' => $postID,
-                            ':image' => $target
-                        ));
-                    }
-					*/
 					// Redirect To Settings Page
 					header('Location: settings.php?action=updated');
 					exit;
@@ -189,12 +128,11 @@ if(!$user->isLoggedIn()) {
         <!-- Sidebar Enable/Disable Checkboxes -->
         <p><input type="hidden" name="settingsID[0]" value="0"><input type="checkbox" name="settingsID[0]" <?php if($rows[0][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable About In Sidebar (Checked = Enabled)</label></p>
         <p><input type="hidden" name="settingsID[1]" value="0"><input type="checkbox" name="settingsID[1]" <?php if($rows[1][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Recent In Sidebar (Checked = Enabled)</label></p>
-        <p><input type="hidden" name="settingsID[2]" value="0"><input type="checkbox" name="settingsID[2]" <?php if($rows[2][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Categories In Sidebar (Checked = Enabled)</label></p>
-        <p><input type="hidden" name="settingsID[3]" value="0"><input type="checkbox" name="settingsID[3]" <?php if($rows[3][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Tags In Sidebar(Checked = Enabled)</label></p>
-        <p><input type="hidden" name="settingsID[4]" value="0"><input type="checkbox" name="settingsID[4]" <?php if($rows[4][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Archives In Sidebar (Checked = Enabled)</label></p>
-        <p><input type="hidden" name="settingsID[5]" value="0"><input type="checkbox" name="settingsID[5]" <?php if($rows[5][2] == 1){echo 'checked';} else {echo '';}?>><label> Sidebar Left or Right? (Unchecked = Left, Checked = Right)</label></p>
-        <p><input type="hidden" name="settingsID[6]" value="0"><input type="checkbox" name="settingsID[6]" <?php if($rows[6][2] == 1){echo 'checked';} else {echo '';}?>><label> Use Background Image? (Checked = Yes)</label></p>
-        <p><input type="hidden" name="settingsID[7]" value="0"><input type="checkbox" name="settingsID[7]" <?php if($rows[7][2] == 1){echo 'checked';} else {echo '';}?>><label> Show Complete Timeline or Home Page (Unchecked = 1 Home Page, Checked = Complete Timeline)</label></p>
+        <p><input type="hidden" name="settingsID[2]" value="0"><input type="checkbox" name="settingsID[2]" <?php if($rows[2][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Tags In Sidebar(Checked = Enabled)</label></p>
+        <p><input type="hidden" name="settingsID[3]" value="0"><input type="checkbox" name="settingsID[3]" <?php if($rows[3][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Archives In Sidebar (Checked = Enabled)</label></p>
+        <p><input type="hidden" name="settingsID[4]" value="0"><input type="checkbox" name="settingsID[4]" <?php if($rows[4][2] == 1){echo 'checked';} else {echo '';}?>><label> Sidebar Left or Right? (Unchecked = Left, Checked = Right)</label></p>
+        <p><input type="hidden" name="settingsID[5]" value="0"><input type="checkbox" name="settingsID[5]" <?php if($rows[5][2] == 1){echo 'checked';} else {echo '';}?>><label> Use Background Image? (Checked = Yes)</label></p>
+        <p><input type="hidden" name="settingsID[6]" value="0"><input type="checkbox" name="settingsID[6]" <?php if($rows[6][2] == 1){echo 'checked';} else {echo '';}?>><label> Show Complete Timeline or Home Page (Unchecked = 1 Home Page, Checked = Complete Timeline)</label></p>
         <p><input type='submit' name='submit' value='Submit'></p>
 	</form>
 	</div>
