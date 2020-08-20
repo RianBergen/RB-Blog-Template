@@ -12,11 +12,6 @@ define('DBPASS', 'password');
 // Example: define('TINYMCE', 'https://cloud.tinymce.com/5/tinymce.min.js?apiKey=000000000000000000000000000000000000000000000000');
 define('TINYMCE', 'key');
 
-// Disqus Credentials
-// Replace 'key' With Your DISQUS Short Code (xxxxxxx.disqus.com)
-// Example: define('DISQUS', 'xxxxxxx');
-define('DISQUS', 'key');
-
 // Absolute URL
 // Replace 'absolute' With Your Websites Absolute URL
 // Example: define('URL', 'https://www.rianbergen.com/');

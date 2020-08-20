@@ -50,42 +50,8 @@ if ($id != NULL) {
 				echo '</div>';
                 
                 echo '<hr/>';
-                
-                echo' <div id="disqus_thread"></div>';
-                echo '<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>';
 			echo '</div>';
 		}
 	?>
-    
-<!-- DISQUS COMMENTS -->
-<script>
-    /**
-     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
-     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
-     *  PLATFORM OR CMS.
-     *  
-     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
-     *  https://disqus.com/admin/universalcode/#configuration-variables
-     */
-    
-    var disqus_config = function () {
-        // Replace PAGE_URL with your page's canonical URL variable
-        <?php echo 'this.page.url = "/page/'.$id.'";';?>
-        
-        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        <?php echo 'this.page.identifier = '.$row["pageID"].';';?>
-    };
-    
-    
-    (function() {    // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
-        var d = document, s = d.createElement('script');
-        
-        // IMPORTANT: Replace EXAMPLE with your forum shortname!
-        <?php echo 's.src = "https://'.DISQUS.'.disqus.com/embed.js";';?>
-        
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
 </div>
 <!-- END   - Left Column: Blog Post Column -->

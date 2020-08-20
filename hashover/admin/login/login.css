@@ -1,0 +1,49 @@
+/*-----------------------------------------------------------------------------
+
+Copyright (C) 2018-2019 Jacob Barkdull
+This file is part of HashOver.
+
+I, Jacob Barkdull, hereby release this work into the public domain.
+This applies worldwide. If this is not legally possible, I grant any
+entity the right to use this work for any purpose, without any
+conditions, unless such conditions are required by law.
+
+-----------------------------------------------------------------------------*/
+
+body {
+	background-image: url('../../images/white-noise.png');
+}
+
+#login {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	text-align: center;
+	margin: -102px 0px 0px -128px;
+	width: 256px;
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF;
+	overflow: hidden;
+}
+
+#login input {
+	display: block;
+	width: 100%;
+}
+
+#login.red {
+	outline: 1px solid #FF0000;
+	border-color: #FF0000;
+}
+
+#padding {
+	padding: 15px;
+}
+
+#login input[type="submit"],
+#login input[type="submit"]:hover {
+	padding: 10px;
+	border-left: none;
+	border-bottom: none;
+	border-right: none;
+}

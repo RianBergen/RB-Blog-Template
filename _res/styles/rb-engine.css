@@ -171,8 +171,13 @@ hr {    /* Default, No Shadow/Depth HR Border */
     vertical-align: middle;
     border-style: none;
     width: 100%;
-    height: 12rem;
     object-fit: cover;
+}
+
+.rb-card-link {
+    color: var(--rb-color-card-text);
+    background-color: transparent;
+    text-decoration: none;
 }
 
 .rb-card-categories-tag {

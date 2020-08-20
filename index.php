@@ -78,14 +78,13 @@ $showTimeline = $rows[6][1];
     <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
     
     <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
-    
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
+
     <?php
     if ($backgroundImage) {
         echo '<style>body{background-color: transparent !important; background-image: url("/_res/images/background/Background.png") !important;}</style>';
     }
     ?>
-    
-    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
     
     <meta name="theme-color" content="#242424">
 </head>
@@ -158,13 +157,13 @@ $showTimeline = $rows[6][1];
 
 </div>
 
-<!-- Disqus Comment Count -->
-<?php
+<!-- Disqus Comment Count
+
 if ($page != 'post') {
     echo '<script id="dsq-count-scr" src="//'.DISQUS.'.disqus.com/count.js" async></script>';
 }
-?>
 
+-->
 <!-- Light/Dark Mode Manager -->
 <script src="/_res/js/rb-theme-manager.js"></script>
 </body>

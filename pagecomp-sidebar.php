@@ -38,7 +38,7 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
         echo '<!-- START - About Card -->';
         echo '<div class="rb-card">';
             echo '<!-- About Image -->';
-            echo '<img class="rb-card-img" src="/_res/images/about/About-1920x1080.png" alt="N/A">';
+            echo '<a href="/action/about" class="rb-card-link"><img class="rb-card-img" src="/_res/images/about/About-1920x1080.png" alt="N/A"></a>';
             $stmt = $connection->prepare('
                 SELECT
                     pageTitle,
@@ -53,11 +53,10 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
             ));
             $row = $stmt->fetch();
             
-            $string = explode(' </p>' , $row['pageContent']); //substr($row['pageContent'], 0, strpos($row['pageContent'], '</p>'));
+            $array1 = str_split($row['pageContent'], 512);//$string = explode('</p>' , $row['pageContent']); //substr($row['pageContent'], 0, strpos($row['pageContent'], '</p>'));
             
             echo '<div>';
-                echo $string[0];
-                echo '<a href="/action/about" class="rb-button rb-button-border rb-padding-1rem-2rem"><b>READ MORE</b></a>';
+                echo '<a href="/action/about" class="rb-card-link">'.$array1[0].'...</a>';
             echo '</div>';
         echo '</div>';
         echo '<!-- END   - About Card -->';
