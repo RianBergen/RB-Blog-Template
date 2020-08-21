@@ -58,6 +58,7 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
             
             echo '<div>';
                 echo '<a href="/action/about" class="rb-card-link">'.$array1[0].'</a>';
+                echo '<p><a href="/action/about" class="rb-card-link rb-text-opacity">Read More &gt;</a></p>';
             echo '</div>';
         echo '</div>';
         echo '<!-- END   - About Card -->';
@@ -139,12 +140,11 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
                     $finalTags = array_unique($tagsArray);
                     sort($finalTags);
                     
-                    echo '<span class="rb-text-opacity">';
-                        echo '<strong><a class="rb-link-tags-container-item" href="/">Back Home</a></strong>';
+                    echo '<ul class="rb-card-footer-tags-table rb-text-opacity">';
                         foreach ($finalTags as $tag) {
-                            echo '<a href="/tag/'.$tag.'" class="rb-link-tags-container-item">#'.ucwords($tag).'</a>';
+                            echo '<li style="padding-bottom: 4px;"><a href="/tag/'.$tag.'" class="rb-link-tags-container-item">#'.ucwords($tag).'</a></li>';
                         }
-                    echo '</span>';
+                    echo '</ul>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';
@@ -174,14 +174,13 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
                             postDate DESC
                     ');
                     
-                    echo '<span class="rb-text-opacity">';
-                        echo '<strong><a class="rb-link-tags-container-item" href="/">Back Home</a></strong>';
+                    echo '<ul class="rb-card-footer-tags-table rb-text-opacity">';
                         while($row = $statement->fetch()){
                             $monthName = ''.date("F", mktime(0, 0, 0, $row['Month'], 10)).' '.$row['Year'].'';
                             $slug = 'archive/'.$row['Month'].'-'.$row['Year'];
-                            echo '<a href="/'.$slug.'" class="rb-link-tags-container-item">'.$monthName.'</a>';
+                            echo '<li style="padding-bottom: 4px;"><a href="/'.$slug.'" class="rb-link-tags-container-item">'.$monthName.'</a></li>';
                         }
-                    echo '</span>';
+                    echo '</ul>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';

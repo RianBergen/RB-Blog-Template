@@ -149,6 +149,14 @@ if(!$user->isLoggedIn()) {
 		<p><label>Content</label><br />
 		<textarea name='pageContent' cols='60' rows='10'><?php echo $row['pageContent'];?></textarea></p>
         
+		<!-- Available Fields -->
+		<p><label>Available Tags/Fields</label><br />
+			<label>New Post: [Title], [Content], [Link]</label><br />
+			<label>Subscribe/Unsubscribe: [Email]</label><br />
+			<label>Contact Email: [First], [Last], [Email], [Subject]</label><br />
+			<label>About Page: [END OF DESCRIPTION]</label>
+		</p>
+
         <p><label>Extra Field</label><br />
 		<input type='text' name='pageExtra' value='<?php echo $row['pageExtra'];?>'></p>
         
@@ -164,6 +172,6 @@ if(!$user->isLoggedIn()) {
 ?>
 
 <!-- Light/Dark Mode Manager -->
-<script src="/_res/js/rb-theme-manager.js"></script>
+<script src="/_res/js/rb-theme-manager.js?v=<?php echo ''.CSSVERSION.'';?>"></script>
 </body>
 </html>

@@ -396,7 +396,6 @@ hr {    /* Default, No Shadow/Depth HR Border */
 .rb-link-tags-container-item {
     margin-bottom: 16px;
     margin-right: 16px;
-    float: left;
     color: var(--rb-color-card-text);
     background-color: transparent;
     text-decoration: none;
@@ -510,7 +509,35 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 .hashover-dashed-title {
     margin-top: 12px;
+    display: none !important;
 }
+
+.hashover-inputs {
+    margin-top: 12px;
+}
+
+.hashover-avatar-image {
+    display: none !important;
+}
+
+.hashover-end-links {
+    display: none !important;
+}
+
+.hashover .hashover-name-input input, .hashover .hashover-password-input input, .hashover .hashover-email-input input, .hashover .hashover-website-input input {
+    background: transparent !important;
+}
+
+.hashover .hashover-post-button, .hashover .hashover-reply-post, .hashover .hashover-edit-post {
+    background-color: var(--rb-color-footer) !important;
+    border-color: var(--rb-color-elements-text) !important;
+}
+
+.hashover .hashover-post-button:hover, .hashover .hashover-reply-post:hover, .hashover .hashover-edit-post:hover {
+    background-color: var(--rb-color-footer) !important;
+    border-color: var(--rb-color-elements-text) !important;
+}
+
 /* END   - COMMENTS */
 
 

@@ -167,7 +167,7 @@ if(!$user->isLoggedIn()) {
                             $msg = '
                                 <html>
                                 <head>
-                                    <title>Contact Request</title>
+                                    <title>New Post</title>
                                 </head>
                                 <body>
                             '.$rowemail['pageContent'].'
@@ -176,8 +176,12 @@ if(!$user->isLoggedIn()) {
                             ';
                             
                             $msg = str_replace('[Title]', $postTitle, $msg);
-                            $content = substr($postContent, 0, strpos($postContent, '</p>'));
-                            $msg = str_replace('[Content]', $content, $msg);
+
+                            // Prepare Description From Content
+                            $array1 = explode('[END OF DESCRIPTION]' , $postContent);
+                            $array1[0] = strip_tags(html_entity_decode($array1[0]), '<p><ul><li><img><b><h1><h2><h3><h4><h5><strong>');
+
+                            $msg = str_replace('[Content]', $array1[0], $msg);
                             $msg = str_replace('[Link]', URL."post/".$postSlug, $msg);
                             
                             // Add Headers
@@ -245,6 +249,11 @@ if(!$user->isLoggedIn()) {
 		<p><label>Content</label><br />
 		<textarea name='postContent' cols='60' rows='10'><?php if(isset($error)){echo $_POST['postContent'];}?></textarea></p>
 		
+        <!-- Available Fields -->
+		<p><label>Available Tags/Fields</label><br />
+			<label>[END OF DESCRIPTION]</label>
+		</p>
+
         <p><input type="checkbox" name="comments" <?php if(isset($error)){if($_POST['comments'] == true){echo 'checked';} else {echo '';}}else{echo 'checked';}?>><label> Enable/Disable Comments (Checked = Enabled)</label></p>
         
         <p><input type="checkbox" name="notify" <?php if(isset($error)){if($_POST['notify'] == true){echo 'checked';} else {echo '';}}else{echo '';}?>><label> Notify Subscribers (Checked = Yes)</label></p>
@@ -260,6 +269,6 @@ if(!$user->isLoggedIn()) {
 ?>
 
 <!-- Light/Dark Mode Manager -->
-<script src="/_res/js/rb-theme-manager.js"></script>
+<script src="/_res/js/rb-theme-manager.js?v=<?php echo ''.CSSVERSION.'';?>"></script>
 </body>
 </html>

@@ -212,6 +212,11 @@ if(!$user->isLoggedIn()) {
 
 		<p><label>Content</label><br />
 		<textarea name='postContent' cols='60' rows='10'><?php echo $row['postContent'];?></textarea></p>
+
+        <!-- Available Fields -->
+		<p><label>Available Tags/Fields</label><br />
+			<label>[END OF DESCRIPTION]</label>
+		</p>
 		
         <p><input type="checkbox" name="comments" <?php if($row['postComments'] == true){echo 'checked';} else {echo '';}?>><label> Enable/Disable Comments (Checked = Enabled)</label></p>
         
@@ -227,6 +232,6 @@ if(!$user->isLoggedIn()) {
 ?>
 
 <!-- Light/Dark Mode Manager -->
-<script src="/_res/js/rb-theme-manager.js"></script>
+<script src="/_res/js/rb-theme-manager.js?v=<?php echo ''.CSSVERSION.'';?>"></script>
 </body>
 </html>

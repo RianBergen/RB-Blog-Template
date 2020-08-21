@@ -140,6 +140,6 @@ if(isset($_GET['delimage'])) {
 ?>
 
 <!-- Light/Dark Mode Manager -->
-<script src="../_res/js/rb-theme-manager.js"></script>
+<script src="../_res/js/rb-theme-manager.js?v=<?php echo ''.CSSVERSION.'';?>"></script>
 </body>
 </html>

@@ -171,6 +171,6 @@ if(!$user->isLoggedIn()) {
 ?>
 
 <!-- Light/Dark Mode Manager -->
-<script src="/_res/js/rb-theme-manager.js"></script>
+<script src="/_res/js/rb-theme-manager.j?v=<?php echo ''.CSSVERSION.'';?>s"></script>
 </body>
 </html>

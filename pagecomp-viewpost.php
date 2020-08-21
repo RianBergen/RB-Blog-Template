@@ -92,7 +92,7 @@ if ($id != NULL) {
 					// HashOver Comments
                 	echo' <div id="hashover"></div>';
 					echo '<noscript>Please enable JavaScript to view the <a href="https://www.barkdull.org/software/hashover">comments powered by HashOver.</a></noscript>';
-					echo '<script type="text/javascript" src="/hashover/comments.php"></script>';
+					echo '<script type="text/javascript" src="/hashover/comments.php?v='.CSSVERSION.'"></script>';
 				}
 			echo '</div>';
 		}
