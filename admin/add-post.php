@@ -33,7 +33,8 @@ if(!$user->isLoggedIn()) {
 	<?php echo '<script src="'.TINYMCE.'"></script>';?>
 	<script>
 		tinymce.init({
-			selector: "textarea",
+            selector: "textarea",
+            <?php if(ISDARKMODE == 'dark'){echo 'skin: "oxide-dark",content_css: "dark",';}else{echo '';}?>
 			plugins: [
 				"advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",

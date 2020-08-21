@@ -9,7 +9,8 @@ if ($id != NULL) {
             postDate,
             postSlug,
             postImage,
-            postTags
+			postTags,
+			postComments
         FROM 
             blog_posts
         WHERE
@@ -60,35 +61,42 @@ if ($id != NULL) {
 				if ($row['postImage'] != "") {
 					echo '<img class="rb-card-img" src="/'.$row['postImage'].'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
 				}
+
 				echo '<div>';
-					echo '<h3><b>'.$row['postTitle'].'</b></h3>';
-					echo '<h5>Posted On: <span class="rb-text-opacity">'.date('F d, Y', strtotime($row['postDate'])).'</span></h5>';
-					echo '</span></h5>';
-                    if ($row['postTags'] != NULL) {
-                        echo '<h5>Tagged As: <span class="rb-text-opacity">';
-                            $links = array();
-                            $parts = explode(', ', $row['postTags']);
-                            foreach ($parts as $tag) {
-                                $links[] = "<a class='rb-card-categories-tag' href='/tag/".$tag."'>".$tag."</a>";
-                            }
-                            
-                            echo implode(", ", $links);
-                        echo '</span></h5>';
-                    }
+					// Display Title and Date
+					echo '<h3 class="rb-card-title"><b>'.$row['postTitle'].'</b></h3>';
+					echo '<h5 class="rb-card-date"><span class="rb-text-opacity">'.date('F d, Y', strtotime($row['postDate'])).'</span></h5>';
+
+					// Display Content
+            		echo '<div>';
+						echo str_replace('[END OF DESCRIPTION]', ' ', $row['postContent']);
+        			echo '</div>';
 				echo '</div>';
-				echo '<div>';
-					echo ''.$row['postContent'].'';
+
+				if($row['postComments'] == 1) {
+					echo '<div class="rb-card-footer rb-card-footer-comment_separator">';
+				} else {
+					echo '<div class="rb-card-footer">';
+				}
+					if ($row['postTags'] != NULL) {
+						echo '<h5 class="rb-card-footer-tags"><span class="rb-text-opacity"><ul class="rb-card-footer-tags-table">';
+						$links = array();
+						$parts = explode(', ', $row['postTags']);
+						foreach ($parts as $tag) {
+							echo "<li class='rb-card-footer-tags-table-item'><a class='rb-card-categories-tag rb-text-opacity' href='/tag/".$tag."'>#".$tag."</a></li>";
+						}
+						echo '</ul></span></h5>';
+					}
 				echo '</div>';
-                
-                echo '<hr/>';
-                
-                echo' <div id="hashover"></div>';
-                echo '<noscript>Please enable JavaScript to view the <a href="https://www.barkdull.org/software/hashover">comments powered by HashOver.</a></noscript>';
+				if($row['postComments'] == 1) {
+					// HashOver Comments
+                	echo' <div id="hashover"></div>';
+					echo '<noscript>Please enable JavaScript to view the <a href="https://www.barkdull.org/software/hashover">comments powered by HashOver.</a></noscript>';
+					echo '<script type="text/javascript" src="/hashover/comments.php"></script>';
+				}
 			echo '</div>';
 		}
-	?>
-    
-<!-- HASHOVER COMMENTS -->
-<script type="text/javascript" src="/hashover/comments.php"></script>
-</div>
-<!-- END   - Left Column: Blog Post Column -->
+	
+echo '</div>';
+echo '<!-- END   - Left Column: Blog Post Column -->';
+?>

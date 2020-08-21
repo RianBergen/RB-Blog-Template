@@ -133,6 +133,7 @@ if(!$user->isLoggedIn()) {
         <p><input type="hidden" name="settingsID[4]" value="0"><input type="checkbox" name="settingsID[4]" <?php if($rows[4][2] == 1){echo 'checked';} else {echo '';}?>><label> Sidebar Left or Right? (Unchecked = Left, Checked = Right)</label></p>
         <p><input type="hidden" name="settingsID[5]" value="0"><input type="checkbox" name="settingsID[5]" <?php if($rows[5][2] == 1){echo 'checked';} else {echo '';}?>><label> Use Background Image? (Checked = Yes)</label></p>
         <p><input type="hidden" name="settingsID[6]" value="0"><input type="checkbox" name="settingsID[6]" <?php if($rows[6][2] == 1){echo 'checked';} else {echo '';}?>><label> Show Complete Timeline or Home Page (Unchecked = 1 Home Page, Checked = Complete Timeline)</label></p>
+        <p><a href="../hashover/admin/settings">HashOver Comments Settings</a></p>
         <p><input type='submit' name='submit' value='Submit'></p>
 	</form>
 	</div>

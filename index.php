@@ -79,6 +79,8 @@ $showTimeline = $rows[6][1];
     
     <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
+    
+    <link id="theme-style-comments" rel="stylesheet" type="text/css" onload="this.media='all'" href="<?php if(ISDARKMODE == 'dark'){echo '/hashover/themes/default-dark-borderless/comments.css';}else{echo '/hashover/themes/default-borderless/comments.css';}?>?v=<?php echo ''.CSSVERSION.'';?>">
 
     <?php
     if ($backgroundImage) {
@@ -157,13 +159,6 @@ $showTimeline = $rows[6][1];
 
 </div>
 
-<!-- Disqus Comment Count
-
-if ($page != 'post') {
-    echo '<script id="dsq-count-scr" src="//'.DISQUS.'.disqus.com/count.js" async></script>';
-}
-
--->
 <!-- Light/Dark Mode Manager -->
 <script src="/_res/js/rb-theme-manager.js"></script>
 </body>

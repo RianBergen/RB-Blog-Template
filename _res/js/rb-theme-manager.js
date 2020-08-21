@@ -18,9 +18,33 @@ function SwitchTheme() {
 //Sets the theme based on an input boolean
 function theme_SetCssTheme(dark) {
     if (dark) {
-        document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.dark.css");
+		// Style Sheet
+		document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.dark.css");
+
+		// HashOver Comments
+		if(!!document.getElementById("theme-style-comments")) {
+			document.getElementById("theme-style-comments").setAttribute("href", "/hashover/themes/default-dark-borderless/comments.css");
+		}
+
+		// TinyMCE
+		if(!!document.getElementById("u0")) {
+			var string = document.getElementById("u0").getAttribute("href").toString();
+			document.getElementById("u0").setAttribute("href", string.replace("oxide", "oxide-dark"));
+		}
     } else {
-        document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.light.css");
+		// Style Sheet
+		document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.light.css");
+
+		// HashOver Comments
+		if(!!document.getElementById("theme-style-comments")) {
+			document.getElementById("theme-style-comments").setAttribute("href", "/hashover/themes/default-borderless/comments.css");
+		}
+
+		// TinyMCE
+		if(!!document.getElementById("u0")) {
+			var string = document.getElementById("u0").getAttribute("href").toString();
+			document.getElementById("u0").setAttribute("href", string.replace("oxide-dark", "oxide"));
+		}
     }
 }
 

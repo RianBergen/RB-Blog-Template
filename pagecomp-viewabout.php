@@ -46,7 +46,7 @@ if ($id != NULL) {
 					echo '<h3><b>'.$row['pageTitle'].'</b></h3>';
 				echo '</div>';
 				echo '<div>';
-					echo ''.$row['pageContent'].'';
+					echo str_replace('[END OF DESCRIPTION]', ' ', $row['pageContent']);
 				echo '</div>';
                 
                 echo '<hr/>';

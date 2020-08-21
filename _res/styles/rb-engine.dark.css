@@ -34,4 +34,14 @@
     --rb-color-table-header-border: #BBBBBB; /* Border Color For Table Header */
     
     --rb-shadow-cards: 0px 14px 49px -27px rgba(0,0,0,0.75); /* Box Shadow For Card Elements */ /* Old Box Shadow: 0rem 0.125rem 0.3125rem 0rem rgba(0, 0, 0, 0.2), 0rem 0.125rem 0.75rem 0rem  rgba(0, 0, 0, 0.19) */
+
+}
+
+a:link, a:visited {
+    color: var(--rb-color-card-text);
+    text-decoration: none;
+}
+  
+a:link:active, a:visited:active {
+    color: var(--rb-color-card-text);
 }

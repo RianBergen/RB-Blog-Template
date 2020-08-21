@@ -180,8 +180,49 @@ hr {    /* Default, No Shadow/Depth HR Border */
     text-decoration: none;
 }
 
+.rb-card-title {
+    margin-bottom: 8px;
+}
+
+.rb-card-date {
+    margin-top: 0px;
+}
+
+.rb-card-footer {
+    font-size: 0.85em;
+    line-height: 1.6em;
+    border-top: 1px solid #ddd;
+    padding-top: 12px;
+    padding-bottom: 16px;
+    margin: 0 16px 0;
+}
+
+.rb-card-footer-comment_separator {
+    border-bottom: 1px solid #ddd;
+}
+
+.rb-card-footer-tags {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.rb-card-footer-tags-table {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    list-style: none;
+}
+
+.rb-card-footer-tags-table-item {
+    float: left;
+    margin-right: 10px;
+}
+
 .rb-card-categories-tag {
     color: var(--rb-color-card-text);
+    background-color: transparent;
+    text-decoration: none;
 }
 
 .rb-card-textonly {
@@ -344,7 +385,20 @@ hr {    /* Default, No Shadow/Depth HR Border */
     font-size: 0.8rem !important;
 }
 
+.rb-link-tags-container {
+    margin: 16px;
+}
+
 .rb-link-tags-container > a {
+    text-decoration: none;
+}
+
+.rb-link-tags-container-item {
+    margin-bottom: 16px;
+    margin-right: 16px;
+    float: left;
+    color: var(--rb-color-card-text);
+    background-color: transparent;
     text-decoration: none;
 }
 
@@ -450,8 +504,12 @@ hr {    /* Default, No Shadow/Depth HR Border */
 
 
 /* START - COMMENTS */
-#disqus_thread {
-    margin: 1rem;
+.hashover {
+    margin: 0 16px 0 16px;
+}
+
+.hashover-dashed-title {
+    margin-top: 12px;
 }
 /* END   - COMMENTS */
 

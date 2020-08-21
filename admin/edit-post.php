@@ -90,9 +90,6 @@ if(!$user->isLoggedIn()) {
             // Form Handling
 			if(!isset($error)) {
 				try {
-					// Create Post Slug
-					$postSlug = createPostSlug($postTitle);
-					
                     // Cleanup postComments Data
                     if($comments){
                         $comments = 1;
@@ -106,7 +103,6 @@ if(!$user->isLoggedIn()) {
                             blog_posts
                         SET
                             postTitle = :postTitle,
-                            postSlug = :postSlug,
                             postContent = :postContent,
                             postTags = :postTags,
                             postComments = :postComments
@@ -116,7 +112,6 @@ if(!$user->isLoggedIn()) {
 					$stmt->execute(array(
 						':postID' => $postID,
 						':postTitle' => $postTitle,
-						':postSlug' => $postSlug,
 						':postContent' => $postContent,
                         ':postTags' => $postTags,
                         ':postComments' => $comments

@@ -41,6 +41,7 @@ if ($id != NULL) {
                 $lastname = testInput($_POST['id3']);
                 $email = testInput($_POST['id4']);
                 $subject = testInput($_POST['id5']);
+                $math = testInput($_POST['id6']);
                 
                 // Very Basic Validation
                 if($firstname =='') {
@@ -57,6 +58,10 @@ if ($id != NULL) {
                 
                 if($subject == '') {
                     $error[] = 'Please Enter A Subject';
+                }
+
+                if(($math != '5') && ($math != 'Five') && ($math != 'five')) {
+                    $error[] = 'This was a triumph...';
                 }
                 
                 // No Errors
@@ -115,10 +120,15 @@ if ($id != NULL) {
             // Honeypot
             if (testInput($_POST['id1']) == "") {
                 $email = testInput($_POST['id4']);
-                
+                $math = testInput($_POST['id6']);
+
                 // Very Basic Validation
                 if(($email == '') || (!filter_var($email, FILTER_VALIDATE_EMAIL))) {
                     $error[] = 'Please Enter A Valid Email';
+                }
+
+                if(($math != '5') && ($math != 'Five') && ($math != 'five')) {
+                    $error[] = 'This was a triumph...';
                 }
                 
                 // No Errors
@@ -289,6 +299,9 @@ if ($id != NULL) {
                             <label for="id4">Email</label>
                             <input class="rb-login-input" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email...">
                             
+                            <label for="id6">What is One Plus Four?</label>
+                            <input class="rb-login-input" style="width: 100%;" type="text" id="id6" name="id6" placeholder="Probably Not Six...">
+
                             <label for="id5">Subject</label>
                             <textarea class="rb-login-input" style="width: 100%; height: 12.5rem;" id="id5" name="id5" placeholder="Write something..."></textarea>
 
@@ -327,6 +340,9 @@ if ($id != NULL) {
                         
                         <label for="id4">Email</label>
                         <input class="rb-login-input" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email...">
+
+                        <label for="id6">What is One Plus Four?</label>
+                        <input class="rb-login-input" style="width: 100%;" type="text" id="id6" name="id6" placeholder="Probably Not Six...">
                         
                         <input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" style="margin: 0rem;" type="submit" name="submitsubscribe" value="Submit">
                     ';

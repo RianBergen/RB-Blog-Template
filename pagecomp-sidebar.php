@@ -53,10 +53,11 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
             ));
             $row = $stmt->fetch();
             
-            $array1 = str_split($row['pageContent'], 512);//$string = explode('</p>' , $row['pageContent']); //substr($row['pageContent'], 0, strpos($row['pageContent'], '</p>'));
+            $array1 = explode('[END OF DESCRIPTION]' , $row['pageContent']);
+            $array1[0] = strip_tags(html_entity_decode($array1[0]), '<p><ul><li><img><b><h1><h2><h3><h4><h5><strong>');
             
             echo '<div>';
-                echo '<a href="/action/about" class="rb-card-link">'.$array1[0].'...</a>';
+                echo '<a href="/action/about" class="rb-card-link">'.$array1[0].'</a>';
             echo '</div>';
         echo '</div>';
         echo '<!-- END   - About Card -->';
@@ -75,7 +76,8 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
                     SELECT
                         postTitle,
                         postDate,
-                        postSlug
+                        postSlug,
+                        postImage
                     FROM
                         blog_posts
                     ORDER BY
@@ -86,7 +88,11 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
                 
                 while($row = $statement->fetch()){
                     echo '<a href="/post/'.$row['postSlug'].'" class="rb-button rb-list-item">';
-                        echo '<img src="/_res/images/side/'.$increment.'.png" onerror="this.src=&#39;/_res/images/192x192-Logo.png&#39;" alt="N/A">';
+                        if($row['postImage'] != NULL) {
+                            echo '<img src="'.$row["postImage"].'" onerror="this.src=&#39;/_res/images/side/'.$increment.'.png&#39;" alt="N/A">';
+                        } else {
+                            echo '<img src="/_res/images/side/'.$increment.'.png" onerror="this.src=&#39;/_res/images/side/'.$increment.'.png&#39;" alt="N/A">';
+                        }
                         echo '<div class="rb-list-item-txt">';
                             echo '<span class="rb-text-font-large">'.$row['postTitle'].'</span><br>';
                             echo '<span>'.date('F d, Y', strtotime($row['postDate'])).'</span>';
@@ -109,8 +115,7 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
             echo '</div>';
             echo '<hr/>';
             echo '<div>';
-                echo '<p class="rb-link-tags-container">';
-                    echo '<a href="/" class="rb-text-black-tag">Back Home</a>';
+                echo '<div class="rb-link-tags-container">';
                     $tagsArray = [];
                     $statement = $connection->query('
                         SELECT DISTINCT
@@ -132,10 +137,15 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
                     }
                     
                     $finalTags = array_unique($tagsArray);
-                    foreach ($finalTags as $tag) {
-                        echo '<a href="/tag/'.$tag.'" class="rb-text-grey-tag">'.ucwords($tag).'</a>';
-                    }
-                echo '</p>';
+                    sort($finalTags);
+                    
+                    echo '<span class="rb-text-opacity">';
+                        echo '<strong><a class="rb-link-tags-container-item" href="/">Back Home</a></strong>';
+                        foreach ($finalTags as $tag) {
+                            echo '<a href="/tag/'.$tag.'" class="rb-link-tags-container-item">#'.ucwords($tag).'</a>';
+                        }
+                    echo '</span>';
+                echo '</div>';
             echo '</div>';
         echo '</div>';
         echo '<!-- END   - Tags -->';
@@ -150,8 +160,7 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
             echo '</div>';
             echo '<hr/>';
             echo '<div>';
-                echo '<p class="rb-link-tags-container">';
-                    echo '<a href="/" class="rb-text-black-tag">Back Home</a>';
+                echo '<div class="rb-link-tags-container">';
                     $statement = $connection->query('
                         SELECT
                             Month(postDate) as Month,
@@ -165,12 +174,15 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
                             postDate DESC
                     ');
                     
-                    while($row = $statement->fetch()){
-                        $monthName = date("F Y", mktime(0, 0, 0, $row['Month'], 10));
-                        $slug = 'archive/'.$row['Month'].'-'.$row['Year'];
-                        echo '<a href="/'.$slug.'" class="rb-text-grey-tag">'.$monthName.'</a>';
-                    }
-                echo '</p>';
+                    echo '<span class="rb-text-opacity">';
+                        echo '<strong><a class="rb-link-tags-container-item" href="/">Back Home</a></strong>';
+                        while($row = $statement->fetch()){
+                            $monthName = ''.date("F", mktime(0, 0, 0, $row['Month'], 10)).' '.$row['Year'].'';
+                            $slug = 'archive/'.$row['Month'].'-'.$row['Year'];
+                            echo '<a href="/'.$slug.'" class="rb-link-tags-container-item">'.$monthName.'</a>';
+                        }
+                    echo '</span>';
+                echo '</div>';
             echo '</div>';
         echo '</div>';
         echo '<!-- END   - Archives -->';
