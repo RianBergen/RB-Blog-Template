@@ -1,5 +1,5 @@
 <?php
-// Get Post Data
+// Get Page Data
 if ($id != NULL) {
 	$statement = $connection->prepare('
         SELECT
@@ -19,13 +19,9 @@ if ($id != NULL) {
 }
 ?>
 
-	<!-- Back To Posts Button -->
-	<div class="rb-nav-flex-grid">
-		<div>
-			<a href="\" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Home</b></a>
-		</div>
-		<div>
-		</div>
+    <!-- Home Button -->
+	<div>
+		<a href="/" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Home</b></a>
 	</div>
 
 	<!-- Blog Post -->
@@ -288,24 +284,24 @@ if ($id != NULL) {
                     }
                     
                     echo '<form action="" method="post">
-                            <input class="rb-login-input rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
+                            <input class="rb-input-field rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
                             
                             <label for="id2">First Name</label>
-                            <input class="rb-login-input" style="width: 100%;" type="text" id="id2" name="id2" placeholder="Your Name...">
+                            <input class="rb-input-field" style="width: 100%;" type="text" id="id2" name="id2" placeholder="Your Name...">
 
                             <label for="id3">Last Name</label>
-                            <input class="rb-login-input" style="width: 100%;" type="text" id="id3" name="id3" placeholder="Your Last Name...">
+                            <input class="rb-input-field" style="width: 100%;" type="text" id="id3" name="id3" placeholder="Your Last Name...">
                             
                             <label for="id4">Email</label>
-                            <input class="rb-login-input" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email...">
+                            <input class="rb-input-field" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email...">
                             
                             <label for="id6">What is One Plus Four?</label>
-                            <input class="rb-login-input" style="width: 100%;" type="text" id="id6" name="id6" placeholder="Probably Not Six...">
+                            <input class="rb-input-field" style="width: 100%;" type="text" id="id6" name="id6" placeholder="Probably Not Six...">
 
                             <label for="id5">Subject</label>
-                            <textarea class="rb-login-input" style="width: 100%; height: 12.5rem;" id="id5" name="id5" placeholder="Write something..."></textarea>
+                            <textarea class="rb-input-field" style="width: 100%; height: 12.5rem;" id="id5" name="id5" placeholder="Write something..."></textarea>
 
-                            <input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" style="margin: 0rem;" type="submit" name="submitcontact" value="Contact">
+                            <input class="rb-button rb-button-border" style="margin: 0rem;" type="submit" name="submitcontact" value="Contact">
                     ';
                     
                     // Check For Success
@@ -336,15 +332,15 @@ if ($id != NULL) {
                     }
                     
                     echo '<form action="" method="post">
-                        <input class="rb-login-input rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
+                        <input class="rb-input-field rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
                         
                         <label for="id4">Email</label>
-                        <input class="rb-login-input" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email...">
+                        <input class="rb-input-field" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email...">
 
                         <label for="id6">What is One Plus Four?</label>
-                        <input class="rb-login-input" style="width: 100%;" type="text" id="id6" name="id6" placeholder="Probably Not Six...">
+                        <input class="rb-input-field" style="width: 100%;" type="text" id="id6" name="id6" placeholder="Probably Not Six...">
                         
-                        <input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" style="margin: 0rem;" type="submit" name="submitsubscribe" value="Submit">
+                        <input class="rb-button rb-button-border" style="margin: 0rem;" type="submit" name="submitsubscribe" value="Submit">
                     ';
                     
                     // Check For Success

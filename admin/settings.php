@@ -19,9 +19,9 @@ if(!$user->isLoggedIn()) {
 	
 	<title><?php echo ''.HTMLTITLE.'';?> - Settings</title>
 	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png">
-	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
-	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
+	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png<?php echo CSSVERSION;?>">
 	
 	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
@@ -61,24 +61,43 @@ if(!$user->isLoggedIn()) {
                             foreach($_POST['settingsID'] as $value){
                                 $i++;
                                 
-                                if($value == true) {
-                                    $value = 1;
+                                if($i != '6') {
+                                    if($value == true) {
+                                        $value = 1;
+                                    } else {
+                                        $value = 0;
+                                    }
+
+                                    $stmt = $connection->prepare('
+                                        UPDATE
+                                            blog_settings
+                                        SET
+                                            settingsValue = :settingsValue
+                                        WHERE
+                                            settingsID = :settingsID
+                                    ');
+                                    $stmt->execute(array(
+                                        ':settingsID' => $i,
+                                        ':settingsValue' => $value
+                                    ));
                                 } else {
-                                    $value = 0;
+                                    if($value == 0) {
+                                        $value = NULL;
+                                    }
+
+                                    $stmt = $connection->prepare('
+                                        UPDATE
+                                            blog_settings
+                                        SET
+                                            settingsImage = :settingsImage
+                                        WHERE
+                                            settingsID = :settingsID
+                                    ');
+                                    $stmt->execute(array(
+                                        ':settingsID' => $i,
+                                        ':settingsImage' => $value
+                                    ));
                                 }
-                                
-                                $stmt = $connection->prepare('
-                                    UPDATE
-                                        blog_settings
-                                    SET
-                                        settingsValue = :settingsValue
-                                    WHERE
-                                        settingsID = :settingsID
-                                ');
-                                $stmt->execute(array(
-                                    ':settingsID' => $i,
-                                    ':settingsValue' => $value
-                                ));
                             }
                         }
                     }
@@ -131,8 +150,35 @@ if(!$user->isLoggedIn()) {
         <p><input type="hidden" name="settingsID[2]" value="0"><input type="checkbox" name="settingsID[2]" <?php if($rows[2][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Tags In Sidebar(Checked = Enabled)</label></p>
         <p><input type="hidden" name="settingsID[3]" value="0"><input type="checkbox" name="settingsID[3]" <?php if($rows[3][2] == 1){echo 'checked';} else {echo '';}?>><label> Enable/Disable Archives In Sidebar (Checked = Enabled)</label></p>
         <p><input type="hidden" name="settingsID[4]" value="0"><input type="checkbox" name="settingsID[4]" <?php if($rows[4][2] == 1){echo 'checked';} else {echo '';}?>><label> Sidebar Left or Right? (Unchecked = Left, Checked = Right)</label></p>
-        <p><input type="hidden" name="settingsID[5]" value="0"><input type="checkbox" name="settingsID[5]" <?php if($rows[5][2] == 1){echo 'checked';} else {echo '';}?>><label> Use Background Image? (Checked = Yes)</label></p>
-        <p><input type="hidden" name="settingsID[6]" value="0"><input type="checkbox" name="settingsID[6]" <?php if($rows[6][2] == 1){echo 'checked';} else {echo '';}?>><label> Show Complete Timeline or Home Page (Unchecked = 1 Home Page, Checked = Complete Timeline)</label></p>
+        
+        <!-- Images -->
+        <p><label>Background Image </label>
+        <select name="settingsID[5]" style='width:400px;'>
+            <option value='0'>NONE</option>
+            <?php
+                $stmt2 = $connection->query('
+                    SELECT
+                        imageID,
+                        imageTitle
+                    FROM
+                        blog_images
+                    ORDER BY
+                        imageTitle
+                ');
+                while($row2 = $stmt2->fetch()) {
+                    if($rows[5][3] != NULL) {
+                        if(($row2['imageID'] == $rows[5][3])) {
+                            $selected ="selected='selected'";
+                        } else {
+                            $selected = null;
+                        }
+                    }
+                    echo "<option value='".$row2['imageID']."' ".$selected.">".$row2['imageTitle']."</option>";
+                }
+            ?>
+        </select></p>
+
+        <p><input type="hidden" name="settingsID[6]" value="0"><input type="checkbox" name="settingsID[6]" <?php if($rows[6][2] == 1){echo 'checked';} else {echo '';}?>><label> Show Complete Timeline or Home Page (Unchecked = Home Page, Checked = Complete Timeline)</label></p>
         <p><a href="../hashover/admin/settings">HashOver Comments Settings</a></p>
         <p><input type='submit' name='submit' value='Submit'></p>
 	</form>

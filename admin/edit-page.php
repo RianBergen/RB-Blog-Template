@@ -19,9 +19,9 @@ if(!$user->isLoggedIn()) {
 	
 	<title><?php echo ''.HTMLTITLE.'';?> - Edit Page</title>
 	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png">
-	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
-	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
+	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png<?php echo CSSVERSION;?>">
     
 	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
@@ -29,37 +29,7 @@ if(!$user->isLoggedIn()) {
     <meta name="theme-color" content="#242424">
 	
     <!-- TinyMCE Initialization Script -->
-	<?php echo '<script src="'.TINYMCE.'"></script>';?>
-	<script>
-		tinymce.init({
-			selector: "textarea",
-			plugins: [
-				"advlist autolink lists link image charmap print preview anchor",
-				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media table paste"
-			],
-			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-            image_list: [
-                <?php
-                    $stmt2 = $connection->query('
-                        SELECT
-                            imageID,
-                            imageTitle,
-                            imagePath
-                        FROM
-                            blog_images
-                        ORDER BY
-                            imageTitle
-                    ');
-                    while($row2 = $stmt2->fetch()) {
-                        echo "{title: '".$row2['imageTitle']."', value: '../".$row2['imagePath']."'},";
-                    }
-                ?>
-                {title: 'Placeholder Image', value: '../_res/images/missing/Placeholder-Image-1920x1080.png'}
-            ],
-            height : "500px"
-		});
-	</script>
+    <?php require_once('tinymce.php');?>
 </head>
 <body class="rb-admin-body">
 <div class="rb-admin-container">
@@ -89,20 +59,32 @@ if(!$user->isLoggedIn()) {
 					// Create Post Slug
 					$pageSlug = createCategorySlug($pageTitle);
 					
+					// Extra Field
+					if($pageExtra == NULL || $pageExtra == '') {
+						$pageExtra = NULL;
+					}
+
+					// Image
+					if($pageImage == NULL || $pageImage == '0') {
+						$pageImage = NULL;
+					}
+
 					// Insert Data Into Database
 					$stmt = $connection->prepare('
                         UPDATE
                             blog_pages
                         SET
                             pageContent = :pageContent,
-                            pageExtra = :pageExtra
+							pageExtra = :pageExtra,
+							pageImage = :pageImage
                         WHERE
                             pageID = :pageID
                     ');
 					$stmt->execute(array(
 						':pageID' => $pageID,
 						':pageContent' => $pageContent,
-                        ':pageExtra' => $pageExtra
+						':pageExtra' => $pageExtra,
+						':pageImage' => $pageImage
 					));
 					
 					// Redirect To Admin Page
@@ -127,7 +109,8 @@ if(!$user->isLoggedIn()) {
                     pageID,
                     pageTitle,
                     pageContent,
-                    pageExtra
+					pageExtra,
+					pageImage
                 FROM
                     blog_pages
                 WHERE
@@ -147,18 +130,51 @@ if(!$user->isLoggedIn()) {
 		<input type='hidden' name='pageID' value='<?php echo $row['pageID'];?>'>
         
 		<p><label>Content</label><br />
-		<textarea name='pageContent' cols='60' rows='10'><?php echo $row['pageContent'];?></textarea></p>
+		<textarea id='tinyMCE' name='pageContent' cols='60' rows='10'><?php echo $row['pageContent'];?></textarea></p>
         
 		<!-- Available Fields -->
-		<p><label>Available Tags/Fields</label><br />
-			<label>New Post: [Title], [Content], [Link]</label><br />
-			<label>Subscribe/Unsubscribe: [Email]</label><br />
-			<label>Contact Email: [First], [Last], [Email], [Subject]</label><br />
-			<label>About Page: [END OF DESCRIPTION]</label>
+		<p <?php if(($row['pageID'] != '8') && ($row['pageID'] != '9') && ($row['pageID'] != '10') && ($row['pageID'] != '11') && ($row['pageID'] != '1')){echo 'style="display: none;"';}?>><label>Available Tags/Fields</label><br />
+			<?php
+				if(($row['pageID'] == '11')){echo '<label>[Title], [Content], [Link]</label>';}
+				if(($row['pageID'] == '9') || ($row['pageID'] == '10')){echo '<label>[Title], [Content], [Link]</label>';}
+				if(($row['pageID'] == '8')){echo '<label>[Title], [Content], [Link]</label>';}
+				if(($row['pageID'] == '1')){echo '<label>[Title], [Content], [Link]</label>';}
+			?>
 		</p>
 
-        <p><label>Extra Field</label><br />
+		<!-- Subject Line For Email Notifications -->
+        <p <?php if(($row['pageID'] != '8') && ($row['pageID'] != '9') && ($row['pageID'] != '10') && ($row['pageID'] != '11')){echo 'style="display: none;"';}?>><label>Email Subject Line</label><br />
 		<input type='text' name='pageExtra' value='<?php echo $row['pageExtra'];?>'></p>
+
+		<!-- About Banner Image -->
+		<?php
+			if(($row['pageID'] == '1')){
+				echo "<p><label>Banner Image </label>";
+        		echo "<select name='pageImage' style='width:400px;'>";
+					echo "<option value='0'>NONE</option>";
+			
+                	$stmt2 = $connection->query('
+        	            SELECT
+        	                imageID,
+        	                imageTitle
+        	            FROM
+        	                blog_images
+        	            ORDER BY
+         	               imageTitle
+         	       ');
+         	       while($row2 = $stmt2->fetch()) {
+        	            if($row['pageImage'] != NULL) {
+        	                if(($row2['imageID'] == $row['pageImage'])) {
+        	                    $selected ="selected='selected'";
+        	                } else {
+        	                    $selected = null;
+        	                }
+        	            }
+         	           echo "<option value='".$row2['imageID']."' ".$selected.">".$row2['imageTitle']."</option>";
+         	       }
+				echo "</select></p>";
+			}
+		?>
         
 		<p><input type='submit' name='submit' value='Submit'></p>
 		

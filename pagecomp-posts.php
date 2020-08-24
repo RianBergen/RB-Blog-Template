@@ -19,9 +19,9 @@
 					postTitle,
 					postContent,
                     postTags,
-                    postDate,
-                    postSlug,
-                    postImage
+					postDate,
+					postImage,
+                    postSlug
                 FROM
                     blog_posts
                 ORDER BY
@@ -33,7 +33,21 @@
 				echo '<div class="rb-card">';
 					// Display Image
 					if($row['postImage'] != NULL) {
-						echo '<a href="/post/'.$row['postSlug'].'" class="rb-card-link"><img class="rb-card-img" src="/'.$row['postImage'].'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A"></a>';
+						$stmt2 = $connection->query('
+							SELECT
+								imageID,
+								imageTitle,
+								imagePath
+							FROM
+								blog_images
+							WHERE
+								imageID = '.$row['postImage']
+						);
+
+						$stmt2->execute(array());
+						$row2 = $stmt2->fetch();
+
+						echo '<a href="/post/'.$row['postSlug'].'" class="rb-card-link"><img class="rb-card-img" title="'.$row2['imageTitle'].'" src="/'.$row2['imagePath'].'?v='.CSSVERSION.'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A"></a>';
 					}
 
 					echo '<div>';

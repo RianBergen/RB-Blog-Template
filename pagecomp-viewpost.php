@@ -35,10 +35,10 @@ if ($id != NULL) {
 }
 ?>
 
-	<!-- Back To Posts Button -->
+    <!-- Home Button -->
 	<div class="rb-nav-flex-grid">
 		<div>
-			<a href="javascript:history.back()" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Go Back</b></a>
+			<a href="/" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Home</b></a>
 		</div>
 		<div>
 		</div>
@@ -59,7 +59,21 @@ if ($id != NULL) {
 		} else {
 			echo '<div class="rb-card">';
 				if ($row['postImage'] != "") {
-					echo '<img class="rb-card-img" src="/'.$row['postImage'].'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
+					$stmt2 = $connection->query('
+						SELECT
+							imageID,
+							imageTitle,
+							imagePath
+						FROM
+							blog_images
+						WHERE
+							imageID = '.$row['postImage']
+					);
+
+					$stmt2->execute(array());
+					$row2 = $stmt2->fetch();
+
+					echo '<img class="rb-card-img" title="'.$row2['imageTitle'].'" src="/'.$row2['imagePath'].'?v='.CSSVERSION.'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
 				}
 
 				echo '<div>';

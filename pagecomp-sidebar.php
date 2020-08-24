@@ -37,12 +37,12 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
         if($showAbout) {
         echo '<!-- START - About Card -->';
         echo '<div class="rb-card">';
-            echo '<!-- About Image -->';
-            echo '<a href="/action/about" class="rb-card-link"><img class="rb-card-img" src="/_res/images/about/About-1920x1080.png" alt="N/A"></a>';
+            // Fetch Data
             $stmt = $connection->prepare('
                 SELECT
                     pageTitle,
-                    pageContent
+                    pageContent,
+                    pageImage
                 FROM
                     blog_pages
                 WHERE
@@ -52,7 +52,28 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
                 ':pageTitle' => 'About'
             ));
             $row = $stmt->fetch();
-            
+
+            // About Image
+            echo '<!-- About Image -->';
+            if($row['pageImage'] != NULL) {
+                $stmt2 = $connection->query('
+                    SELECT
+                        imageID,
+                        imageTitle,
+                        imagePath
+                    FROM
+                        blog_images
+                    WHERE
+                        imageID = '.$row['pageImage']
+                );
+
+                $stmt2->execute(array());
+                $row2 = $stmt2->fetch();
+
+                echo '<a href="/action/about'.$row['postSlug'].'" class="rb-card-link"><img class="rb-card-img" title="'.$row2['imageTitle'].'" src="/'.$row2['imagePath'].'?v='.CSSVERSION.'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A"></a>';
+            }
+
+            // Page Content
             $array1 = explode('[END OF DESCRIPTION]' , $row['pageContent']);
             $array1[0] = strip_tags(html_entity_decode($array1[0]), '<p><ul><li><img><b><h1><h2><h3><h4><h5><strong>');
             
@@ -89,12 +110,7 @@ if($showAbout || $showRecent || $showTags || $showArchives) {
                 
                 while($row = $statement->fetch()){
                     echo '<a href="/post/'.$row['postSlug'].'" class="rb-button rb-list-item">';
-                        if($row['postImage'] != NULL) {
-                            echo '<img src="'.$row["postImage"].'" onerror="this.src=&#39;/_res/images/side/'.$increment.'.png&#39;" alt="N/A">';
-                        } else {
-                            echo '<img src="/_res/images/side/'.$increment.'.png" onerror="this.src=&#39;/_res/images/side/'.$increment.'.png&#39;" alt="N/A">';
-                        }
-                        echo '<div class="rb-list-item-txt">';
+                        echo '<div>';
                             echo '<span class="rb-text-font-large">'.$row['postTitle'].'</span><br>';
                             echo '<span>'.date('F d, Y', strtotime($row['postDate'])).'</span>';
                         echo '</div>';

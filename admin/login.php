@@ -8,6 +8,9 @@ if($user->isLoggedIn()) {
 	header('Location: index.php');
 }
 ?>
+
+
+
 <!-- HTML CODE -->
 <!DOCTYPE html>
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
@@ -19,27 +22,29 @@ if($user->isLoggedIn()) {
 	
 	<title><?php echo ''.HTMLTITLE.'';?> - User Login</title>
 	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png">
-	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
-	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
+	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png<?php echo CSSVERSION;?>">
     
 	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
     
     <meta name="theme-color" content="#242424">
 </head>
-<body class="rb-admin-body">
+<body>
 <div class="rb-login-container">
-	<div class="rb-login-form rb-card">
+	<div class="rb-login-form">
 		
 	<?php
 		// Process Login From If Submitted
 		if(isset($_POST['submit'])) {
             // Honeypot
             if (testInput($_POST['id1']) == "") {
+                // Test The Input For Username and Password
                 $username = testInput($_POST['id2']);
                 $password = testInput($_POST['id3']);
                 
+                // Login The User
                 if($user->login($username, $password)){
                     // Login Worked
                     header('Location: index.php');
@@ -60,16 +65,14 @@ if($user->isLoggedIn()) {
 	?>
 		
 		<!-- Login Form -->
-        <div style="padding: 1rem;">
-            <form action="" method="post">
-                <h1>Login</h1>
-                <label for="id1" class="rb-id1">Honeypot: Do Not Fill Out!</label>
-                <input class="rb-login-input rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
-                <label>Username/Email:</label></br><input class="rb-login-input" style="width: 100%;" type="text" name="id2" value=""/>
-                <label>Password:</label></br><input class="rb-login-input" style="width: 100%;" type="password" name="id3" value=""/>
-                <input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" style="margin: 0rem;"type="submit" name="submit" value="Login"/>
-            </form>
-        </div>
+        <form action="" method="post">
+            <h1>Login</h1>
+            <label for="id1" class="rb-id1">Honeypot: Do Not Fill Out!</label>
+            <input class="rb-input-field rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
+            <label>Username/Email:</label></br><input class="rb-input-field" style="width: 100%;" type="text" name="id2" value=""/>
+            <label>Password:</label></br><input class="rb-input-field" style="width: 100%;" type="password" name="id3" value=""/>
+            <input class="rb-button rb-button-border" type="submit" name="submit" value="Login"/>
+        </form>
 	</div>
 </div>
 

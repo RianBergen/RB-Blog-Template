@@ -19,9 +19,9 @@ if(!$user->isLoggedIn()) {
 	
 	<title><?php echo ''.HTMLTITLE.'';?> - Edit Post</title>
 	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png">
-	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
-	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
+	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png<?php echo CSSVERSION;?>">
 	
 	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
@@ -29,37 +29,7 @@ if(!$user->isLoggedIn()) {
     <meta name="theme-color" content="#242424">
 	
     <!-- TinyMCE Initialization Script -->
-	<?php echo '<script src="'.TINYMCE.'"></script>';?>
-	<script>
-		tinymce.init({
-			selector: "textarea",
-			plugins: [
-				"advlist autolink lists link image charmap print preview anchor",
-				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media table paste"
-			],
-			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-            image_list: [
-                <?php
-                    $stmt2 = $connection->query('
-                        SELECT
-                            imageID,
-                            imageTitle,
-                            imagePath
-                        FROM
-                            blog_images
-                        ORDER BY
-                            imageTitle
-                    ');
-                    while($row2 = $stmt2->fetch()) {
-                        echo "{title: '".$row2['imageTitle']."', value: '../".$row2['imagePath']."'},";
-                    }
-                ?>
-                {title: 'Placeholder Image', value: '../_res/images/missing/Placeholder-Image-1920x1080.png'}
-            ],
-            height : "500px"
-		});
-	</script>
+    <?php require_once('tinymce.php');?>
 </head>
 <body class="rb-admin-body">
 <div class="rb-admin-container">
@@ -117,22 +87,23 @@ if(!$user->isLoggedIn()) {
                         ':postComments' => $comments
 					));
 					
-                    // Add Image If Selected
-                    if($postImage != '0') {
-                        // Connect Image
-                        $stmt2 = $connection->prepare('
-                            UPDATE
-                                blog_posts
-                            SET
-                                postImage = :postImage
-                            WHERE
-                                postID = :postID
-                        ');
-                        $stmt2->execute(array(
-                            ':postID' => $postID,
-                            ':postImage' => $postImage
-                        ));
+                    // Connect Image
+                    if($postImage == '0') {
+                        $postImage = NULL;
                     }
+
+                    $stmt2 = $connection->prepare('
+                        UPDATE
+                            blog_posts
+                        SET
+                            postImage = :postImage
+                        WHERE
+                            postID = :postID
+                    ');
+                    $stmt2->execute(array(
+                        ':postID' => $postID,
+                        ':postImage' => $postImage
+                    ));
 					
 					// Redirect To Admin Page
 					header('Location: index.php?action=updated');
@@ -211,7 +182,7 @@ if(!$user->isLoggedIn()) {
         </select>
 
 		<p><label>Content</label><br />
-		<textarea name='postContent' cols='60' rows='10'><?php echo $row['postContent'];?></textarea></p>
+		<textarea id='tinyMCE' name='postContent' cols='60' rows='10'><?php echo $row['postContent'];?></textarea></p>
 
         <!-- Available Fields -->
 		<p><label>Available Tags/Fields</label><br />
