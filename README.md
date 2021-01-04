@@ -35,6 +35,9 @@ My Website Uses This Template: https://www.rianbergen.com/
    1. Change `title` and `description` (under the HTML Values Section) to the html title and description that you want.
    1. Change `title`, `description`, `copyright` (under the Titlebar Values Section). `title` refers to the Header and Footer Title Bar. `description` refers to the descirption underneath the Header Title Bar. `copyright` is displayed at the bottom of the page.
    1. Change `email-address@email.com` and `admin name` to your admin information. This address will recieve emails concerning Comments, Subscribe/Unsubscribe, and Contact Requests.
+1. HashOver also keeps a file containing Credentials. This file can we found in `\wwwroot\hashover\backend\classes\secrets.php`
+   1. You can find more information at: https://docs.barkdull.org/hashover-v2/setup#required-setup/
+   1. It will also require you to make a second sql database. This database can be empty as HashOver will fill it out on startup.
 1. To install your own images, please go to the following folder `\wwwroot\_res\images\icon` and follow the instructions below.
    1. There are 3 logos within this folder. Please replace those with your own. They should be the exact same sizes and should be named exactly the same. These images appear in the title bar of your browser.
 
