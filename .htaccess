@@ -10,7 +10,6 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d [NC]
 RewriteCond %{REQUEST_FILENAME} !-f [NC]
 
-RewriteRule ^category/(.*)$ index.php?page=category&id=$1 [L]
 RewriteRule ^tag/(.*)$ index.php?page=tag&id=$1 [L]
 RewriteRule ^archive/(.*)-(.*)$ index.php?page=archive&month=$1&year=$2 [L]
 RewriteRule ^action/(.*)$ index.php?page=action&id=$1 [L]
@@ -27,15 +26,15 @@ ErrorDocument 500 https://www.YOURDOMAIN.com/500.html
 #BEGIN EXPIRES
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresDefault "access plus 10 days"
-    ExpiresByType text/css "access plus 1 week"
+    ExpiresDefault "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
     ExpiresByType text/plain "access plus 1 month"
     ExpiresByType image/gif "access plus 1 month"
     ExpiresByType image/png "access plus 1 month"
     ExpiresByType image/jpeg "access plus 1 month"
     ExpiresByType application/x-javascript "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 week"
-    ExpiresByType application/x-icon "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-icon "access plus 1 month"
 </IfModule>
 #END EXPIRES
 

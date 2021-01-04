@@ -9,7 +9,8 @@ if ($id != NULL) {
             postDate,
             postSlug,
             postImage,
-            postTags
+			postTags,
+			postComments
         FROM 
             blog_posts
         WHERE
@@ -34,10 +35,10 @@ if ($id != NULL) {
 }
 ?>
 
-	<!-- Back To Posts Button -->
+    <!-- Home Button -->
 	<div class="rb-nav-flex-grid">
 		<div>
-			<a href="javascript:history.back()" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Go Back</b></a>
+			<a href="/" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Home</b></a>
 		</div>
 		<div>
 		</div>
@@ -58,89 +59,58 @@ if ($id != NULL) {
 		} else {
 			echo '<div class="rb-card">';
 				if ($row['postImage'] != "") {
-					echo '<img class="rb-card-img" src="/'.$row['postImage'].'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
+					$stmt2 = $connection->query('
+						SELECT
+							imageID,
+							imageTitle,
+							imagePath
+						FROM
+							blog_images
+						WHERE
+							imageID = '.$row['postImage']
+					);
+
+					$stmt2->execute(array());
+					$row2 = $stmt2->fetch();
+
+					echo '<img class="rb-card-img" title="'.$row2['imageTitle'].'" src="/'.$row2['imagePath'].'?v='.CSSVERSION.'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
 				}
+
 				echo '<div>';
-					echo '<h3><b>'.$row['postTitle'].'</b></h3>';
-					echo '<h5>Posted On: <span class="rb-text-opacity">'.date('F d, Y', strtotime($row['postDate'])).'</span></h5>';
-						$statement2 = $connection->prepare('
-                            SELECT
-                                categoryTitle,
-                                categorySlug
-                            FROM
-                                blog_categories,
-                                blog_post_categories
-                            WHERE
-                                blog_categories.categoryID = blog_post_categories.pcCategoryID
-                                AND blog_post_categories.pcPostID = :postID'
-                        );
-						$statement2->execute(array(
-                            ':postID' => $row['postID']
-                        ));
-						$categoryRow = $statement2->fetchAll(PDO::FETCH_ASSOC);
+					// Display Title and Date
+					echo '<h3 class="rb-card-title"><b>'.$row['postTitle'].'</b></h3>';
+					echo '<h5 class="rb-card-date"><span class="rb-text-opacity">'.date('F d, Y', strtotime($row['postDate'])).'</span></h5>';
+
+					// Display Content
+            		echo '<div>';
+						echo str_replace('[END OF DESCRIPTION]', ' ', $row['postContent']);
+        			echo '</div>';
+				echo '</div>';
+
+				if($row['postComments'] == 1) {
+					echo '<div class="rb-card-footer rb-card-footer-comment_separator">';
+				} else {
+					echo '<div class="rb-card-footer">';
+				}
+					if ($row['postTags'] != NULL) {
+						echo '<h5 class="rb-card-footer-tags"><span class="rb-text-opacity"><ul class="rb-card-footer-tags-table">';
 						$links = array();
-						foreach ($categoryRow as $category) {
-							$links[] = "<a class='rb-card-categories-tag' href='/category/".$category['categorySlug']."'>".$category['categoryTitle']."</a>";
+						$parts = explode(', ', $row['postTags']);
+						foreach ($parts as $tag) {
+							echo "<li class='rb-card-footer-tags-table-item'><a class='rb-card-categories-tag rb-text-opacity' href='/tag/".$tag."'>#".$tag."</a></li>";
 						}
-						
-						if (empty($categoryRow) != true) {
-                            echo '<h5>Posted In: <span class="rb-text-opacity">';
-                            echo implode(", ", $links);
-                        }
-					echo '</span></h5>';
-                    if ($row['postTags'] != NULL) {
-                        echo '<h5>Tagged As: <span class="rb-text-opacity">';
-                            $links = array();
-                            $parts = explode(', ', $row['postTags']);
-                            foreach ($parts as $tag) {
-                                $links[] = "<a class='rb-card-categories-tag' href='/tag/".$tag."'>".$tag."</a>";
-                            }
-                            
-                            echo implode(", ", $links);
-                        echo '</span></h5>';
-                    }
+						echo '</ul></span></h5>';
+					}
 				echo '</div>';
-				echo '<div>';
-					echo ''.$row['postContent'].'';
-				echo '</div>';
-                
-                echo '<hr/>';
-                
-                echo' <div id="disqus_thread"></div>';
-                echo '<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>';
+				if($row['postComments'] == 1) {
+					// HashOver Comments
+                	echo' <div id="hashover"></div>';
+					echo '<noscript>Please enable JavaScript to view the <a href="https://www.barkdull.org/software/hashover">comments powered by HashOver.</a></noscript>';
+					echo '<script type="text/javascript" src="/hashover/comments.php?v='.CSSVERSION.'"></script>';
+				}
 			echo '</div>';
 		}
-	?>
-    
-<!-- DISQUS COMMENTS -->
-<script>
-    /**
-     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
-     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
-     *  PLATFORM OR CMS.
-     *  
-     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
-     *  https://disqus.com/admin/universalcode/#configuration-variables
-     */
-    
-    var disqus_config = function () {
-        // Replace PAGE_URL with your page's canonical URL variable
-        <?php echo 'this.page.url = "/post/'.$id.'";';?>
-        
-        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        <?php echo 'this.page.identifier = '.$row["postID"].';';?>
-    };
-    
-    
-    (function() {    // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
-        var d = document, s = d.createElement('script');
-        
-        // IMPORTANT: Replace EXAMPLE with your forum shortname!
-        <?php echo 's.src = "https://'.DISQUS.'.disqus.com/embed.js";';?>
-        
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-</div>
-<!-- END   - Left Column: Blog Post Column -->
+	
+echo '</div>';
+echo '<!-- END   - Left Column: Blog Post Column -->';
+?>

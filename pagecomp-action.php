@@ -1,5 +1,5 @@
 <?php
-// Get Post Data
+// Get Page Data
 if ($id != NULL) {
 	$statement = $connection->prepare('
         SELECT
@@ -19,13 +19,9 @@ if ($id != NULL) {
 }
 ?>
 
-	<!-- Back To Posts Button -->
-	<div class="rb-nav-flex-grid">
-		<div>
-			<a href="\" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Home</b></a>
-		</div>
-		<div>
-		</div>
+    <!-- Home Button -->
+	<div>
+		<a href="/" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Home</b></a>
 	</div>
 
 	<!-- Blog Post -->
@@ -41,6 +37,7 @@ if ($id != NULL) {
                 $lastname = testInput($_POST['id3']);
                 $email = testInput($_POST['id4']);
                 $subject = testInput($_POST['id5']);
+                $math = testInput($_POST['id6']);
                 
                 // Very Basic Validation
                 if($firstname =='') {
@@ -57,6 +54,10 @@ if ($id != NULL) {
                 
                 if($subject == '') {
                     $error[] = 'Please Enter A Subject';
+                }
+
+                if(($math != '5') && ($math != 'Five') && ($math != 'five')) {
+                    $error[] = 'This was a triumph...';
                 }
                 
                 // No Errors
@@ -115,10 +116,15 @@ if ($id != NULL) {
             // Honeypot
             if (testInput($_POST['id1']) == "") {
                 $email = testInput($_POST['id4']);
-                
+                $math = testInput($_POST['id6']);
+
                 // Very Basic Validation
                 if(($email == '') || (!filter_var($email, FILTER_VALIDATE_EMAIL))) {
                     $error[] = 'Please Enter A Valid Email';
+                }
+
+                if(($math != '5') && ($math != 'Five') && ($math != 'five')) {
+                    $error[] = 'This was a triumph...';
                 }
                 
                 // No Errors
@@ -171,7 +177,7 @@ if ($id != NULL) {
                         $msg = '
                             <html>
                             <head>
-                                <title>Contact Request</title>
+                                <title>Unsubscribed</title>
                             </head>
                             <body>
                         '.$rowemail['pageContent'].'
@@ -188,6 +194,28 @@ if ($id != NULL) {
                     
                         // Send Message
                         mail($email, $rowemail['pageExtra'], $msg, $headers);
+
+                        // Send Email To Adminstrator
+                        $msg = '
+                            <html>
+                            <head>
+                                <title>User Unsubscribed</title>
+                            </head>
+                            <body>
+                                We lost a user... [Email] has just unsubscribed!. :(
+                            </body>
+                            </html>
+                        ';
+                      
+                        $msg = str_replace('[Email]', $email, $msg);
+                      
+                        // Add Headers
+                        $headers = "MIME-Version: 1.0"."\r\n";
+                        $headers .= "Content-Type: text/html; charset=ISO-8859-1"."\r\n";
+                        $headers .= "From: ".ADMINNAME."<".ADMINEMAIL.">"."\r\n";
+              
+                        // Send Message
+                        mail(ADMINEMAIL, $rowemail['pageExtra'], $msg, $headers);
                         
                         $success[] = 'We are sorry to see you go... :( You will recieve a confirmation email shortly.';
                     } else {
@@ -222,7 +250,7 @@ if ($id != NULL) {
                         $msg = '
                             <html>
                             <head>
-                                <title>Contact Request</title>
+                                <title>Subscribed</title>
                             </head>
                             <body>
                         '.$rowemail['pageContent'].'
@@ -239,7 +267,29 @@ if ($id != NULL) {
                     
                         // Send Message
                         mail($email, $rowemail['pageExtra'], $msg, $headers);
+
+                        // Send Email To Adminstrator
+                        $msg = '
+                            <html>
+                            <head>
+                              <title>User Subscribed</title>
+                            </head>
+                            <body>
+                                A New User!!! [Email] has just subscribed!
+                            </body>
+                            </html>
+                        ';
                         
+                        $msg = str_replace('[Email]', $email, $msg);
+                        
+                        // Add Headers
+                        $headers = "MIME-Version: 1.0"."\r\n";
+                        $headers .= "Content-Type: text/html; charset=ISO-8859-1"."\r\n";
+                        $headers .= "From: ".ADMINNAME."<".ADMINEMAIL.">"."\r\n";
+                
+                        // Send Message
+                        mail(ADMINEMAIL, $rowemail['pageExtra'], $msg, $headers);
+
                         $success[] = 'Thank you for Subscribing! You will recieve a confirmation email shortly.';
                     }
                 }
@@ -276,23 +326,33 @@ if ($id != NULL) {
                             echo '<p class="rb-error" style="margin: 0rem; margin-bottom: 1rem;">'.$error.'</p>';
                         }
                     }
-                    
+
+                    $tempid1 = isset($_POST["id1"]) ? $_POST["id1"] : "";
+                    $tempid2 = isset($_POST["id2"]) ? $_POST["id2"] : "";
+                    $tempid3 = isset($_POST["id3"]) ? $_POST["id3"] : "";
+                    $tempid4 = isset($_POST["id4"]) ? $_POST["id4"] : "";
+                    $tempid5 = isset($_POST["id5"]) ? $_POST["id5"] : "";
+                    $tempid6 = isset($_POST["id6"]) ? $_POST["id6"] : "";
+
                     echo '<form action="" method="post">
-                            <input class="rb-login-input rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
+                            <input class="rb-input-field rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1" value="'.$tempid1.'">
                             
                             <label for="id2">First Name</label>
-                            <input class="rb-login-input" style="width: 100%;" type="text" id="id2" name="id2" placeholder="Your Name...">
+                            <input class="rb-input-field" style="width: 100%;" type="text" id="id2" name="id2" placeholder="Your Name..." value="'.$tempid2.'">
 
                             <label for="id3">Last Name</label>
-                            <input class="rb-login-input" style="width: 100%;" type="text" id="id3" name="id3" placeholder="Your Last Name...">
+                            <input class="rb-input-field" style="width: 100%;" type="text" id="id3" name="id3" placeholder="Your Last Name..." value="'.$tempid3.'">
                             
                             <label for="id4">Email</label>
-                            <input class="rb-login-input" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email...">
+                            <input class="rb-input-field" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email..." value="'.$tempid4.'">
                             
-                            <label for="id5">Subject</label>
-                            <textarea class="rb-login-input" style="width: 100%; height: 12.5rem;" id="id5" name="id5" placeholder="Write something..."></textarea>
+                            <label for="id6">What is One Plus Four?</label>
+                            <input class="rb-input-field" style="width: 100%;" type="text" id="id6" name="id6" placeholder="Probably Not Six..." value="'.$tempid6.'">
 
-                            <input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" style="margin: 0rem;" type="submit" name="submitcontact" value="Contact">
+                            <label for="id5">Subject</label>
+                            <textarea class="rb-input-field" style="width: 100%; height: 12.5rem;" id="id5" name="id5" placeholder="Write something...">'.$tempid5.'</textarea>
+
+                            <input class="rb-button rb-button-border" style="margin: 0rem;" type="submit" name="submitcontact" value="Contact">
                     ';
                     
                     // Check For Success
@@ -321,16 +381,23 @@ if ($id != NULL) {
                             echo '<p class="rb-error" style="margin: 0rem; margin-bottom: 1rem;">'.$error.'</p>';
                         }
                     }
-                    
+
+                    $tempid1 = isset($_POST["id1"]) ? $_POST["id1"] : "";
+                    $tempid4 = isset($_POST["id4"]) ? $_POST["id4"] : "";
+                    $tempid6 = isset($_POST["id6"]) ? $_POST["id6"] : "";
+
                     echo '<form action="" method="post">
-                        <input class="rb-login-input rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1">
+                        <input class="rb-input-field rb-id1" style="width: 100%;" type="text" id="id1" name="id1" placeholder="id1" value="'.$tempid1.'">
                         
                         <label for="id4">Email</label>
-                        <input class="rb-login-input" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email...">
+                        <input class="rb-input-field" style="width: 100%;" type="text" id="id4" name="id4" placeholder="Your Email..." value="'.$tempid4.'">
+
+                        <label for="id6">What is One Plus Four?</label>
+                        <input class="rb-input-field" style="width: 100%;" type="text" id="id6" name="id6" placeholder="Probably Not Six..." value="'.$tempid6.'">
                         
-                        <input class="rb-login-button rb-button rb-button-border rb-padding-1rem-2rem" style="margin: 0rem;" type="submit" name="submitsubscribe" value="Submit">
+                        <input class="rb-button rb-button-border" style="margin: 0rem;" type="submit" name="submitsubscribe" value="Submit">
                     ';
-                    
+
                     // Check For Success
                     if(isset($success)) {
                         foreach($success as $success) {

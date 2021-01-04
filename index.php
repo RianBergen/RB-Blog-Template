@@ -33,7 +33,8 @@ try {
     $statement = $connection->query('
         SELECT
             settingsID,
-            settingsValue
+            settingsValue,
+            settingsImage
         FROM
             blog_settings
         WHERE
@@ -51,15 +52,15 @@ try {
     echo $e->getMessage();
 }
 
-if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1] || $rows[4][1]) {
+if($rows[0][1] || $rows[1][1] || $rows[2][1] || $rows[3][1]) {
     $showSidebar = 1;
 } else {
     $showSidebar = 0;
 }
 
-$sidebarRight = $rows[5][1];
-$backgroundImage = $rows[6][1];
-$showTimeline = $rows[7][1];
+$sidebarRight = $rows[4][1];
+$backgroundImage = $rows[5][2];
+$showTimeline = $rows[6][1];
 ?>
 
 <!-- HTML CODE -->
@@ -73,19 +74,33 @@ $showTimeline = $rows[7][1];
 	
     <title><?php echo ''.HTMLTITLE.'';?></title>
     <meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-    <link rel="icon" sizes="16x16" href=<?php echo '"/_res/images/16x16-Logo.png"';?>>
-    <link rel="icon" sizes="32x32" href=<?php echo '"/_res/images/32x32-Logo.png"';?>>
-    <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/192x192-Logo.png"';?>>
+    <link rel="icon" sizes="16x16" href=<?php echo '"/_res/images/icon/16x16-Logo.png?v='.CSSVERSION.'"';?>>
+    <link rel="icon" sizes="32x32" href=<?php echo '"/_res/images/icon/32x32-Logo.png?v='.CSSVERSION.'"';?>>
+    <link rel="icon" sizes="192x192" href=<?php echo '"/_res/images/icon/192x192-Logo.png?v='.CSSVERSION.'"';?>>
     
     <link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
+    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
     
+    <link id="theme-style-comments" rel="stylesheet" type="text/css" onload="this.media='all'" href="<?php if(ISDARKMODE == 'dark'){echo '/hashover/themes/default-dark-borderless/comments.css';}else{echo '/hashover/themes/default-borderless/comments.css';}?>?v=<?php echo ''.CSSVERSION.'';?>">
+
     <?php
-    if ($backgroundImage) {
-        echo '<style>body{background-color: transparent !important; background-image: url("/_res/images/background/Background.png") !important;}</style>';
+    if ($backgroundImage != NULL) {
+        $stmt2 = $connection->query('
+			SELECT
+				imageID,
+				imagePath
+			FROM
+				blog_images
+			WHERE
+				imageID = '.$backgroundImage
+		);
+
+		$stmt2->execute(array());
+        $row2 = $stmt2->fetch();
+        
+        echo '<style>body, html{background-color: transparent !important; background-image: url("/'.$row2["imagePath"].'") !important;}</style>';
     }
     ?>
-    
-    <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
     
     <meta name="theme-color" content="#242424">
 </head>
@@ -124,9 +139,6 @@ $showTimeline = $rows[7][1];
         } else if ($page == 'post') {
             // View Selected Post
 			include 'pagecomp-viewpost.php';
-		} else if ($page == 'category') {
-            // View All Posts In Selected Category
-			include 'pagecomp-categories.php';
 		} else if ($page == 'archive') {
             // View All Posts In Selected Archive
 			include 'pagecomp-archives.php';
@@ -161,14 +173,7 @@ $showTimeline = $rows[7][1];
 
 </div>
 
-<!-- Disqus Comment Count -->
-<?php
-if ($page != 'post') {
-    echo '<script id="dsq-count-scr" src="//'.DISQUS.'.disqus.com/count.js" async></script>';
-}
-?>
-
 <!-- Light/Dark Mode Manager -->
-<script src="/_res/js/rb-theme-manager.js"></script>
+<script src="/_res/js/rb-theme-manager.js?v=<?php echo ''.CSSVERSION.'';?>"></script>
 </body>
 </html>

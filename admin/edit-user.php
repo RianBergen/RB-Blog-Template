@@ -19,16 +19,16 @@ if(!$user->isLoggedIn()) {
 	
 	<title><?php echo ''.HTMLTITLE.'';?> - Edit User</title>
 	<meta name="description" content=<?php echo '"'.HTMLDECRIPTION.'"';?>>
-	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png">
-	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png">
-	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png">
+	<link rel="icon" sizes="16x16" href="/_res/images/16x16-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="32x32" href="/_res/images/32x32-Logo.png<?php echo CSSVERSION;?>">
+	<link rel="icon" sizes="192x192" href="/_res/images/192x192-Logo.png<?php echo CSSVERSION;?>">
 	
 	<link id="theme-style" rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.<?php echo ''.ISDARKMODE.'';?>.css?v=<?php echo ''.CSSVERSION.'';?>">
     <link rel="stylesheet" type="text/css" onload="this.media='all'" href="/_res/styles/rb-engine.css?v=<?php echo ''.CSSVERSION.'';?>">
     
     <meta name="theme-color" content="#242424">
 </head>
-<body>
+<body class="rb-admin-body">
 <div class="rb-admin-container">
 	<div class="rb-card rb-admin-content">
     
@@ -165,7 +165,12 @@ if(!$user->isLoggedIn()) {
 	</div>
 </div>
 
+<?php
+	// Include Page Footer
+	include '../pagecomp-footer.php';
+?>
+
 <!-- Light/Dark Mode Manager -->
-<script src="/_res/js/rb-theme-manager.js"></script>
+<script src="/_res/js/rb-theme-manager.j?v=<?php echo ''.CSSVERSION.'';?>s"></script>
 </body>
 </html>

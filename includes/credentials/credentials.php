@@ -1,4 +1,4 @@
-<!-- This File Stores All Credentials For https://www.rianbergen.com/ -->
+<!-- This File Stores All Credentials For https://www.YOURDOMAIN.com/ -->
 <?php
 // Database Credentials
 define('DBHOST', 'hostname');
@@ -11,11 +11,6 @@ define('DBPASS', 'password');
 // Replace 'key' With Your TinyMCE Link (Which Includes The API Key)
 // Example: define('TINYMCE', 'https://cloud.tinymce.com/5/tinymce.min.js?apiKey=000000000000000000000000000000000000000000000000');
 define('TINYMCE', 'key');
-
-// Disqus Credentials
-// Replace 'key' With Your DISQUS Short Code (xxxxxxx.disqus.com)
-// Example: define('DISQUS', 'xxxxxxx');
-define('DISQUS', 'key');
 
 // Absolute URL
 // Replace 'absolute' With Your Websites Absolute URL

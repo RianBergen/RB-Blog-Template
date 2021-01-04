@@ -1,38 +1,77 @@
-//Init. If is dark then initially change it to dark
-var IsDark = getDarkThemeFromCookie();
-//theme_SetCssTheme(IsDark);
-theme_SetButtonText(IsDark);
+// Initialize
+var IsDark = getDarkThemeFromCookie(); // Retrieve Light/Dark Theme Setting From Cookie
+theme_SetButtonText(IsDark); // Overwrite HTML Button Based On Result
 
+
+
+// Called By HTML Button: Switches Between Light/Dark Theme
 function SwitchTheme() {
-	//Change the style based on if the theme is currently dark
-    theme_SetCssTheme(!IsDark);
-    theme_SetButtonText(!IsDark);
-
-	//Invert the theme
+	// Invert The Theme
 	IsDark = !IsDark;
 
-	//Update the cookie
+	// Overwrite CSS Styles And HTML Button
+	theme_SetCssTheme(IsDark);
+    theme_SetButtonText(IsDark);
+
+	// Set/Update The Cookie
 	setDarkThemeInCookie(IsDark, 30);
 }
 
-//Sets the theme based on an input boolean
+
+
+// Overwrites The CSS Styles Based On Input Variable
 function theme_SetCssTheme(dark) {
-    if (dark) {
-        document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.dark.css");
-    } else {
-        document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.light.css");
+    if (dark) { // If Input Variable Is True: Dark Mode
+		// Main Stylesheet
+		document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.dark.css");
+
+		// HashOver Comments StyleSheet
+		if(document.getElementById("theme-style-comments")) {
+			document.getElementById("theme-style-comments").setAttribute("href", "/hashover/themes/default-dark-borderless/comments.css");
+		}
+
+		// TinyMCE StyleSheet
+		if(document.getElementById("tinyMCE")) {
+			// Remove All Editors
+			tinymce.remove("#tinyMCE");
+
+			// Initialize Editor
+			InitTinyMCE_Dark();
+		}
+    } else { // If Input Variable Is False: Light Mode
+		// Main Stylesheet
+		document.getElementById("theme-style").setAttribute("href", "/_res/styles/rb-engine.light.css");
+
+		// HashOver Comments StyleSheet
+		if(document.getElementById("theme-style-comments")) {
+			document.getElementById("theme-style-comments").setAttribute("href", "/hashover/themes/default-borderless/comments.css");
+		}
+
+		// TinyMCE StyleSheet
+		if(document.getElementById("tinyMCE")) {
+			// Remove All Editors
+			tinymce.remove("#tinyMCE");
+
+			// Initialize Editor
+			InitTinyMCE_Light();
+		}
     }
 }
 
-//Sets the theme button text based on an input boolean
+
+
+// Overwrites The HTML Button Based On Input Variable
 function theme_SetButtonText(dark) {
-    if (dark) {
+    if (dark) { // If Input Variable Is True: Dark Mode
         document.getElementById("theme-change-button").innerHTML = "Disable Dark Mode";
-    } else {
+    } else { // If Input Variable Is False: Light Mode
         document.getElementById("theme-change-button").innerHTML = "Enable Dark Mode";
     }
 }
 
+
+
+// Retrieve Light/Dark Theme Setting From Cookie
 function getDarkThemeFromCookie() {
 	var name = "DarkThemeOn" + "=";
 	var decodedCookie = decodeURIComponent(document.cookie);
@@ -49,6 +88,9 @@ function getDarkThemeFromCookie() {
 	return false;
 }
 
+
+
+// Set/Update The Cookie
 function setDarkThemeInCookie(cvalue, exdays) {
 	var d = new Date();
 	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));

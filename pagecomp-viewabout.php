@@ -6,7 +6,8 @@ if ($id != NULL) {
             pageID,
             pageTitle,
             pageContent,
-            pageSlug
+			pageSlug,
+			pageImage
         FROM 
             blog_pages
         WHERE
@@ -19,10 +20,10 @@ if ($id != NULL) {
 }
 ?>
 
-	<!-- Back To Posts Button -->
+    <!-- Home Button -->
 	<div class="rb-nav-flex-grid">
 		<div>
-			<a href="javascript:history.back()" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Go Back</b></a>
+			<a href="/" class="rb-button rb-button-border rb-padding-1rem-2rem rb-margin-2rem-left" style="margin-bottom: 0rem !important; margin-top: 2rem;"><b>Home</b></a>
 		</div>
 		<div>
 		</div>
@@ -42,50 +43,37 @@ if ($id != NULL) {
 			echo '</div>';
 		} else {
 			echo '<div class="rb-card">';
+
+				// About Image
+				echo '<!-- About Image -->';
+				if($row['pageImage'] != NULL) {
+					$stmt2 = $connection->query('
+						SELECT
+							imageID,
+							imageTitle,
+							imagePath
+						FROM
+							blog_images
+						WHERE
+							imageID = '.$row['pageImage']
+					);
+
+					$stmt2->execute(array());
+					$row2 = $stmt2->fetch();
+
+					echo '<img class="rb-card-img" title="'.$row2['imageTitle'].'" src="/'.$row2['imagePath'].'?v='.CSSVERSION.'" onerror="this.src=&#39;/_res/images/missing/Placeholder-Image-1920x1080.png&#39;" alt="N/A">';
+				}
+			
 				echo '<div>';
 					echo '<h3><b>'.$row['pageTitle'].'</b></h3>';
 				echo '</div>';
 				echo '<div>';
-					echo ''.$row['pageContent'].'';
+					echo str_replace('[END OF DESCRIPTION]', ' ', $row['pageContent']);
 				echo '</div>';
                 
                 echo '<hr/>';
-                
-                echo' <div id="disqus_thread"></div>';
-                echo '<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>';
 			echo '</div>';
 		}
 	?>
-    
-<!-- DISQUS COMMENTS -->
-<script>
-    /**
-     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
-     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
-     *  PLATFORM OR CMS.
-     *  
-     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
-     *  https://disqus.com/admin/universalcode/#configuration-variables
-     */
-    
-    var disqus_config = function () {
-        // Replace PAGE_URL with your page's canonical URL variable
-        <?php echo 'this.page.url = "/page/'.$id.'";';?>
-        
-        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        <?php echo 'this.page.identifier = '.$row["pageID"].';';?>
-    };
-    
-    
-    (function() {    // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
-        var d = document, s = d.createElement('script');
-        
-        // IMPORTANT: Replace EXAMPLE with your forum shortname!
-        <?php echo 's.src = "https://'.DISQUS.'.disqus.com/embed.js";';?>
-        
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
 </div>
 <!-- END   - Left Column: Blog Post Column -->
