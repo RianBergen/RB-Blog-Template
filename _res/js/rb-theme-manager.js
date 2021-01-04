@@ -11,7 +11,7 @@ function SwitchTheme() {
 
 	// Overwrite CSS Styles And HTML Button
 	theme_SetCssTheme(IsDark);
-    theme_SetButtonText(!IsDark);
+    theme_SetButtonText(IsDark);
 
 	// Set/Update The Cookie
 	setDarkThemeInCookie(IsDark, 30);
@@ -31,28 +31,12 @@ function theme_SetCssTheme(dark) {
 		}
 
 		// TinyMCE StyleSheet
-		if(document.getElementById("u0")) {
+		if(document.getElementById("tinyMCE")) {
 			// Remove All Editors
-			tinymce.remove();
-			
+			tinymce.remove("#tinyMCE");
+
 			// Initialize Editor
 			InitTinyMCE_Dark();
-
-			// Stylesheet 1
-			var string = document.getElementById("u0").getAttribute("href").toString();
-			document.getElementById("u0").setAttribute("href", string.replace("oxide", "oxide-dark"));
-
-			// Stylesheet 2
-			string = document.getElementById("u1").getAttribute("href").toString();
-			document.getElementById("u1").setAttribute("href", string.replace("oxide", "oxide-dark"));
-
-			// Correct Error When Switching From Light To Dark For The First Time
-			try {
-				string = document.getElementById("u1").getAttribute("href").toString();
-				document.getElementById("u1").setAttribute("href", string.replace("oxide-dark-dark", "oxide-dark"));
-			} catch {
-				// Do Nothing
-			}
 		}
     } else { // If Input Variable Is False: Light Mode
 		// Main Stylesheet
@@ -64,20 +48,12 @@ function theme_SetCssTheme(dark) {
 		}
 
 		// TinyMCE StyleSheet
-		if(document.getElementById("u0") || document.getElementById("u1")) {
+		if(document.getElementById("tinyMCE")) {
 			// Remove All Editors
-			tinymce.remove();
-			
+			tinymce.remove("#tinyMCE");
+
 			// Initialize Editor
 			InitTinyMCE_Light();
-
-			// Stylesheet 1
-			var string = document.getElementById("u0").getAttribute("href").toString();
-			document.getElementById("u0").setAttribute("href", string.replace("oxide-dark", "oxide"));
-
-			// Stylesheet 2
-			string = document.getElementById("u1").getAttribute("href").toString();
-			document.getElementById("u1").setAttribute("href", string.replace("oxide-dark", "oxide"));
 		}
     }
 }

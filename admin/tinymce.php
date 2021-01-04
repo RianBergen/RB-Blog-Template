@@ -46,7 +46,7 @@
 
 
 
-    // Initialize TinyMCE Using Dark Theme
+    // Initialize TinyMCE Using Light Theme
     function InitTinyMCE_Light() {
 		tinymce.init({
             // ID Selector

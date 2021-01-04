@@ -1,4 +1,4 @@
-<!-- This File Stores All Credentials For https://www.rianbergen.com/ -->
+<!-- This File Stores All Credentials For https://www.YOURDOMAIN.com/ -->
 <?php
 // Database Credentials
 define('DBHOST', 'hostname');
