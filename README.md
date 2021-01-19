@@ -79,8 +79,8 @@ My Website Uses This Template: https://www.rianbergen.com/
   * GitHub: https://github.com/GerritBergen
   * For helping solve some of the issues and providing at least 30% of the inspiration!
 * David Carr
-  * Website: https://www.daveismyname.blog/
-  * GitHub: https://github.com/daveismyname
+  * Website: https://dcblog.dev/
+  * GitHub: https://github.com/dcblogdev
   * He has some very helpful tutorials on his website as well as some amazing code examples!
 * TinyMCE
   * Website: https://www.tiny.cloud/
