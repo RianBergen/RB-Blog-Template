@@ -67,6 +67,9 @@ if(isset($_GET['deluser'])) {
 		}
 	?>
 	
+    <!-- Add User Button -->
+    <p><a href='add-user.php'>Add User</a></p>
+
 	<!-- Table Containg Database Content -->
     <div class="rb-admin-content-table-container">
         <table class="rb-admin-content-table">
@@ -107,7 +110,6 @@ if(isset($_GET['deluser'])) {
             ?>
         </table>
     </div>
-	<p><a href='add-user.php'>Add User</a></p>
 	</div>
 </div>
 

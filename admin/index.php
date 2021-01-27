@@ -67,7 +67,10 @@ if(isset($_GET['delpost'])) {
 			echo '<p>Post '.$_GET['action'].'.</p>';
 		}
 	?>
-	
+
+    <!-- Add Post Button -->
+	<p><a href='add-post.php'>Add Post</a></p>
+
 	<!-- Table Containg Database Content -->
     <div class="rb-admin-content-table-container">
         <table class="rb-admin-content-table">
@@ -108,8 +111,6 @@ if(isset($_GET['delpost'])) {
             ?>
         </table>
     </div>
-	
-	<p><a href='add-post.php'>Add Post</a></p>
 	</div>
 </div>
 
