@@ -637,6 +637,7 @@ hr {    /* Default, No Shadow/Depth HR Border */
 .rb-admin-content-table-container {
     margin-left: 1rem;
     margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
 .rb-admin-content-table {
@@ -669,5 +670,24 @@ hr {    /* Default, No Shadow/Depth HR Border */
     .rb-admin-content-table-data-hidden {
         display: none;
     }
+}
+
+#IFRAME-CONTAINER {
+    background-color: red;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: calc(56.25% + 80px + 100px);
+}
+
+
+#IFRAME-IMAGE {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 /* END   - Admin Form */
