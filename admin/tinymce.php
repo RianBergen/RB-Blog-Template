@@ -9,13 +9,59 @@
 			plugins: [
 				"advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media table paste"
+				"insertdatetime media table paste imagetools wordcount template"
             ],
             // Skins For Dark Mode
             skin: "oxide-dark",
             content_css: "dark",
             // Toolbar Information Including List Of Images When Adding Images
-			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image template | customInsertButton",
+            
+            // Custom Button
+            setup: function (editor) {
+                var openDialog = function () {
+                    return editor.windowManager.open({
+                        title: 'Insert AstroBin iFrame',
+                        body: {
+                            type: 'panel',
+                            items: [
+                                {
+                                    type: 'input',
+                                    name: 'URL',
+                                    label: 'URL'
+                                }
+                            ]
+                        },
+                        buttons: [
+                            {
+                                type: 'submit',
+                                text: 'Submit',
+                                primary: true
+                            },
+                            {
+                                type: 'cancel',
+                                text: 'Cancel'
+                            }
+                        ],
+                        onSubmit: function (api) {
+                            var data = api.getData();
+                            editor.insertContent(
+                                '<div id="IFRAME-CONTAINER"><iframe id="IFRAME-IMAGE" scrolling="no" src="' + data.URL + '"></iframe></div>'
+                            );
+                            api.close();
+                        }
+                    });
+                };
+
+                editor.ui.registry.addButton('customInsertButton', {
+                    text: 'AstroBin iFrame',
+                    onAction: function () {
+                        openDialog();
+                    }
+                });
+            },
+            
+            // Image List
             image_list: [
                 <?php
                     // Retrieve List Of Images
@@ -27,8 +73,9 @@
                         FROM
                             blog_images
                         ORDER BY
-                            imageTitle
+                            imageID
                     ');
+                    
                     while($row2 = $stmt2->fetch()) {
                         // Input Images Into List
                         echo "{title: '".$row2['imageTitle']."', value: '../".$row2['imagePath']."'},";
@@ -55,10 +102,56 @@
 			plugins: [
 				"advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media table paste"
+				"insertdatetime media table paste imagetools wordcount template"
             ],
             // Toolbar Information Including List Of Images When Adding Images
-			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image template | customInsertButton",
+            
+            // Custom Button
+            setup: function (editor) {
+                var openDialog = function () {
+                    return editor.windowManager.open({
+                        title: 'Insert AstroBin iFrame',
+                        body: {
+                            type: 'panel',
+                            items: [
+                                {
+                                    type: 'input',
+                                    name: 'URL',
+                                    label: 'URL'
+                                }
+                            ]
+                        },
+                        buttons: [
+                            {
+                                type: 'submit',
+                                text: 'Submit',
+                                primary: true
+                            },
+                            {
+                                type: 'cancel',
+                                text: 'Cancel'
+                            }
+                        ],
+                        onSubmit: function (api) {
+                            var data = api.getData();
+                            editor.insertContent(
+                                '<div id="IFRAME-CONTAINER"><iframe id="IFRAME-IMAGE" scrolling="no" src="' + data.URL + '"></iframe></div>'
+                            );
+                            api.close();
+                        }
+                    });
+                };
+
+                editor.ui.registry.addButton('customInsertButton', {
+                    text: 'AstroBin iFrame',
+                    onAction: function () {
+                        openDialog();
+                    }
+                });
+            },
+            
+            // Image List
             image_list: [
                 <?php
                     // Retrieve List Of Images
@@ -70,8 +163,9 @@
                         FROM
                             blog_images
                         ORDER BY
-                            imageTitle
+                            imageID
                     ');
+
                     while($row2 = $stmt2->fetch()) {
                         // Input Images Into List
                         echo "{title: '".$row2['imageTitle']."', value: '../".$row2['imagePath']."'},";

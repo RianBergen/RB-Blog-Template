@@ -62,7 +62,7 @@
 						// Display Description
             			echo '<div>';
 							echo '<a href="/post/'.$row['postSlug'].'" class="rb-card-link">'.$array1[0].'</a>';
-							echo '<p><a href="/action/about" class="rb-card-link rb-text-opacity">Read More &gt;</a></p>';
+							echo '<p><a href="/post/'.$row['postSlug'].'" class="rb-card-link rb-text-opacity">Read More &gt;</a></p>';
             			echo '</div>';
 					echo '</div>';
 					echo '<div class="rb-card-footer">';

@@ -62,7 +62,10 @@ function __autoload($class) {
 }
 
 // Define How Many Posts Are Allowed Per Page
-define('POSTSPERPAGE', '7');
+define('POSTSPERPAGE', '10');
+
+// Define How Many Images Are Allowed In Admin Page
+define('IMAGESPERPAGE', '10');
 
 // Include User Class And Create New User
 $user = new User($connection);

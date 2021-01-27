@@ -87,6 +87,9 @@ if(isset($_GET['delimage'])) {
 		}
 	?>
 	
+    <!-- Add Image Button -->
+    <p><a href='add-image.php'>Add Image</a></p>
+
 	<!-- Table Containg Database Content -->
     <div class="rb-admin-content-table-container">
         <table class="rb-admin-content-table" style="margin-bottom: 1rem;">
@@ -99,6 +102,18 @@ if(isset($_GET['delimage'])) {
             
             <?php
                 try {
+                    // Setup Paginator
+                    $images = new Paginator(IMAGESPERPAGE,'p');
+                    $statementcheck = $connection->query('
+                        SELECT
+                            imageID
+                        FROM
+                            blog_images'
+                    );
+                
+                    // Give Paginator Number Pages
+                    $images->set_total($statementcheck->rowCount());
+                    
                     // Get SQL Data
                     $statement = $connection->query('
                         SELECT
@@ -108,14 +123,14 @@ if(isset($_GET['delimage'])) {
                         FROM
                             blog_images
                         ORDER BY
-                            imageID DESC'
+                            imageID DESC '.$images->get_limit()
                     );
                     while($row = $statement->fetch()) {
                         echo '<tr class="rb-admin-content-table-row">';
                             echo '<td width="150" class="rb-admin-content-table-data"><img src="../'.$row['imagePath'].'" alt="'.$row['imageTitle'].'" width="100%"></td>';
                             echo '<td class="rb-admin-content-table-data">'.$row['imageTitle'].'</td>';
                             echo '<td class="rb-admin-content-table-data">'.$row['imagePath'].'</td>';
-                            echo '<td class="rb-admin-content-table-data">';
+                            echo '<td width="100" class="rb-admin-content-table-data">';
                                 ?>
                                 <a href="edit-image.php?id=<?php echo $row['imageID'];?>">Edit</a> | 
                                 <a href="javascript:delimage('<?php echo $row['imageID'];?>','<?php echo $row['imageTitle'];?>')">Delete</a>
@@ -130,7 +145,8 @@ if(isset($_GET['delimage'])) {
         </table>
     </div>
 
-    <p><a href='add-image.php'>Add Image</a></p>
+    <?php echo $images->page_links(); ?>
+
 	</div>
 </div>
 
